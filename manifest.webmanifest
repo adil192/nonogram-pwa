@@ -1,0 +1,37 @@
+{
+  "name": "Nonogram - Adil Hanney",
+  "short_name": "Nonogram",
+  "description": "",
+  "theme_color": "#8732f5",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "https://adil.hanney.org/nonogram/",
+  "start_url": "https://adil.hanney.org/nonogram/",
+  "icons": [
+    {
+      "src": "/maskable_icon_x128.png",
+      "type": "image/png",
+      "sizes": "128x128",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/maskable_icon_x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/maskable_icon_x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon_maskable.svg",
+      "type": "image/svg+xml",
+      "sizes": "513x513",
+      "purpose": "any maskable"
+    }
+  ]
+}
