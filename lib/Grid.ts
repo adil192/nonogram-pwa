@@ -1,5 +1,8 @@
 import {Tile} from "./Tile";
 
+// Difficulty between 0.0 (easiest) and 1.0 (hardest)
+const difficulty = 0.5;
+
 export class Grid {
 	readonly elem: HTMLElement;
 	readonly width: number;
@@ -30,7 +33,7 @@ export class Grid {
 
 					if (x < 0 && y < 0) gridItem.elem.innerText = ""; // top left corner should be left blank
 				} else {
-					if (Math.random() > 0.7) gridItem.elem.classList.add("selected"); // dummy data
+					if (Math.random() > 1 - difficulty) gridItem.elem.classList.add("selected"); // dummy data
 
 					// add border around edges
 					if (x == 0) gridItem.elem.classList.add("x-start");
