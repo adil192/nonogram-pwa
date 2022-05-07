@@ -33,6 +33,11 @@ $lastUpdate = "22-05-06-0000"; // when changing this, you should also update sw.
 <main>
 </main>
 
+<footer>
+    <button class="btn btn-outline-primary">
+    </button>
+</footer>
+
 
 
 <script src="nonogram.js?lastUpdate=<?=$lastUpdate?>" type="module"></script>
