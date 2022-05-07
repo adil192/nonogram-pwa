@@ -19,21 +19,34 @@ export class Grid {
 
 		// create grid items
 		this.gridItems = [];
-		for (let y = -1; y < this.width; ++y) {
+		let xStateCounts: number[][] = Array.from(Array(this.width), () => [0]);  // e.g. [ [1,2,1], [3], [1,4] ]
+		let yStateCounts: number[][] = Array.from(Array(this.width), () => [0]);
+		for (let y = -1; y < this.height; ++y) {
+			let yStateCountsCurrent = yStateCounts[y];
 			let row: GridItem[] = [];
-			for (let x = -1; x < this.height; ++x) {
+			for (let x = -1; x < this.width; ++x) {
+				let xStateCountsCurrent = xStateCounts[x];
 				const isTile: boolean = x >= 0 && y >= 0;
 				const gridItem = new GridItem(isTile);
 
 				if (!isTile) {
-					gridItem.elem.innerText = "1 2 1"; // dummy data
-
 					if (y < 0) gridItem.elem.classList.add("vertical"); // make top row vertical
 					else gridItem.elem.classList.add("horizontal");
 
 					if (x < 0 && y < 0) gridItem.elem.innerText = ""; // top left corner should be left blank
 				} else {
 					gridItem.state = Math.random() > 1 - difficulty;
+					if (gridItem.state) {
+						xStateCountsCurrent[xStateCountsCurrent.length - 1] += 1
+						yStateCountsCurrent[yStateCountsCurrent.length - 1] += 1;
+					} else {
+						if (xStateCountsCurrent[xStateCountsCurrent.length - 1] != 0) {
+							xStateCountsCurrent.push(0);
+						}
+						if (yStateCountsCurrent[yStateCountsCurrent.length - 1] != 0) {
+							yStateCountsCurrent.push(0);
+						}
+					}
 
 					gridItem.isSelected = gridItem.state; // dummy data
 
@@ -56,6 +69,18 @@ export class Grid {
 				row.push(gridItem);
 			}
 			this.gridItems.push(row);
+		}
+
+		let x, y;
+		for (y = -1, x = 0; x < this.width; ++x) {
+			let label = yStateCounts[x].filter(n => n != 0).join(" ");
+			if (!label) label = "0";
+			this.getGridItem(x, y).elem.innerText = label;
+		}
+		for (x = -1, y = 0; y < this.height; ++y) {
+			let label = xStateCounts[y].filter(n => n != 0).join(" ");
+			if (!label) label = "0";
+			this.getGridItem(x, y).elem.innerText = label;
 		}
 	}
 
