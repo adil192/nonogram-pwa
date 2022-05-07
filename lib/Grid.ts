@@ -1,13 +1,14 @@
 import {Tile} from "./Tile";
 
-// Difficulty between 0.0 (easiest) and 1.0 (hardest)
-const difficulty = 0.5;
-
 export class Grid {
 	readonly elem: HTMLElement;
 	readonly width: number;
 	readonly height: number;
 	readonly gridItems: GridItem[][];
+
+	// difficulty between 0.0 (easiest) and 1.0 (hardest)
+	public static difficulty: number = 0.5;
+
 	public isCross: boolean = false;
 
 	constructor(elem: HTMLElement, width: number, height: number) {
@@ -36,7 +37,7 @@ export class Grid {
 
 					if (x < 0 && y < 0) gridItem.elem.innerText = ""; // top left corner should be left blank
 				} else {
-					gridItem.state = Math.random() > 1 - difficulty;
+					gridItem.state = Math.random() > 1 - Grid.difficulty;
 					if (gridItem.state) {
 						xStateCountsCurrent[xStateCountsCurrent.length - 1] += 1
 						yStateCountsCurrent[yStateCountsCurrent.length - 1] += 1;

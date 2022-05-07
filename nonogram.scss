@@ -58,11 +58,14 @@ footer {
 	padding: 1rem;
 	gap: 1rem;
 
-	> .btn {
+	> * {
 		flex-basis: 4rem;
+		margin: auto;
+	}
+
+	> .btn {
 		height: 4rem;
 		position: relative;
-		margin: auto;
 		border-radius: 50%;
 		aspect-ratio: 1;
 
@@ -83,6 +86,22 @@ footer {
 				background-color: transparent;
 				background-image: url("images/cross.svg");
 			}
+		}
+	}
+
+	#difficultyToggleContainer {
+		display: flex;
+		flex-flow: column nowrap;
+
+		> * {
+			width: 100%;
+			text-align: center;
+		}
+		> input {
+			border: none;
+		}
+		> label {
+			font-size: 0.9em;
 		}
 	}
 }

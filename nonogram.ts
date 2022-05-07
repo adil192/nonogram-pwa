@@ -3,6 +3,7 @@ import {Grid} from "./lib/Grid";
 
 let main: HTMLElement;
 
+let difficultyToggle: HTMLInputElement;
 let crossToggle: HTMLButtonElement;
 
 let grid: Grid = null;
@@ -20,6 +21,7 @@ window.addEventListener("load", function() {
 	}
 
 	main = document.querySelector("main");
+	difficultyToggle = document.querySelector("#difficultyToggle");
 	crossToggle = document.querySelector("#crossToggle");
 
 	init();
@@ -29,6 +31,11 @@ window.addEventListener("load", function() {
 
 		if (grid.isCross) crossToggle.classList.add("is-cross");
 		else crossToggle.classList.remove("is-cross");
+	})
+	difficultyToggle.addEventListener("change", function () {
+		Grid.difficulty = 1 - difficultyToggle.valueAsNumber / 11;
+		grid.Destroy();
+		grid = new Grid(main, GRID_WIDTH, GRID_HEIGHT);
 	})
 });
 
