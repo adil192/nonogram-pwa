@@ -47,56 +47,55 @@ main {
 		text-align: right;
 		padding-right: 2 * $thick-border-width;
 	}
+}
 
-	.tile {
-		aspect-ratio: 1;
-		border: $normal-border-width solid $normal-border-color;
-		position: relative;
+.tile {
+	aspect-ratio: 1;
+	border: $normal-border-width solid $normal-border-color;
+	position: relative;
+
+	&::before, &::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
 	}
-	.tile.selected {
+
+	&.selected {
 		background: $tile-selected-bg;
 	}
 
-	.tile.x-middle {
+	&.x-middle {
 		border-left-width: $middle-border-width;
 		border-left-color: $middle-border-color;
 	}
-	.tile.y-middle {
+	&.y-middle {
 		border-top-width: $middle-border-width;
 		border-top-color: $middle-border-color;
 	}
 
-	.tile {
-		&::before, &::after {
-			content: "";
-			position: absolute;
-			top: 0;
-			left: 0;
-			bottom: 0;
-			right: 0;
-		}
-	}
-
-	.tile.x-start,
-	.tile.x-end,
-	.tile.y-start,
-	.tile.y-end {
+	&.x-start,
+	&.x-end,
+	&.y-start,
+	&.y-end {
 		&::after {
 			margin: -$thick-border-width;
 			border-width: $thick-border-width;
 			border-color: $theme-color;
 		}
 	}
-	.tile.x-start::after {
+	&.x-start::after {
 		border-left-style: solid;
 	}
-	.tile.x-end::after {
+	&.x-end::after {
 		border-right-style: solid;
 	}
-	.tile.y-start::after {
+	&.y-start::after {
 		border-top-style: solid;
 	}
-	.tile.y-end::after {
+	&.y-end::after {
 		border-bottom-style: solid;
 	}
 	@mixin thick-border-radius($position) {
@@ -105,16 +104,16 @@ main {
 			border-#{$position}-radius: $thick-border-radius;
 		}
 	}
-	.tile.x-start.y-start {
+	&.x-start.y-start {
 		@include thick-border-radius(top-left);
 	}
-	.tile.x-start.y-end {
+	&.x-start.y-end {
 		@include thick-border-radius(bottom-left);
 	}
-	.tile.x-end.y-start {
+	&.x-end.y-start {
 		@include thick-border-radius(top-right);
 	}
-	.tile.x-end.y-end {
+	&.x-end.y-end {
 		@include thick-border-radius(bottom-right);
 	}
 }
