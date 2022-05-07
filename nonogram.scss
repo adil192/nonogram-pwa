@@ -32,16 +32,17 @@ main {
 	margin: auto;
 
 
+	.label {
+		// center text
+		display: flex;
+		align-items: center;
+	}
 	.label.vertical {
 		writing-mode: vertical-lr;
 		text-orientation: upright;
 		word-spacing: -1rem;
 		padding-bottom: 2 * $thick-border-width;
-
-		// center text
-		display: flex;
-		flex-direction: row-reverse;
-		align-items: center;
+		flex-direction: row-reverse; // keep text at bottom
 	}
 	.label.horizontal {
 		text-align: right;
