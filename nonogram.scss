@@ -53,6 +53,7 @@ main {
 .tile {
 	aspect-ratio: 1;
 	position: relative;
+	transition: background-color 0.05s;
 
 	&::before, &::after {
 		content: "";
