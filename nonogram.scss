@@ -1,0 +1,117 @@
+$theme-color: #8732f5;
+
+// tiles
+$tile-selected-bg: rgba(0,0,0,0.3);
+$normal-border-color: #f0f0f0;
+$normal-border-width: 1px;
+$middle-border-color: #aaaaaa;
+$middle-border-width: 2px;
+$thick-border-color: $theme-color;
+$thick-border-width: 0.75vw;
+$thick-border-radius: 1.5vw;
+
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+body {
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+main {
+	display: grid;
+	grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr;
+	grid-gap: 0;
+	text-align: center;
+	padding: $thick-border-width;
+	width: 100%;
+	max-width: 80vh;
+	margin: auto;
+
+
+	.label.vertical {
+		writing-mode: vertical-lr;
+		text-orientation: upright;
+		word-spacing: -1rem;
+		padding-bottom: 2 * $thick-border-width;
+
+		// center text
+		display: flex;
+		flex-direction: row-reverse;
+		align-items: center;
+	}
+	.label.horizontal {
+		text-align: right;
+		padding-right: 2 * $thick-border-width;
+	}
+
+	.tile {
+		aspect-ratio: 1;
+		border: $normal-border-width solid $normal-border-color;
+		position: relative;
+	}
+	.tile.selected {
+		background: $tile-selected-bg;
+	}
+
+	.tile.x-middle {
+		border-left-width: $middle-border-width;
+		border-left-color: $middle-border-color;
+	}
+	.tile.y-middle {
+		border-top-width: $middle-border-width;
+		border-top-color: $middle-border-color;
+	}
+
+	.tile.x-start,
+	.tile.x-end,
+	.tile.y-start,
+	.tile.y-end {
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+
+			margin: -$thick-border-width;
+			border-width: $thick-border-width;
+			border-color: $theme-color;
+		}
+	}
+	.tile.x-start::before {
+		border-left-style: solid;
+	}
+	.tile.x-end::before {
+		border-right-style: solid;
+	}
+	.tile.y-start::before {
+		border-top-style: solid;
+	}
+	.tile.y-end::before {
+		border-bottom-style: solid;
+	}
+	.tile.x-start.y-start {
+		&, &::before {
+			border-top-left-radius: $thick-border-radius;
+		}
+	}
+	.tile.x-start.y-end {
+		&, &::before {
+			border-bottom-left-radius: $thick-border-radius;
+		}
+	}
+	.tile.x-end.y-start {
+		&, &::before {
+			border-top-right-radius: $thick-border-radius;
+		}
+	}
+	.tile.x-end.y-end {
+		&, &::before {
+			border-bottom-right-radius: $thick-border-radius;
+		}
+	}
+}

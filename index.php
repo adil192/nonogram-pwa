@@ -26,7 +26,15 @@ $lastUpdate = "22-05-06-0000"; // when changing this, you should also update sw.
 <body>
 
 
+<header>
+    <h1>Nonogram</h1>
+</header>
 
-<script src="nonogram.js?lastUpdate=<?=$lastUpdate?>"></script>
+<main>
+</main>
+
+
+
+<script src="nonogram.js?lastUpdate=<?=$lastUpdate?>" type="module"></script>
 </body>
 </html>
