@@ -46,6 +46,7 @@ main {
 	}
 	.label.horizontal {
 		padding-right: 2 * $thick-border-width;
+		min-width: 4em;
 	}
 }
 
