@@ -8,6 +8,7 @@ export class Grid {
 	readonly width: number;
 	readonly height: number;
 	readonly gridItems: GridItem[][];
+	public isCross: boolean = false;
 
 	constructor(elem: HTMLElement, width: number, height: number) {
 		this.elem = elem;
@@ -90,7 +91,8 @@ export class Grid {
 	}
 
 	onGridItemClicked(gridItem: GridItem) {
-		gridItem.isSelected = !gridItem.isSelected;
+		if (this.isCross) gridItem.isCrossed = !gridItem.isCrossed;
+		else gridItem.isSelected = !gridItem.isSelected;
 	}
 
 	public Destroy() {
@@ -107,8 +109,9 @@ export class GridItem {
 	elem: HTMLDivElement;
 	tile?: Tile;
 
-	private _selected: boolean = false;
 	public state: boolean = false;
+	private _selected: boolean = false;
+	private _crossed: boolean = false;
 	
 	constructor(isTile: boolean) {
 		this.elem = document.createElement("div");
@@ -127,7 +130,24 @@ export class GridItem {
 	public set isSelected(selected: boolean) {
 		this._selected = selected;
 
-		if (selected) this.elem.classList.add("selected");
-		else this.elem.classList.remove("selected");
+		if (selected) {
+			this.elem.classList.add("selected");
+			this.isCrossed = false;
+		} else {
+			this.elem.classList.remove("selected");
+		}
+	}
+	public get isCrossed(): boolean {
+		return this._crossed;
+	}
+	public set isCrossed(crossed: boolean) {
+		this._crossed = crossed;
+
+		if (crossed) {
+			this.elem.classList.add("crossed");
+			this.isSelected = false;
+		} else {
+			this.elem.classList.remove("crossed");
+		}
 	}
 }

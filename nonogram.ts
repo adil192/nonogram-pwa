@@ -3,7 +3,6 @@ import {Grid} from "./lib/Grid";
 
 let main: HTMLElement;
 
-let isCross: boolean = false;
 let crossToggle: HTMLButtonElement;
 
 let grid: Grid = null;
@@ -23,13 +22,14 @@ window.addEventListener("load", function() {
 	main = document.querySelector("main");
 	crossToggle = document.querySelector("#crossToggle");
 
+	init();
+
 	crossToggle.addEventListener("click", function () {
-		isCross = !isCross;
-		if (isCross) crossToggle.classList.add("is-cross");
+		grid.isCross = !grid.isCross;
+
+		if (grid.isCross) crossToggle.classList.add("is-cross");
 		else crossToggle.classList.remove("is-cross");
 	})
-
-	init();
 });
 
 function init() {

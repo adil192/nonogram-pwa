@@ -117,6 +117,10 @@ footer {
 	&.selected {
 		background: $tile-selected-bg;
 	}
+	&.crossed {
+		background: url("images/cross.svg") no-repeat center center;
+		background-size: 50%;
+	}
 
 	&::before {
 		border: $normal-border-width solid $normal-border-color;
