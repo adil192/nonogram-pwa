@@ -33,7 +33,9 @@ export class Grid {
 
 					if (x < 0 && y < 0) gridItem.elem.innerText = ""; // top left corner should be left blank
 				} else {
-					if (Math.random() > 1 - difficulty) gridItem.elem.classList.add("selected"); // dummy data
+					gridItem.state = Math.random() > 1 - difficulty;
+
+					gridItem.isSelected = gridItem.state; // dummy data
 
 					// add border around edges
 					if (x == 0) gridItem.elem.classList.add("x-start");
@@ -70,6 +72,9 @@ export class Grid {
 export class GridItem {
 	elem: HTMLDivElement;
 	tile?: Tile;
+
+	private _selected: boolean = false;
+	public state: boolean = false;
 	
 	constructor(isTile: boolean) {
 		this.elem = document.createElement("div");
@@ -80,5 +85,15 @@ export class GridItem {
 		} else {
 			this.elem.classList.add("label");
 		}
+	}
+
+	public get isSelected(): boolean {
+		return this._selected;
+	}
+	public set isSelected(selected: boolean) {
+		this._selected = selected;
+
+		if (selected) this.elem.classList.add("selected");
+		else this.elem.classList.remove("selected");
 	}
 }
