@@ -86,7 +86,7 @@ main {
 	&.y-start,
 	&.y-end {
 		&::after {
-			margin: -$thick-border-width;
+			margin: -$thick-border-width * 2 / 3;
 			border-width: $thick-border-width;
 			border-color: $theme-color;
 		}
