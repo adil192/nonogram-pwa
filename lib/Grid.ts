@@ -44,6 +44,11 @@ export class Grid {
 					if (y == 0) gridItem.elem.classList.add("y-start");
 					else if (y == this.height - 1) gridItem.elem.classList.add("y-end");
 					else if (y == this.height / 2.0) gridItem.elem.classList.add("y-middle");
+
+					// onclick
+					gridItem.elem.addEventListener("click", () => {
+						this.onGridItemClicked(gridItem);
+					});
 				}
 
 				this.elem.append(gridItem.elem);
@@ -57,6 +62,10 @@ export class Grid {
 	// indices offset by 1 to allow for ["-1"] to be a label, and ["0"] to be the first game tile
 	getGridItem(x: number, y: number) {
 		return this.gridItems[x + 1][y + 1];
+	}
+
+	onGridItemClicked(gridItem: GridItem) {
+		gridItem.isSelected = !gridItem.isSelected;
 	}
 
 	public Destroy() {
