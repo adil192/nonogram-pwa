@@ -33,7 +33,14 @@ window.addEventListener("load", function() {
 		else crossToggle.classList.remove("is-cross");
 	})
 	difficultyToggle.addEventListener("change", function () {
+		let inputValue = difficultyToggle.valueAsNumber;
+		inputValue = Math.min(10, Math.max(1, inputValue));
+		if (inputValue != difficultyToggle.valueAsNumber) {
+			difficultyToggle.valueAsNumber = inputValue;
+		}
+
 		Grid.difficulty = 1 - difficultyToggle.valueAsNumber / 11;
+
 		grid.Destroy();
 		grid = new Grid(main, GRID_WIDTH, GRID_HEIGHT);
 	})
