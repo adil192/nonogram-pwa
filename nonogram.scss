@@ -8,6 +8,7 @@ $middle-border-color: #aaaaaa;
 $middle-border-width: 2px;
 $thick-border-color: $theme-color;
 $thick-border-width: 0.75vw;
+$thick-border-radius-internal: 1vw;
 $thick-border-radius: 1.5vw;
 
 
@@ -65,53 +66,55 @@ main {
 		border-top-color: $middle-border-color;
 	}
 
-	.tile.x-start,
-	.tile.x-end,
-	.tile.y-start,
-	.tile.y-end {
-		&::before {
+	.tile {
+		&::before, &::after {
 			content: "";
 			position: absolute;
 			top: 0;
 			left: 0;
 			bottom: 0;
 			right: 0;
+		}
+	}
 
+	.tile.x-start,
+	.tile.x-end,
+	.tile.y-start,
+	.tile.y-end {
+		&::after {
 			margin: -$thick-border-width;
 			border-width: $thick-border-width;
 			border-color: $theme-color;
 		}
 	}
-	.tile.x-start::before {
+	.tile.x-start::after {
 		border-left-style: solid;
 	}
-	.tile.x-end::before {
+	.tile.x-end::after {
 		border-right-style: solid;
 	}
-	.tile.y-start::before {
+	.tile.y-start::after {
 		border-top-style: solid;
 	}
-	.tile.y-end::before {
+	.tile.y-end::after {
 		border-bottom-style: solid;
 	}
-	.tile.x-start.y-start {
-		&, &::before {
-			border-top-left-radius: $thick-border-radius;
+	@mixin thick-border-radius($position) {
+		border-#{$position}-radius: $thick-border-radius-internal;
+		&::after {
+			border-#{$position}-radius: $thick-border-radius;
 		}
+	}
+	.tile.x-start.y-start {
+		@include thick-border-radius(top-left);
 	}
 	.tile.x-start.y-end {
-		&, &::before {
-			border-bottom-left-radius: $thick-border-radius;
-		}
+		@include thick-border-radius(bottom-left);
 	}
 	.tile.x-end.y-start {
-		&, &::before {
-			border-top-right-radius: $thick-border-radius;
-		}
+		@include thick-border-radius(top-right);
 	}
 	.tile.x-end.y-end {
-		&, &::before {
-			border-bottom-right-radius: $thick-border-radius;
-		}
+		@include thick-border-radius(bottom-right);
 	}
 }
