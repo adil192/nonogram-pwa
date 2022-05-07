@@ -35,6 +35,7 @@ main {
 	.label {
 		// center text
 		display: flex;
+		flex-direction: row-reverse; // align text at right/bottom
 		align-items: center;
 	}
 	.label.vertical {
@@ -42,10 +43,8 @@ main {
 		text-orientation: upright;
 		word-spacing: -1rem;
 		padding-bottom: 2 * $thick-border-width;
-		flex-direction: row-reverse; // keep text at bottom
 	}
 	.label.horizontal {
-		text-align: right;
 		padding-right: 2 * $thick-border-width;
 	}
 }
