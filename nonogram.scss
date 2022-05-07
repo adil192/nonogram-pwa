@@ -52,7 +52,6 @@ main {
 
 .tile {
 	aspect-ratio: 1;
-	border: $normal-border-width solid $normal-border-color;
 	position: relative;
 
 	&::before, &::after {
@@ -68,11 +67,16 @@ main {
 		background: $tile-selected-bg;
 	}
 
-	&.x-middle {
+	&::before {
+		border: $normal-border-width solid $normal-border-color;
+		border-right-width: 0;
+		border-bottom-width: 0;
+	}
+	&.x-middle::before {
 		border-left-width: $middle-border-width;
 		border-left-color: $middle-border-color;
 	}
-	&.y-middle {
+	&.y-middle::before {
 		border-top-width: $middle-border-width;
 		border-top-color: $middle-border-color;
 	}
