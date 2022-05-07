@@ -28,7 +28,7 @@ main {
 	text-align: center;
 	padding: $thick-border-width * 2;
 	width: 100%;
-	max-width: 80vh;
+	max-width: 75vh;
 	margin: auto;
 
 
@@ -59,9 +59,11 @@ footer {
 
 	> .btn {
 		flex-basis: 4rem;
-		height: 3rem;
+		height: 4rem;
 		position: relative;
 		margin: auto;
+		border-radius: 50%;
+		aspect-ratio: 1;
 
 		&::before {
 			content: "";
@@ -79,11 +81,6 @@ footer {
 			&::before {
 				background-color: transparent;
 				background-image: url("images/cross.svg");
-				transition: filter 0.15s ease-in-out;
-			}
-			&:active::before,
-			&:hover::before {
-				filter: invert(1);
 			}
 		}
 	}
@@ -91,14 +88,12 @@ footer {
 
 .btn-outline-primary {
 	color: $theme-color;
-	border-color: $theme-color;
-	&:active {
-		background-color: rgba($theme-color, 0.75);
-	}
+	border-color: transparent;
+	&:active,
 	&:hover {
 		color: white;
-		background-color: rgba($theme-color, 0.75);
-		border-color: $theme-color;
+		background-color: rgba($theme-color, 0.25);
+		border-color: transparent;
 	}
 	&:focus {
 		box-shadow: 0 0 0 .25rem rgba($theme-color,.5);
