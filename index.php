@@ -34,7 +34,7 @@ $lastUpdate = "22-05-06-0000"; // when changing this, you should also update sw.
 </main>
 
 <footer>
-    <button class="btn btn-outline-primary">
+    <button class="btn btn-outline-primary" id="crossToggle">
     </button>
 </footer>
 

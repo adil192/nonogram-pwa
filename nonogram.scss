@@ -59,7 +59,33 @@ footer {
 
 	> .btn {
 		flex-basis: 4rem;
+		height: 3rem;
+		position: relative;
 		margin: auto;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0; left: 0; bottom: 0; right: 0;
+			height: 1.5rem;
+			margin: auto;
+			aspect-ratio: 1;
+
+			background: $theme-color no-repeat center center;
+			background-size: 100%;
+		}
+
+		&.is-cross {
+			&::before {
+				background-color: transparent;
+				background-image: url("images/cross.svg");
+				transition: filter 0.15s ease-in-out;
+			}
+			&:active::before,
+			&:hover::before {
+				filter: invert(1);
+			}
+		}
 	}
 }
 
@@ -71,7 +97,7 @@ footer {
 	}
 	&:hover {
 		color: white;
-		background-color: $theme-color;
+		background-color: rgba($theme-color, 0.75);
 		border-color: $theme-color;
 	}
 	&:focus {

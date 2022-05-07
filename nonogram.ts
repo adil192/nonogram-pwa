@@ -2,6 +2,10 @@ import {Tile} from "./lib/Tile";
 import {Grid} from "./lib/Grid";
 
 let main: HTMLElement;
+
+let isCross: boolean = false;
+let crossToggle: HTMLButtonElement;
+
 let grid: Grid = null;
 
 const GRID_WIDTH = 10;
@@ -17,6 +21,13 @@ window.addEventListener("load", function() {
 	}
 
 	main = document.querySelector("main");
+	crossToggle = document.querySelector("#crossToggle");
+
+	crossToggle.addEventListener("click", function () {
+		isCross = !isCross;
+		if (isCross) crossToggle.classList.add("is-cross");
+		else crossToggle.classList.remove("is-cross");
+	})
 
 	init();
 });
