@@ -1,5 +1,5 @@
 // Cache name has a timestamp because the browser re-caches the assets when the service worker file is modified
-const staticCacheName = "nonogram-cache-" + "22-05-08-1700";
+const staticCacheName = "nonogram-cache-" + "22-05-08-1740";
 const assets = [
 	'/favicon.ico',
 	'/nonogram/',
@@ -11,6 +11,9 @@ const assets = [
 	'/assets/ext/bootstrap.5.1.3.min.css',
 ];
 const assets_extra = [
+	'/nonogram/images/cross.svg',
+	'/nonogram/images/trash.svg',
+
 	'/nonogram/fonts/MPLUSRounded1c-Regular.00-ff.ttf',
 	'/nonogram/fonts/MPLUSRounded1c-Regular.00-ff.woff',
 	'/nonogram/fonts/MPLUSRounded1c-Regular.00-ff.woff2',
