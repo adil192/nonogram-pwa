@@ -8,6 +8,16 @@
 	url('/nonogram/fonts/MPLUSRounded1c-Regular.00-ff.ttf') format('truetype');
 	unicode-range: U+00-FF; /* basic Latin */
 }
+@font-face {
+	font-family: 'MPLUSRounded1c';
+	font-style: normal;
+	font-weight: 400;
+	src: local('MPLUSRounded1c'),
+	url('/nonogram/fonts/MPLUSRounded1c-Regular.100-5ff.woff2') format('woff2'),
+	url('/nonogram/fonts/MPLUSRounded1c-Regular.100-5ff.woff') format('woff'),
+	url('/nonogram/fonts/MPLUSRounded1c-Regular.100-5ff.ttf') format('truetype');
+	unicode-range: U+100-5FF; /* extended Latin */
+}
 
 @font-face {
 	font-family: 'MPLUSRounded1c';
@@ -18,4 +28,14 @@
 	url('/nonogram/fonts/MPLUSRounded1c-Medium.00-ff.woff') format('woff'),
 	url('/nonogram/fonts/MPLUSRounded1c-Medium.00-ff.ttf') format('truetype');
 	unicode-range: U+00-FF; /* basic Latin */
+}
+@font-face {
+	font-family: 'MPLUSRounded1c';
+	font-style: normal;
+	font-weight: 500;
+	src: local('MPLUSRounded1c'),
+	url('/nonogram/fonts/MPLUSRounded1c-Medium.100-5ff.woff2') format('woff2'),
+	url('/nonogram/fonts/MPLUSRounded1c-Medium.100-5ff.woff') format('woff'),
+	url('/nonogram/fonts/MPLUSRounded1c-Medium.100-5ff.ttf') format('truetype');
+	unicode-range: U+100-5FF; /* extended Latin */
 }
