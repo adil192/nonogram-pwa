@@ -1,3 +1,6 @@
+// used commands like this to subset the full 3.4MB ttf file:
+// pyftsubset MPLUSRounded1c-Regular.ttf --unicodes=100-5ff --ignore-missing-unicodes --with-zopfli --recommended-glyphs --flavor=woff2
+
 @font-face {
 	font-family: 'MPLUSRounded1c';
 	font-style: normal;
