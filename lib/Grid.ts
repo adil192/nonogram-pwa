@@ -18,13 +18,9 @@ export class Grid {
 
 		// create grid items
 		this.gridItems = [];
-		let xStateCounts: number[][] = Array.from(Array(this.size), () => [0]);  // e.g. [ [1,2,1], [3], [1,4] ]
-		let yStateCounts: number[][] = Array.from(Array(this.size), () => [0]);
 		for (let y = -1; y < this.size; ++y) {
-			let yStateCountsCurrent = yStateCounts[y];
 			let row: GridItem[] = [];
 			for (let x = -1; x < this.size; ++x) {
-				let xStateCountsCurrent = xStateCounts[x];
 				const isTile: boolean = x >= 0 && y >= 0;
 				const gridItem = isTile ? new GridItemTile(x, y) : new GridItemLabel();
 
@@ -35,17 +31,6 @@ export class Grid {
 					if (x < 0 && y < 0) gridItem.elem.innerText = ""; // top left corner should be left blank
 				} else {
 					gridItem.state = Math.random() > 1 - Grid.difficulty;
-					if (gridItem.state) {
-						xStateCountsCurrent[xStateCountsCurrent.length - 1] += 1
-						yStateCountsCurrent[yStateCountsCurrent.length - 1] += 1;
-					} else {
-						if (xStateCountsCurrent[xStateCountsCurrent.length - 1] != 0) {
-							xStateCountsCurrent.push(0);
-						}
-						if (yStateCountsCurrent[yStateCountsCurrent.length - 1] != 0) {
-							yStateCountsCurrent.push(0);
-						}
-					}
 
 					// add border around edges
 					if (x == 0) gridItem.elem.classList.add("x-start");
@@ -70,8 +55,7 @@ export class Grid {
 
 		let x, y;
 		for (y = -1, x = 0; x < this.size; ++x) {
-			let label = yStateCounts[x].filter(n => n != 0).join(" ");
-			if (!label) label = "0";
+			let label: string = this.getVerticalLabel(x, true).join(" ");
 			this.getGridItem(x, y).elem.innerText = label;
 
 			if (label == this.size + "") { // full row/column
@@ -81,14 +65,44 @@ export class Grid {
 			}
 		}
 		for (x = -1, y = 0; y < this.size; ++y) {
-			let label = xStateCounts[y].filter(n => n != 0).join("\n");
-			if (!label) label = "0";
+			let label: string = this.getHorizontalLabel(y, true).join("\n");
 			this.getGridItem(x, y).elem.innerText = label;
 
 			if (label == this.size + "") { // full row/column
 				for (let bx = 0; bx < this.size; ++bx) {
 					this.getGridItem<GridItemTile>(bx, y).isSelected = true;
 				}
+			}
+		}
+	}
+
+	getHorizontalLabel(y: number, isStart: boolean = false): number[] {
+		let counts: number[] = [];
+
+		for (let x = 0; x < this.size; ++x) this._getLabel_countTile(x, y, isStart, counts);
+
+		counts = counts.filter(n => n != 0);
+		if (!counts.length) return [0];
+		else return counts;
+	}
+	getVerticalLabel(x: number, isStart: boolean = false): number[] {
+		let counts: number[] = [];
+
+		for (let y = 0; y < this.size; ++y) this._getLabel_countTile(x, y, isStart, counts);
+
+		counts = counts.filter(n => n != 0);
+		if (!counts.length) return [0];
+		else return counts;
+	}
+	private _getLabel_countTile(x: number, y: number, isStart: boolean, counts: number[]) {
+		let tile: GridItemTile = this.getGridItem(x, y);
+		let counted = isStart ? tile.state : tile.isSelected;
+
+		if (counted) {
+			counts[counts.length - 1] += 1
+		} else {
+			if (counts[counts.length - 1] != 0) {
+				counts.push(0);
 			}
 		}
 	}
