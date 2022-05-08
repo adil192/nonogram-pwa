@@ -26,9 +26,9 @@ export class Grid {
 			for (let x = -1; x < this.size; ++x) {
 				let xStateCountsCurrent = xStateCounts[x];
 				const isTile: boolean = x >= 0 && y >= 0;
-				const gridItem = new GridItem(isTile);
+				const gridItem = isTile ? new GridItemTile() : new GridItemLabel();
 
-				if (!isTile) {
+				if (gridItem instanceof GridItemLabel) {
 					if (y < 0) gridItem.elem.classList.add("vertical"); // make top row vertical
 					else gridItem.elem.classList.add("horizontal");
 
@@ -76,7 +76,7 @@ export class Grid {
 
 			if (label == this.size + "") { // full row/column
 				for (let by = 0; by < this.size; ++by) {
-					this.getGridItem(x, by).isSelected = true;
+					this.getGridItem<GridItemTile>(x, by).isSelected = true;
 				}
 			}
 		}
@@ -87,26 +87,26 @@ export class Grid {
 
 			if (label == this.size + "") { // full row/column
 				for (let bx = 0; bx < this.size; ++bx) {
-					this.getGridItem(bx, y).isSelected = true;
+					this.getGridItem<GridItemTile>(bx, y).isSelected = true;
 				}
 			}
 		}
 	}
 
 	// indices offset by 1 to allow for ["-1"] to be a label, and ["0"] to be the first game tile
-	getGridItem(x: number, y: number) {
-		return this.gridItems[x + 1][y + 1];
+	getGridItem<T extends GridItem>(x: number, y: number): T {
+		return this.gridItems[x + 1][y + 1] as T;
 	}
 
-	onGridItemClicked(gridItem: GridItem) {
+	onGridItemClicked(gridItem: GridItemTile) {
 		if (this.isCross) gridItem.isCrossed = !gridItem.isCrossed;
 		else gridItem.isSelected = !gridItem.isSelected;
 	}
 
 	public Clear() {
-		for (let x = -1; x < this.size; ++x) {
-			for (let y = -1; y < this.size; ++y) {
-				let gridItem = this.getGridItem(x, y);
+		for (let x = 0; x < this.size; ++x) {
+			for (let y = 0; y < this.size; ++y) {
+				let gridItem = this.getGridItem<GridItemTile>(x, y);
 				gridItem.isSelected = false;
 				gridItem.isCrossed = false;
 			}
@@ -123,21 +123,17 @@ export class Grid {
 	}
 }
 
-export class GridItem {
-	elem: HTMLDivElement;
-
+export abstract class GridItem {
+	elem: HTMLElement;
+}
+export class GridItemTile extends GridItem {
 	public state: boolean = false;
 	private _selected: boolean = false;
 	private _crossed: boolean = false;
-	
-	constructor(isTile: boolean) {
-		this.elem = document.createElement("div");
 
-		if (isTile) {
-			this.elem.classList.add("tile");
-		} else {
-			this.elem.classList.add("label");
-		}
+	constructor() {
+		super();
+		this.elem = document.createElement("tile");
 	}
 
 	public get isSelected(): boolean {
@@ -164,6 +160,27 @@ export class GridItem {
 			this.isSelected = false;
 		} else {
 			this.elem.classList.remove("crossed");
+		}
+	}
+}
+export class GridItemLabel extends GridItem {
+	private _correct: boolean = false;
+
+	constructor() {
+		super();
+		this.elem = document.createElement("label");
+	}
+
+	public get isCorrect(): boolean {
+		return this._correct;
+	}
+	public set isCrossed(correct: boolean) {
+		this._correct = correct;
+
+		if (correct) {
+			this.elem.classList.add("correct");
+		} else {
+			this.elem.classList.remove("correct");
 		}
 	}
 }

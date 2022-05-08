@@ -40,16 +40,16 @@ main {
 	margin: auto;
 
 
-	.label {
+	label {
 		// center text
 		display: flex;
 		align-items: center;
 	}
-	.label.vertical {
+	label.vertical {
 		flex-direction: column-reverse; // align text at bottom
 		padding-bottom: 2 * $thick-border-width;
 	}
-	.label.horizontal {
+	label.horizontal {
 		flex-direction: row-reverse; // align text to end
 		padding-right: 2 * $thick-border-width;
 		min-width: 4em;
@@ -134,7 +134,7 @@ footer {
 	}
 }
 
-.tile {
+tile {
 	aspect-ratio: 1;
 	position: relative;
 	transition: background-color 0.05s;
