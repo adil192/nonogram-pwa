@@ -1,5 +1,5 @@
 // Cache name has a timestamp because the browser re-caches the assets when the service worker file is modified
-const staticCacheName = "nonogram-cache-" + "22-04-03-1243";
+const staticCacheName = "nonogram-cache-" + "22-05-08-1700";
 const assets = [
 	'/favicon.ico',
 	'/nonogram/',
@@ -10,11 +10,26 @@ const assets = [
 	'/nonogram/lib/Tile',
 	'/assets/ext/bootstrap.5.1.3.min.css',
 ];
+const assets_extra = [
+	'/nonogram/fonts/MPLUSRounded1c-Regular.00-ff.ttf',
+	'/nonogram/fonts/MPLUSRounded1c-Regular.00-ff.woff',
+	'/nonogram/fonts/MPLUSRounded1c-Regular.00-ff.woff2',
+	'/nonogram/fonts/MPLUSRounded1c-Regular.100-5ff.ttf',
+	'/nonogram/fonts/MPLUSRounded1c-Regular.100-5ff.woff',
+	'/nonogram/fonts/MPLUSRounded1c-Regular.100-5ff.woff2',
+	'/nonogram/fonts/MPLUSRounded1c-Medium.00-ff.ttf',
+	'/nonogram/fonts/MPLUSRounded1c-Medium.00-ff.woff',
+	'/nonogram/fonts/MPLUSRounded1c-Medium.00-ff.woff2',
+	'/nonogram/fonts/MPLUSRounded1c-Medium.100-5ff.ttf',
+	'/nonogram/fonts/MPLUSRounded1c-Medium.100-5ff.woff',
+	'/nonogram/fonts/MPLUSRounded1c-Medium.100-5ff.woff2',
+];
 
 self.addEventListener('install', (evt) => {
 	evt.waitUntil(
 		(async () => {
 			const cache = await caches.open(staticCacheName);
+			cache.addAll(assets_extra).then();
 			await cache.addAll(assets);
 		})()
 	);
