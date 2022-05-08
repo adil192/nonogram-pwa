@@ -8,8 +8,7 @@ let crossToggle: HTMLButtonElement;
 
 let grid: Grid = null;
 
-const GRID_WIDTH = 10;
-const GRID_HEIGHT = 10;
+const GRID_SIZE = 10;
 
 
 window.addEventListener("load", function() {
@@ -42,13 +41,13 @@ window.addEventListener("load", function() {
 		Grid.difficulty = 1 - difficultyToggle.valueAsNumber / 11;
 
 		grid.Destroy();
-		grid = new Grid(main, GRID_WIDTH, GRID_HEIGHT);
+		grid = new Grid(main, GRID_SIZE);
 	})
 });
 
 function init() {
 	if (grid != null) grid.Destroy();
 
-	grid = new Grid(main, GRID_WIDTH, GRID_HEIGHT);
+	grid = new Grid(main, GRID_SIZE);
 
 }

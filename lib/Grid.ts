@@ -2,8 +2,7 @@ import {Tile} from "./Tile";
 
 export class Grid {
 	readonly elem: HTMLElement;
-	readonly width: number;
-	readonly height: number;
+	readonly size: number;
 	readonly gridItems: GridItem[][];
 
 	// difficulty between 0.0 (easiest) and 1.0 (hardest)
@@ -11,22 +10,21 @@ export class Grid {
 
 	public isCross: boolean = false;
 
-	constructor(elem: HTMLElement, width: number, height: number) {
+	constructor(elem: HTMLElement, size: number) {
 		this.elem = elem;
-		this.width = width;
-		this.height = height;
+		this.size = size;
 
 		// set number of css grid columns
-		this.elem.style.gridTemplateColumns = "auto "+ "1fr ".repeat(this.width);
+		this.elem.style.gridTemplateColumns = "auto "+ "1fr ".repeat(this.size);
 
 		// create grid items
 		this.gridItems = [];
-		let xStateCounts: number[][] = Array.from(Array(this.width), () => [0]);  // e.g. [ [1,2,1], [3], [1,4] ]
-		let yStateCounts: number[][] = Array.from(Array(this.width), () => [0]);
-		for (let y = -1; y < this.height; ++y) {
+		let xStateCounts: number[][] = Array.from(Array(this.size), () => [0]);  // e.g. [ [1,2,1], [3], [1,4] ]
+		let yStateCounts: number[][] = Array.from(Array(this.size), () => [0]);
+		for (let y = -1; y < this.size; ++y) {
 			let yStateCountsCurrent = yStateCounts[y];
 			let row: GridItem[] = [];
-			for (let x = -1; x < this.width; ++x) {
+			for (let x = -1; x < this.size; ++x) {
 				let xStateCountsCurrent = xStateCounts[x];
 				const isTile: boolean = x >= 0 && y >= 0;
 				const gridItem = new GridItem(isTile);
@@ -54,11 +52,11 @@ export class Grid {
 
 					// add border around edges
 					if (x == 0) gridItem.elem.classList.add("x-start");
-					else if (x == this.width - 1) gridItem.elem.classList.add("x-end");
-					else if (x == this.width / 2.0) gridItem.elem.classList.add("x-middle");
+					else if (x == this.size - 1) gridItem.elem.classList.add("x-end");
+					else if (x == this.size / 2.0) gridItem.elem.classList.add("x-middle");
 					if (y == 0) gridItem.elem.classList.add("y-start");
-					else if (y == this.height - 1) gridItem.elem.classList.add("y-end");
-					else if (y == this.height / 2.0) gridItem.elem.classList.add("y-middle");
+					else if (y == this.size - 1) gridItem.elem.classList.add("y-end");
+					else if (y == this.size / 2.0) gridItem.elem.classList.add("y-middle");
 
 					// onclick
 					gridItem.elem.addEventListener("click", () => {
@@ -74,12 +72,12 @@ export class Grid {
 		}
 
 		let x, y;
-		for (y = -1, x = 0; x < this.width; ++x) {
+		for (y = -1, x = 0; x < this.size; ++x) {
 			let label = yStateCounts[x].filter(n => n != 0).join(" ");
 			if (!label) label = "0";
 			this.getGridItem(x, y).elem.innerText = label;
 		}
-		for (x = -1, y = 0; y < this.height; ++y) {
+		for (x = -1, y = 0; y < this.size; ++y) {
 			let label = xStateCounts[y].filter(n => n != 0).join("\n");
 			if (!label) label = "0";
 			this.getGridItem(x, y).elem.innerText = label;
@@ -97,8 +95,8 @@ export class Grid {
 	}
 
 	public Destroy() {
-		for (let x = -1; x < this.width; ++x) {
-			for (let y = -1; y < this.height; ++y) {
+		for (let x = -1; x < this.size; ++x) {
+			for (let y = -1; y < this.size; ++y) {
 				let gridItem = this.getGridItem(x, y);
 				gridItem.elem.remove();
 			}
