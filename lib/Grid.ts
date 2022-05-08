@@ -62,6 +62,10 @@ export class Grid {
 				for (let by = 0; by < this.size; ++by) {
 					this.getGridItem<GridItemTile>(x, by).isSelected = true;
 				}
+			} else if (!label) {
+				for (let by = 0; by < this.size; ++by) {
+					this.getGridItem<GridItemTile>(x, by).isCrossed = true;
+				}
 			}
 		}
 		for (x = -1, y = 0; y < this.size; ++y) {
@@ -72,6 +76,10 @@ export class Grid {
 				for (let bx = 0; bx < this.size; ++bx) {
 					this.getGridItem<GridItemTile>(bx, y).isSelected = true;
 				}
+			} else if (!label) {
+				for (let bx = 0; bx < this.size; ++bx) {
+					this.getGridItem<GridItemTile>(bx, y).isCrossed = true;
+				}
 			}
 		}
 	}
@@ -81,18 +89,14 @@ export class Grid {
 
 		for (let x = 0; x < this.size; ++x) this._getLabel_countTile(x, y, isStart, counts);
 
-		counts = counts.filter(n => n != 0);
-		if (!counts.length) return [0];
-		else return counts;
+		return counts.filter(n => n != 0);
 	}
 	getVerticalLabel(x: number, isStart: boolean = false): number[] {
 		let counts: number[] = [];
 
 		for (let y = 0; y < this.size; ++y) this._getLabel_countTile(x, y, isStart, counts);
 
-		counts = counts.filter(n => n != 0);
-		if (!counts.length) return [0];
-		else return counts;
+		return counts.filter(n => n != 0);
 	}
 	private _getLabel_countTile(x: number, y: number, isStart: boolean, counts: number[]) {
 		let tile: GridItemTile = this.getGridItem(x, y);
