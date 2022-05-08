@@ -39,16 +39,14 @@ main {
 	.label {
 		// center text
 		display: flex;
-		flex-direction: row-reverse; // align text at right/bottom
 		align-items: center;
 	}
 	.label.vertical {
-		writing-mode: vertical-lr;
-		text-orientation: upright;
-		word-spacing: -1rem;
+		flex-direction: column-reverse; // align text at bottom
 		padding-bottom: 2 * $thick-border-width;
 	}
 	.label.horizontal {
+		flex-direction: row-reverse; // align text to end
 		padding-right: 2 * $thick-border-width;
 		min-width: 4em;
 	}

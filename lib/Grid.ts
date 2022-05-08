@@ -80,7 +80,7 @@ export class Grid {
 			this.getGridItem(x, y).elem.innerText = label;
 		}
 		for (x = -1, y = 0; y < this.height; ++y) {
-			let label = xStateCounts[y].filter(n => n != 0).join(" ");
+			let label = xStateCounts[y].filter(n => n != 0).join("\n");
 			if (!label) label = "0";
 			this.getGridItem(x, y).elem.innerText = label;
 		}
