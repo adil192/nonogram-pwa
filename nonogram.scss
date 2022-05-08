@@ -25,6 +25,10 @@ body {
 	font-family: MPLUSRounded1c, var(--bs-body-font-family), sans-serif;
 }
 
+header {
+	padding: 1rem;
+}
+
 main {
 	display: grid;
 	grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr;
