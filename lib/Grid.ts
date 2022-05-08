@@ -48,8 +48,6 @@ export class Grid {
 						}
 					}
 
-					gridItem.isSelected = gridItem.state; // dummy data
-
 					// add border around edges
 					if (x == 0) gridItem.elem.classList.add("x-start");
 					else if (x == this.size - 1) gridItem.elem.classList.add("x-end");
