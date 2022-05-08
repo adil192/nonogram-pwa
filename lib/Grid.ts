@@ -104,6 +104,16 @@ export class Grid {
 		else gridItem.isSelected = !gridItem.isSelected;
 	}
 
+	public Clear() {
+		for (let x = -1; x < this.size; ++x) {
+			for (let y = -1; y < this.size; ++y) {
+				let gridItem = this.getGridItem(x, y);
+				gridItem.isSelected = false;
+				gridItem.isCrossed = false;
+			}
+		}
+	}
+
 	public Destroy() {
 		for (let x = -1; x < this.size; ++x) {
 			for (let y = -1; y < this.size; ++y) {

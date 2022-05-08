@@ -5,6 +5,7 @@ let main: HTMLElement;
 
 let difficultyToggle: HTMLInputElement;
 let crossToggle: HTMLButtonElement;
+let binBtn: HTMLButtonElement;
 
 let grid: Grid = null;
 
@@ -22,6 +23,7 @@ window.addEventListener("load", function() {
 	main = document.querySelector("main");
 	difficultyToggle = document.querySelector("#difficultyToggle");
 	crossToggle = document.querySelector("#crossToggle");
+	binBtn = document.querySelector("#binBtn");
 
 	init();
 
@@ -30,6 +32,9 @@ window.addEventListener("load", function() {
 
 		if (grid.isCross) crossToggle.classList.add("is-cross");
 		else crossToggle.classList.remove("is-cross");
+	})
+	binBtn.addEventListener("click", function () {
+		grid.Clear();
 	})
 	difficultyToggle.addEventListener("change", function () {
 		let inputValue = difficultyToggle.valueAsNumber;
