@@ -1,4 +1,3 @@
-import {Tile} from "./lib/Tile";
 import {Grid} from "./lib/Grid";
 
 let main: HTMLElement;

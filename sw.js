@@ -7,7 +7,6 @@ const assets = [
 	'/nonogram/nonogram.css',
 	'/nonogram/nonogram.js',
 	'/nonogram/lib/Grid',
-	'/nonogram/lib/Tile',
 	'/assets/ext/bootstrap.5.1.3.min.css',
 ];
 const assets_extra = [

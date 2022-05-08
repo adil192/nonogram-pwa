@@ -1,4 +1,3 @@
-import {Tile} from "./Tile";
 
 export class Grid {
 	readonly elem: HTMLElement;
@@ -126,7 +125,6 @@ export class Grid {
 
 export class GridItem {
 	elem: HTMLDivElement;
-	tile?: Tile;
 
 	public state: boolean = false;
 	private _selected: boolean = false;
@@ -137,7 +135,6 @@ export class GridItem {
 
 		if (isTile) {
 			this.elem.classList.add("tile");
-			this.tile = new Tile(this.elem);
 		} else {
 			this.elem.classList.add("label");
 		}
