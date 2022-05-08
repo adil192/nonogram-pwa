@@ -12,6 +12,9 @@ $thick-border-radius-internal: 1vw;
 $thick-border-radius: 1.5vw;
 
 
+@import "fonts/MPLUSRounded1c";
+
+
 html, body {
 	width: 100%;
 	height: 100%;
@@ -19,6 +22,7 @@ html, body {
 body {
 	display: flex;
 	flex-flow: column nowrap;
+	font-family: MPLUSRounded1c, var(--bs-body-font-family), sans-serif;
 }
 
 main {
