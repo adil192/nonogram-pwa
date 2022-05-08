@@ -26,7 +26,7 @@ export class Grid {
 			for (let x = -1; x < this.size; ++x) {
 				let xStateCountsCurrent = xStateCounts[x];
 				const isTile: boolean = x >= 0 && y >= 0;
-				const gridItem = isTile ? new GridItemTile() : new GridItemLabel();
+				const gridItem = isTile ? new GridItemTile(x, y) : new GridItemLabel();
 
 				if (gridItem instanceof GridItemLabel) {
 					if (y < 0) gridItem.elem.classList.add("vertical"); // make top row vertical
@@ -131,9 +131,14 @@ export class GridItemTile extends GridItem {
 	private _selected: boolean = false;
 	private _crossed: boolean = false;
 
-	constructor() {
+	public readonly x: number;
+	public readonly y: number;
+
+	constructor(x: number, y: number) {
 		super();
 		this.elem = document.createElement("tile");
+		this.x = x;
+		this.y = y;
 	}
 
 	public get isSelected(): boolean {
@@ -174,7 +179,7 @@ export class GridItemLabel extends GridItem {
 	public get isCorrect(): boolean {
 		return this._correct;
 	}
-	public set isCrossed(correct: boolean) {
+	public set isCorrect(correct: boolean) {
 		this._correct = correct;
 
 		if (correct) {
