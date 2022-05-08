@@ -74,11 +74,23 @@ export class Grid {
 			let label = yStateCounts[x].filter(n => n != 0).join(" ");
 			if (!label) label = "0";
 			this.getGridItem(x, y).elem.innerText = label;
+
+			if (label == this.size + "") { // full row/column
+				for (let by = 0; by < this.size; ++by) {
+					this.getGridItem(x, by).isSelected = true;
+				}
+			}
 		}
 		for (x = -1, y = 0; y < this.size; ++y) {
 			let label = xStateCounts[y].filter(n => n != 0).join("\n");
 			if (!label) label = "0";
 			this.getGridItem(x, y).elem.innerText = label;
+
+			if (label == this.size + "") { // full row/column
+				for (let bx = 0; bx < this.size; ++bx) {
+					this.getGridItem(bx, y).isSelected = true;
+				}
+			}
 		}
 	}
 
