@@ -74,11 +74,13 @@ footer {
 		&::before {
 			content: "";
 			position: absolute;
-			top: 0; left: 0; bottom: 0; right: 0;
-			height: 1.5rem;
+			top: 0; left: 0; bottom: 0; right: 0; height: 1.5rem;
 			margin: auto;
 			aspect-ratio: 1;
-
+		}
+	}
+	#crossToggle {
+		&::before {
 			background: $theme-color no-repeat center center;
 			background-size: 100%;
 		}
@@ -88,6 +90,12 @@ footer {
 				background-color: transparent;
 				background-image: url("images/cross.svg");
 			}
+		}
+	}
+	#binBtn {
+		&::before {
+			background: url("images/trash.svg") no-repeat center center;
+			background-size: 100%;
 		}
 	}
 

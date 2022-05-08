@@ -39,6 +39,7 @@ $lastUpdate = "22-05-06-0000"; // when changing this, you should also update sw.
         <input id="difficultyToggle" type="number" value="5" min="1" max="10">
     </div>
     <button class="btn btn-outline-primary" id="crossToggle"></button>
+    <button class="btn btn-outline-primary" id="binBtn"></button>
 </footer>
 
 
