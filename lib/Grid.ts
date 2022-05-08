@@ -85,14 +85,14 @@ export class Grid {
 	}
 
 	getHorizontalLabel(y: number, isStart: boolean = false): number[] {
-		let counts: number[] = [];
+		let counts: number[] = [0];
 
 		for (let x = 0; x < this.size; ++x) this._getLabel_countTile(x, y, isStart, counts);
 
 		return counts.filter(n => n != 0);
 	}
 	getVerticalLabel(x: number, isStart: boolean = false): number[] {
-		let counts: number[] = [];
+		let counts: number[] = [0];
 
 		for (let y = 0; y < this.size; ++y) this._getLabel_countTile(x, y, isStart, counts);
 
