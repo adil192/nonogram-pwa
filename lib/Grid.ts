@@ -4,6 +4,9 @@ export class Grid {
 	readonly size: number;
 	private readonly gridItems: GridItem[][];
 
+	private modalBackdrop: HTMLDivElement;
+	private wonModal: HTMLDivElement;
+
 	// difficulty between 0.0 (easiest) and 1.0 (hardest)
 	public static difficulty: number = 4 / 11;
 
@@ -12,6 +15,9 @@ export class Grid {
 	constructor(elem: HTMLElement, size: number) {
 		this.elem = elem;
 		this.size = size;
+
+		this.modalBackdrop = document.querySelector("#backdrop");
+		this.wonModal = document.querySelector("#wonModal");
 
 		// set number of css grid columns
 		this.elem.style.gridTemplateColumns = "auto "+ "1fr ".repeat(this.size);
@@ -161,6 +167,19 @@ export class Grid {
 	}
 	checkWon() {
 		if (!this._hasWon()) return;
+
+		this.showWonModal();
+	}
+
+	showWonModal() {
+		this.modalBackdrop.style.display = "block"
+		this.wonModal.style.display = "block"
+		this.wonModal.classList.add("show")
+	}
+	hideWonModal() {
+		this.modalBackdrop.style.display = "none"
+		this.wonModal.style.display = "none"
+		this.wonModal.classList.remove("show")
 	}
 
 	public Clear() {

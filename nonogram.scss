@@ -73,20 +73,6 @@ footer {
 		margin: auto;
 	}
 
-	> .btn {
-		height: 4rem;
-		position: relative;
-		border-radius: 50%;
-		aspect-ratio: 1;
-
-		&::before {
-			content: "";
-			position: absolute;
-			top: 0; left: 0; bottom: 0; right: 0; height: 1.5rem;
-			margin: auto;
-			aspect-ratio: 1;
-		}
-	}
 	#crossToggle {
 		&::before {
 			background: $theme-color no-repeat center center;
@@ -124,17 +110,40 @@ footer {
 	}
 }
 
+.btn-link {
+	color: $theme-color;
+}
 .btn-outline-primary {
 	color: $theme-color;
 	border-color: transparent;
 	&:active,
 	&:hover {
-		color: white;
+		color: mix($theme-color, black);
 		background-color: rgba($theme-color, 0.25);
 		border-color: transparent;
 	}
 	&:focus {
 		box-shadow: 0 0 0 .25rem rgba($theme-color,.5);
+	}
+}
+.btn-icon {
+	height: 4rem;
+	position: relative;
+	border-radius: 50%;
+	aspect-ratio: 1;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0; left: 0; bottom: 0; right: 0; height: 1.5rem;
+		margin: auto;
+		aspect-ratio: 1;
+	}
+}
+.btn-refresh {
+	&::before {
+		background: url("images/refresh.svg") no-repeat center center;
+		background-size: contain;
 	}
 }
 
