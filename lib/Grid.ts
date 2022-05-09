@@ -5,7 +5,7 @@ export class Grid {
 	private readonly gridItems: GridItem[][];
 
 	// difficulty between 0.0 (easiest) and 1.0 (hardest)
-	public static difficulty: number = 0.5;
+	public static difficulty: number = 4 / 11;
 
 	public isCross: boolean = false;
 
@@ -30,7 +30,7 @@ export class Grid {
 
 					if (x < 0 && y < 0) gridItem.elem.innerText = ""; // top left corner should be left blank
 				} else {
-					gridItem.state = Math.random() > 1 - Grid.difficulty;
+					gridItem.state = Math.random() > Grid.difficulty;
 
 					// add border around edges
 					if (x == 0) gridItem.elem.classList.add("x-start");

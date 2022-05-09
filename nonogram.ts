@@ -42,7 +42,7 @@ window.addEventListener("load", function() {
 			difficultyToggle.valueAsNumber = inputValue;
 		}
 
-		Grid.difficulty = 1 - difficultyToggle.valueAsNumber / 11;
+		Grid.difficulty = difficultyToggle.valueAsNumber / 11;
 
 		grid.Destroy();
 		grid = new Grid(main, GRID_SIZE);
