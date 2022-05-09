@@ -54,8 +54,13 @@ export class Grid {
 		}
 
 		for (let x = 0; x < this.size; ++x) {
-			let label: string = this.getVerticalLabel(x, true).join("\n");
-			this.getGridItem(x, -1).elem.innerText = label;
+			let gridItem: GridItemLabel = this.getGridItem(x, -1);
+
+			let counts = this.getVerticalLabel(x, true);
+			gridItem.counts = counts.join(",");
+
+			let label: string = counts.join("\n");
+			gridItem.elem.innerText = label;
 
 			if (label == this.size + "") { // full row/column
 				for (let by = 0; by < this.size; ++by) {
@@ -68,8 +73,13 @@ export class Grid {
 			}
 		}
 		for (let y = 0; y < this.size; ++y) {
-			let label: string = this.getHorizontalLabel(y, true).join(" ");
-			this.getGridItem(-1, y).elem.innerText = label;
+			let gridItem: GridItemLabel = this.getGridItem(-1, y);
+
+			let counts = this.getHorizontalLabel(y, true);
+			gridItem.counts = counts.join(",");
+
+			let label: string = counts.join(" ");
+			gridItem.elem.innerText = label;
 
 			if (label == this.size + "") { // full row/column
 				for (let bx = 0; bx < this.size; ++bx) {
@@ -98,10 +108,10 @@ export class Grid {
 		return counts.filter(n => n != 0);
 	}
 	checkHorizontalLabel(y: number): boolean {
-		return this.getHorizontalLabel(y).join(" ") == this.getGridItem(-1, y).elem.innerText;
+		return this.getHorizontalLabel(y).join(",") == this.getGridItem<GridItemLabel>(-1, y).counts;
 	}
 	checkVerticalLabel(x: number): boolean {
-		return this.getVerticalLabel(x).join(" ") == this.getGridItem(x, -1).elem.innerText;
+		return this.getVerticalLabel(x).join(",") == this.getGridItem<GridItemLabel>(x, -1).counts;
 	}
 	private _getLabel_countTile(x: number, y: number, isStart: boolean, counts: number[]) {
 		let tile: GridItemTile = this.getGridItem(x, y);
@@ -195,6 +205,7 @@ export class GridItemTile extends GridItem {
 	}
 }
 export class GridItemLabel extends GridItem {
+	public counts: string;
 	private _correct: boolean = false;
 
 	constructor() {
