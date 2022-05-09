@@ -54,6 +54,10 @@ main {
 		padding-right: 2 * $thick-border-width;
 		min-width: 4em;
 	}
+	label.correct {
+		color: $theme-color;
+		font-weight: 500;
+	}
 }
 
 footer {

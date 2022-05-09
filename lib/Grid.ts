@@ -97,6 +97,12 @@ export class Grid {
 
 		return counts.filter(n => n != 0);
 	}
+	checkHorizontalLabel(y: number): boolean {
+		return this.getHorizontalLabel(y).join(" ") == this.getGridItem(-1, y).elem.innerText;
+	}
+	checkVerticalLabel(x: number): boolean {
+		return this.getVerticalLabel(x).join(" ") == this.getGridItem(x, -1).elem.innerText;
+	}
 	private _getLabel_countTile(x: number, y: number, isStart: boolean, counts: number[]) {
 		let tile: GridItemTile = this.getGridItem(x, y);
 		let counted = isStart ? tile.state : tile.isSelected;
@@ -118,6 +124,9 @@ export class Grid {
 	onGridItemClicked(gridItem: GridItemTile) {
 		if (this.isCross) gridItem.isCrossed = !gridItem.isCrossed;
 		else gridItem.isSelected = !gridItem.isSelected;
+
+		this.getGridItem<GridItemLabel>(gridItem.x, -1).isCorrect = this.checkVerticalLabel(gridItem.x);
+		this.getGridItem<GridItemLabel>(-1, gridItem.y).isCorrect = this.checkHorizontalLabel(gridItem.y);
 	}
 
 	public Clear() {
