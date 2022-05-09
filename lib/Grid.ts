@@ -95,6 +95,8 @@ export class Grid {
 				this.getGridItem<GridItemLabel>(-1, y).isCorrect = true;
 			}
 		}
+		
+		this.checkWon();
 	}
 
 	getHorizontalLabel(y: number, isStart: boolean = false): number[] {
@@ -141,6 +143,24 @@ export class Grid {
 
 		this.getGridItem<GridItemLabel>(gridItem.x, -1).isCorrect = this.checkVerticalLabel(gridItem.x);
 		this.getGridItem<GridItemLabel>(-1, gridItem.y).isCorrect = this.checkHorizontalLabel(gridItem.y);
+
+		this.checkWon();
+	}
+
+	private _hasWon(): boolean {
+		let gridItem: GridItemLabel;
+		for (let y = 0; y < this.size; ++y) {
+			gridItem = this.getGridItem(-1, y);
+			if (!gridItem.isCorrect) return false;
+		}
+		for (let x = 0; x < this.size; ++x) {
+			gridItem = this.getGridItem(x, -1);
+			if (!gridItem.isCorrect) return false;
+		}
+		return true;
+	}
+	checkWon() {
+		if (!this._hasWon()) return;
 	}
 
 	public Clear() {
