@@ -3,8 +3,10 @@ $theme-color: #8732f5;
 // tiles
 $tile-selected-bg: $theme-color;
 $normal-border-color: #f0f0f0;
+$normal-border-color-dark: #0f0f0f;
 $normal-border-width: 1px;
 $middle-border-color: #aaaaaa;
+$middle-border-color-dark: #2f2f2f;
 $middle-border-width: 2px;
 $thick-border-color: $theme-color;
 $thick-border-width: 0.75vw;
@@ -222,5 +224,40 @@ tile {
 	}
 	&.x-end.y-end {
 		@include thick-border-radius(bottom-right);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	html, body, .modal-content {
+		background: #191919;
+		color: white;
+	}
+	.btn-icon::before {
+		filter: invert(1);
+	}
+	#crossToggle {
+		&::before {
+			filter: none;
+		}
+		&.is-cross::before {
+			filter: invert(1);
+		}
+	}
+	tile {
+		&.crossed {
+			background-image: url("/nonogram/images/cross-white.svg");
+		}
+
+		&::before {
+			border-color: $normal-border-color-dark;
+		}
+
+		&.x-middle::before {
+			border-left-color: $middle-border-color-dark;
+		}
+
+		&.y-middle::before {
+			border-top-color: $middle-border-color-dark;
+		}
 	}
 }
