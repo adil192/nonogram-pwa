@@ -2,7 +2,7 @@
 export class Grid {
 	readonly elem: HTMLElement;
 	readonly size: number;
-	readonly gridItems: GridItem[][];
+	private readonly gridItems: GridItem[][];
 
 	// difficulty between 0.0 (easiest) and 1.0 (hardest)
 	public static difficulty: number = 0.5;
@@ -53,10 +53,9 @@ export class Grid {
 			this.gridItems.push(row);
 		}
 
-		let x, y;
-		for (y = -1, x = 0; x < this.size; ++x) {
-			let label: string = this.getVerticalLabel(x, true).join(" ");
-			this.getGridItem(x, y).elem.innerText = label;
+		for (let x = 0; x < this.size; ++x) {
+			let label: string = this.getVerticalLabel(x, true).join("\n");
+			this.getGridItem(x, -1).elem.innerText = label;
 
 			if (label == this.size + "") { // full row/column
 				for (let by = 0; by < this.size; ++by) {
@@ -68,9 +67,9 @@ export class Grid {
 				}
 			}
 		}
-		for (x = -1, y = 0; y < this.size; ++y) {
-			let label: string = this.getHorizontalLabel(y, true).join("\n");
-			this.getGridItem(x, y).elem.innerText = label;
+		for (let y = 0; y < this.size; ++y) {
+			let label: string = this.getHorizontalLabel(y, true).join(" ");
+			this.getGridItem(-1, y).elem.innerText = label;
 
 			if (label == this.size + "") { // full row/column
 				for (let bx = 0; bx < this.size; ++bx) {
@@ -113,7 +112,7 @@ export class Grid {
 
 	// indices offset by 1 to allow for ["-1"] to be a label, and ["0"] to be the first game tile
 	getGridItem<T extends GridItem>(x: number, y: number): T {
-		return this.gridItems[x + 1][y + 1] as T;
+		return this.gridItems[y + 1][x + 1] as T;
 	}
 
 	onGridItemClicked(gridItem: GridItemTile) {
