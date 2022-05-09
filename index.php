@@ -38,8 +38,8 @@ $lastUpdate = "22-05-06-0000"; // when changing this, you should also update sw.
         <label for="difficultyToggle">Difficulty</label>
         <input id="difficultyToggle" type="number" value="4" min="1" max="10">
     </div>
-    <button class="btn btn-outline-primary btn-icon" id="crossToggle"></button>
-    <button class="btn btn-outline-primary btn-icon" id="binBtn"></button>
+    <button class="btn btn-outline-primary btn-icon" aria-label="Toggle cross" id="crossToggle"></button>
+    <button class="btn btn-outline-primary btn-icon" aria-label="Clear" id="binBtn"></button>
 </footer>
 
 <div class="modal fade" id="wonModal" tabindex="-1" aria-labelledby="wonModalLabel" aria-hidden="true" aria-modal="true">
@@ -47,7 +47,7 @@ $lastUpdate = "22-05-06-0000"; // when changing this, you should also update sw.
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title" id="wonModalLabel">Congrats</h2>
-                <button class="btn btn-outline-primary btn-icon btn-refresh" onclick="window.location = window.location;"></button>
+                <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="Refresh" onclick="window.location = window.location;"></button>
             </div>
             <div class="modal-body">
                 Game complete
