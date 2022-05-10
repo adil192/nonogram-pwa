@@ -310,9 +310,9 @@ export class GridItemTile extends GridItem {
 		this.grid.OnTileDragStart(this);
 
 		// set dragging image as a blank canvas
-		const canvas: HTMLCanvasElement = document.createElement("canvas");
-		canvas.width = canvas.height = 1;
-		event.dataTransfer.setDragImage(canvas, 0, 0);
+		let image = new Image();
+		image.src = 'images/transparent.webp';
+		event.dataTransfer.setDragImage(image, 0, 0);
 	}
 	private onDragEnd(event: DragEvent) {
 		this.grid.OnTileDragEnd();

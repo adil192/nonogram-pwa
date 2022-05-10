@@ -22,6 +22,8 @@ $lastUpdate = "22-05-06-0000"; // when changing this, you should also update sw.
     <link rel="apple-touch-icon" href="/maskable_icon_x192.png">
     <meta name="apple-mobile-web-app-status-bar" content="#8732f5">
     <meta name="theme-color" content="#8732f5">
+
+    <link rel="preload" as="image" href="images/transparent.webp">
 </head>
 <body>
 

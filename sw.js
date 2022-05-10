@@ -13,6 +13,7 @@ const assets_extra = [
 	'/nonogram/images/cross.svg',
 	'/nonogram/images/cross-white.svg',
 	'/nonogram/images/refresh.svg',
+	'/nonogram/images/transparent.webp',
 	'/nonogram/images/trash.svg',
 
 	'/nonogram/fonts/MPLUSRounded1c-Regular.00-ff.ttf',
