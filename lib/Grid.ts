@@ -243,6 +243,14 @@ export class Grid {
 		this.draggingAction(newTile);
 		this.onTileChanged(newTile);
 	}
+	public OnTileDragEnterCoords(x: number, y: number) {
+		let tile: GridItemTile;
+		try {
+			tile = this.getGridItem(x, y);
+		} catch (e) { return; }
+
+		this.OnTileDragEnter(tile);
+	}
 
 	public Clear() {
 		for (let x = -1; x < this.size; ++x) {
@@ -287,11 +295,16 @@ export class GridItemTile extends GridItem {
 		this.grid = grid;
 		this.x = x;
 		this.y = y;
+		this.elem.dataset.x = x + "";
+		this.elem.dataset.y = y + "";
 
 		this.elem.draggable = true;
 		this.elem.addEventListener("dragstart", (event) => this.onDragStart(event));
 		this.elem.addEventListener("dragend", (event) => this.onDragEnd(event));
 		this.elem.addEventListener("dragenter", (event) => this.onDragEnter(event));
+		this.elem.addEventListener("touchstart", (event) => this.onTouchStart(event));
+		this.elem.addEventListener("touchend", (event) => this.onTouchEnd(event));
+		this.elem.addEventListener("touchmove", (event) => this.onTouchMove(event));
 	}
 
 	private onDragStart(event: DragEvent) {
@@ -307,6 +320,19 @@ export class GridItemTile extends GridItem {
 	}
 	private onDragEnter(event: DragEvent) {
 		this.grid.OnTileDragEnter(this);
+	}
+
+	private onTouchStart(event: TouchEvent) {
+		this.grid.OnTileDragStart(this);
+	}
+	private onTouchEnd(event: TouchEvent) {
+		this.grid.OnTileDragEnd();
+	}
+	private onTouchMove(event: TouchEvent) {
+		if (event.touches.length < 1) return;
+		let touch: Touch = event.touches.item(0);
+		let newTileElem: HTMLElement = document.elementFromPoint(touch.pageX, touch.pageY) as HTMLElement;
+		this.grid.OnTileDragEnterCoords(parseInt(newTileElem.dataset.x), parseInt(newTileElem.dataset.y));
 	}
 
 	public get isSelected(): boolean {
