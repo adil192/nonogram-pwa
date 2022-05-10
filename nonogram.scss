@@ -237,6 +237,10 @@ tile {
 		background: #191919;
 		color: white;
 	}
+	input {
+		background: rgba(#ffffff, 0.1);
+		color: white;
+	}
 	.btn-icon::before {
 		filter: invert(1);
 	}
