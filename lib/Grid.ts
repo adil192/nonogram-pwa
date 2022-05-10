@@ -11,6 +11,7 @@ export class Grid {
 	// difficulty between 0.0 (easiest) and 1.0 (hardest)
 	public static difficulty: number = 4 / 11;
 
+	public touchEnabled: boolean = false;
 	private draggingTile: GridItemTile;
 	private draggingAction: (GridItemTile) => void;
 
@@ -51,11 +52,6 @@ export class Grid {
 					if (y == 0) gridItem.elem.classList.add("y-start");
 					else if (y == this.size - 1) gridItem.elem.classList.add("y-end");
 					else if (y == this.size / 2.0) gridItem.elem.classList.add("y-middle");
-
-					// onclick
-					gridItem.elem.addEventListener("click", () => {
-						this.onTileClicked(gridItem);
-					});
 				}
 
 				this.elem.append(gridItem.elem);
@@ -173,6 +169,8 @@ export class Grid {
 	}
 
 	onTileClicked(tile: GridItemTile) {
+		if (this.touchEnabled) return; // touch screens use custom logic
+
 		if (this.isCross) tile.isCrossed = !tile.isCrossed;
 		else tile.isSelected = !tile.isSelected;
 
@@ -305,6 +303,7 @@ export class GridItemTile extends GridItem {
 		this.elem.addEventListener("touchstart", (event) => this.onTouchStart(event));
 		this.elem.addEventListener("touchend", (event) => this.onTouchEnd(event));
 		this.elem.addEventListener("touchmove", (event) => this.onTouchMove(event));
+		this.elem.addEventListener("click", () => this.grid.onTileClicked(this));
 	}
 
 	private onDragStart(event: DragEvent) {
@@ -323,6 +322,7 @@ export class GridItemTile extends GridItem {
 	}
 
 	private onTouchStart(event: TouchEvent) {
+		this.grid.touchEnabled = true;
 		this.grid.OnTileDragStart(this);
 	}
 	private onTouchEnd(event: TouchEvent) {
