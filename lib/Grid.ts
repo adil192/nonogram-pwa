@@ -11,6 +11,9 @@ export class Grid {
 	// difficulty between 0.0 (easiest) and 1.0 (hardest)
 	public static difficulty: number = 4 / 11;
 
+	private draggingTile: GridItemTile;
+	private draggingAction: (GridItemTile) => void;
+
 	public isCross: boolean = false;
 
 	constructor(elem: HTMLElement, size: number) {
@@ -31,7 +34,7 @@ export class Grid {
 			let row: GridItem[] = [];
 			for (let x = -1; x < this.size; ++x) {
 				const isTile: boolean = x >= 0 && y >= 0;
-				const gridItem = isTile ? new GridItemTile(x, y) : new GridItemLabel();
+				const gridItem = isTile ? new GridItemTile(this, x, y) : new GridItemLabel();
 
 				if (gridItem instanceof GridItemLabel) {
 					if (y < 0) gridItem.elem.classList.add("vertical"); // make top row vertical
@@ -51,7 +54,7 @@ export class Grid {
 
 					// onclick
 					gridItem.elem.addEventListener("click", () => {
-						this.onGridItemClicked(gridItem);
+						this.onTileClicked(gridItem);
 					});
 				}
 
@@ -169,12 +172,15 @@ export class Grid {
 		return this.gridItems[y + 1][x + 1] as T;
 	}
 
-	onGridItemClicked(gridItem: GridItemTile) {
-		if (this.isCross) gridItem.isCrossed = !gridItem.isCrossed;
-		else gridItem.isSelected = !gridItem.isSelected;
+	onTileClicked(tile: GridItemTile) {
+		if (this.isCross) tile.isCrossed = !tile.isCrossed;
+		else tile.isSelected = !tile.isSelected;
 
-		this.getGridItem<GridItemLabel>(gridItem.x, -1).isCorrect = this.checkVerticalLabel(gridItem.x);
-		this.getGridItem<GridItemLabel>(-1, gridItem.y).isCorrect = this.checkHorizontalLabel(gridItem.y);
+		this.onTileChanged(tile);
+	}
+	onTileChanged(tile: GridItemTile) {
+		this.getGridItem<GridItemLabel>(tile.x, -1).isCorrect = this.checkVerticalLabel(tile.x);
+		this.getGridItem<GridItemLabel>(-1, tile.y).isCorrect = this.checkHorizontalLabel(tile.y);
 
 		this.checkWon();
 	}
@@ -211,6 +217,33 @@ export class Grid {
 		}, 300)
 	}
 
+	public OnTileDragStart(startTile: GridItemTile) {
+		this.draggingTile = startTile;
+
+		if (this.isCross) {
+			if (startTile.isCrossed) this.draggingAction = (tile) => tile.isCrossed = false;
+			else this.draggingAction = (tile) => tile.isCrossed = true;
+		} else {
+			if (startTile.isSelected) this.draggingAction = (tile) => tile.isSelected = false;
+			else this.draggingAction = (tile) => tile.isSelected = true;
+		}
+		this.draggingAction(startTile);
+		this.onTileChanged(startTile);
+	}
+	public OnTileDragEnd() {
+		this.draggingTile = null;
+	}
+	public OnTileDragEnter(newTile: GridItemTile) {
+		// make sure we're dragging a tile
+		if (this.draggingTile == null) return;
+
+		// only allow dragging horizontally/vertically
+		if (this.draggingTile.x != newTile.x && this.draggingTile.y != newTile.y) return;
+
+		this.draggingAction(newTile);
+		this.onTileChanged(newTile);
+	}
+
 	public Clear() {
 		for (let x = -1; x < this.size; ++x) {
 			for (let y = -1; y < this.size; ++y) {
@@ -239,6 +272,8 @@ export abstract class GridItem {
 	elem: HTMLElement;
 }
 export class GridItemTile extends GridItem {
+	private grid: Grid;
+
 	public state: boolean = false;
 	private _selected: boolean = false;
 	private _crossed: boolean = false;
@@ -246,11 +281,32 @@ export class GridItemTile extends GridItem {
 	public readonly x: number;
 	public readonly y: number;
 
-	constructor(x: number, y: number) {
+	constructor(grid: Grid, x: number, y: number) {
 		super();
 		this.elem = document.createElement("tile");
+		this.grid = grid;
 		this.x = x;
 		this.y = y;
+
+		this.elem.draggable = true;
+		this.elem.addEventListener("dragstart", (event) => this.onDragStart(event));
+		this.elem.addEventListener("dragend", (event) => this.onDragEnd(event));
+		this.elem.addEventListener("dragenter", (event) => this.onDragEnter(event));
+	}
+
+	private onDragStart(event: DragEvent) {
+		this.grid.OnTileDragStart(this);
+
+		// set dragging image as a blank canvas
+		const canvas: HTMLCanvasElement = document.createElement("canvas");
+		canvas.width = canvas.height = 1;
+		event.dataTransfer.setDragImage(canvas, 0, 0);
+	}
+	private onDragEnd(event: DragEvent) {
+		this.grid.OnTileDragEnd();
+	}
+	private onDragEnter(event: DragEvent) {
+		this.grid.OnTileDragEnter(this);
 	}
 
 	public get isSelected(): boolean {
