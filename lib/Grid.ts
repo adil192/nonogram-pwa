@@ -173,13 +173,16 @@ export class Grid {
 
 	showWonModal() {
 		this.modalBackdrop.style.display = "block"
-		this.wonModal.style.display = "block"
+		this.wonModal.style.display = "flex"
+		void(this.wonModal.offsetHeight) // enable css transition for .modal.show
 		this.wonModal.classList.add("show")
 	}
 	hideWonModal() {
-		this.modalBackdrop.style.display = "none"
-		this.wonModal.style.display = "none"
 		this.wonModal.classList.remove("show")
+		setTimeout(() => {
+			this.modalBackdrop.style.display = "none"
+			this.wonModal.style.display = "none"
+		}, 300)
 	}
 
 	public Clear() {

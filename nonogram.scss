@@ -227,6 +227,11 @@ tile {
 	}
 }
 
+.modal {
+	align-content: center;
+	align-items: center;
+}
+
 @media (prefers-color-scheme: dark) {
 	html, body, .modal-content {
 		background: #191919;
