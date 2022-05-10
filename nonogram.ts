@@ -5,6 +5,7 @@ let main: HTMLElement;
 let difficultyToggle: HTMLInputElement;
 let crossToggle: HTMLButtonElement;
 let binBtn: HTMLButtonElement;
+let newGameBtn: HTMLButtonElement;
 
 let grid: Grid = null;
 
@@ -23,6 +24,7 @@ window.addEventListener("load", function() {
 	difficultyToggle = document.querySelector("#difficultyToggle");
 	crossToggle = document.querySelector("#crossToggle");
 	binBtn = document.querySelector("#binBtn");
+	newGameBtn = document.querySelector("#newGameBtn");
 
 	init();
 
@@ -34,6 +36,12 @@ window.addEventListener("load", function() {
 	})
 	binBtn.addEventListener("click", function () {
 		grid.Clear();
+	})
+	newGameBtn.addEventListener("click", function () {
+		Grid.ClearSeed();
+		grid.Destroy();
+		grid.hideWonModal();
+		grid = new Grid(main, GRID_SIZE);
 	})
 	difficultyToggle.addEventListener("change", function () {
 		let inputValue = difficultyToggle.valueAsNumber;

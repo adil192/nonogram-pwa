@@ -117,8 +117,7 @@ export class Grid {
 		});
 
 		if (seed == 0) {
-			Rng.seed = Math.random() * 1000;
-			this.SaveSeed();
+			this.ClearSeed();
 		} else {
 			Rng.seed = seed;
 		}
@@ -126,6 +125,10 @@ export class Grid {
 	static SaveSeed() {
 		console.log("save seed:", Rng.seed);
 		document.cookie = this.cookieName + Rng.seed + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
+	}
+	static ClearSeed() {
+		Rng.seed = Math.random() * 1000;
+		this.SaveSeed();
 	}
 
 	getHorizontalLabel(y: number, isStart: boolean = false): number[] {
