@@ -1,3 +1,4 @@
+import {Rng} from "./Rng";
 
 export class Grid {
 	readonly elem: HTMLElement;
@@ -15,6 +16,8 @@ export class Grid {
 	constructor(elem: HTMLElement, size: number) {
 		this.elem = elem;
 		this.size = size;
+
+		Grid.LoadSeedFromCookie();
 
 		this.modalBackdrop = document.querySelector("#backdrop");
 		this.wonModal = document.querySelector("#wonModal");
@@ -36,7 +39,7 @@ export class Grid {
 
 					if (x < 0 && y < 0) gridItem.elem.innerText = ""; // top left corner should be left blank
 				} else {
-					gridItem.state = Math.random() > Grid.difficulty;
+					gridItem.state = Rng.seededRandom() > Grid.difficulty;
 
 					// add border around edges
 					if (x == 0) gridItem.elem.classList.add("x-start");
@@ -103,6 +106,26 @@ export class Grid {
 		}
 		
 		this.checkWon();
+	}
+
+	static readonly cookieName: string = "nonogramSeed=";
+	static LoadSeedFromCookie() {
+		let seed: number = 0;
+		let cookies = decodeURIComponent(document.cookie).split('; ');
+		cookies.forEach(val => {
+			if (val.indexOf(this.cookieName) === 0) seed = parseFloat(val.substring(this.cookieName.length));
+		});
+
+		if (seed == 0) {
+			Rng.seed = Math.random() * 1000;
+			this.SaveSeed();
+		} else {
+			Rng.seed = seed;
+		}
+	}
+	static SaveSeed() {
+		console.log("save seed:", Rng.seed);
+		document.cookie = this.cookieName + Rng.seed + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
 	}
 
 	getHorizontalLabel(y: number, isStart: boolean = false): number[] {
@@ -276,3 +299,5 @@ export class GridItemLabel extends GridItem {
 		}
 	}
 }
+
+Grid.LoadSeedFromCookie();
