@@ -285,16 +285,15 @@ export class Grid {
 	}
 
 	public Clear() {
-		for (let x = -1; x < this.size; ++x) {
-			for (let y = -1; y < this.size; ++y) {
-				let gridItem: GridItemLabel|GridItemTile = this.getGridItem(x, y);
-				if (gridItem instanceof GridItemLabel) {
-					gridItem.isCorrect = false;
-				} else {
-					gridItem.isSelected = false;
-					gridItem.isCrossed = false;
-				}
+		for (let x = 0; x < this.size; ++x) {
+			for (let y = 0; y < this.size; ++y) {
+				let gridItem: GridItemTile = this.getGridItem(x, y);
+				gridItem.isSelected = false;
+				gridItem.isCrossed = false;
 			}
+		}
+		for (let n = 0; n < this.size; ++n) { // revalidate diagonals
+			this.onTileChanged(this.getGridItem(n, n));
 		}
 	}
 
