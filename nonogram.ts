@@ -43,6 +43,7 @@ window.addEventListener("load", function() {
 		grid.hideWonModal();
 		grid = new Grid(main, GRID_SIZE);
 	})
+	difficultyToggle.valueAsNumber = Grid.difficulty * 11;
 	difficultyToggle.addEventListener("change", function () {
 		let inputValue = difficultyToggle.valueAsNumber;
 		inputValue = Math.min(10, Math.max(1, inputValue));

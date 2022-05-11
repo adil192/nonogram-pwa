@@ -8,14 +8,33 @@ export class Grid {
 	private modalBackdrop: HTMLDivElement;
 	private wonModal: HTMLDivElement;
 
-	// difficulty between 0.0 (easiest) and 1.0 (hardest)
-	public static difficulty: number = 4 / 11;
-
 	public touchEnabled: boolean = false;
 	private draggingTile: GridItemTile;
 	private draggingAction: (GridItemTile) => void;
 
 	public isCross: boolean = false;
+
+	static readonly seedCookieName: string = "nonogramSeed=";
+	static readonly difficultyCookieName: string = "nonogramDifficulty=";
+	readonly gridItemsCookieName: string = "nonogramGridItems=";
+
+	public static _difficulty: number = (() => {
+		let difficulty: number = 4 / 11;
+		let cookies = decodeURIComponent(document.cookie).split('; ');
+		cookies.forEach(val => {
+			if (val.indexOf(this.difficultyCookieName) === 0) difficulty = parseFloat(val.substring(this.difficultyCookieName.length));
+		});
+		return difficulty;
+	})();
+	// difficulty between 0.0 (easiest) and 1.0 (hardest)
+	public static get difficulty(): number {
+		return this._difficulty;
+	}
+	public static set difficulty(difficulty: number) {
+		this._difficulty = difficulty;
+
+		document.cookie = this.difficultyCookieName + difficulty + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
+	}
 
 	constructor(elem: HTMLElement, size: number) {
 		this.elem = elem;
@@ -117,7 +136,6 @@ export class Grid {
 		this.checkWon();
 	}
 
-	static readonly seedCookieName: string = "nonogramSeed=";
 	static LoadSeedFromCookie() {
 		let seed: number = 0;
 		let cookies = decodeURIComponent(document.cookie).split('; ');
@@ -140,7 +158,6 @@ export class Grid {
 		this.SaveSeed();
 	}
 
-	readonly gridItemsCookieName: string = "nonogramGridItems=";
 	private loadSerializedGridItemsFromCookie(): Record<string, boolean> {
 		let gridItems: Record<string, boolean> = null;
 		let cookies = decodeURIComponent(document.cookie).split('; ');
