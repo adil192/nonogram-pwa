@@ -29,13 +29,23 @@ export class Grid {
 		// set number of css grid columns
 		this.elem.style.gridTemplateColumns = "auto "+ "1fr ".repeat(this.size);
 
+		// get saved state
+		let serializedGridItems = this.loadSerializedGridItemsFromCookie();
+
 		// create grid items
 		this.gridItems = [];
 		for (let y = -1; y < this.size; ++y) {
 			let row: GridItem[] = [];
 			for (let x = -1; x < this.size; ++x) {
+				let serialized: Record<string, boolean>;
+				try {
+					serialized = serializedGridItems[y][x];
+				} catch (e) {
+					serialized = null;
+				}
+
 				const isTile: boolean = x >= 0 && y >= 0;
-				const gridItem = isTile ? new GridItemTile(this, x, y) : new GridItemLabel();
+				const gridItem = isTile ? new GridItemTile(this, x, y, serialized) : new GridItemLabel(serialized);
 
 				if (gridItem instanceof GridItemLabel) {
 					if (y < 0) gridItem.elem.classList.add("vertical"); // make top row vertical
@@ -107,12 +117,12 @@ export class Grid {
 		this.checkWon();
 	}
 
-	static readonly cookieName: string = "nonogramSeed=";
+	static readonly seedCookieName: string = "nonogramSeed=";
 	static LoadSeedFromCookie() {
 		let seed: number = 0;
 		let cookies = decodeURIComponent(document.cookie).split('; ');
 		cookies.forEach(val => {
-			if (val.indexOf(this.cookieName) === 0) seed = parseFloat(val.substring(this.cookieName.length));
+			if (val.indexOf(this.seedCookieName) === 0) seed = parseFloat(val.substring(this.seedCookieName.length));
 		});
 
 		if (seed == 0) {
@@ -123,11 +133,33 @@ export class Grid {
 	}
 	static SaveSeed() {
 		console.log("save seed:", Rng.seed);
-		document.cookie = this.cookieName + Rng.seed + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
+		document.cookie = this.seedCookieName + Rng.seed + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
 	}
 	static ClearSeed() {
 		Rng.seed = Math.random() * 1000;
 		this.SaveSeed();
+	}
+
+	readonly gridItemsCookieName: string = "nonogramGridItems=";
+	private loadSerializedGridItemsFromCookie(): Record<string, boolean> {
+		let gridItems: Record<string, boolean> = null;
+		let cookies = decodeURIComponent(document.cookie).split('; ');
+		cookies.forEach(val => {
+			if (val.indexOf(this.gridItemsCookieName) === 0) gridItems = JSON.parse(val.substring(this.gridItemsCookieName.length));
+		});
+		return gridItems;
+	}
+	private saveGridItemsToCookie() {
+		let serializable = [];
+		for (let y = 0; y < this.size; ++y) {
+			let row = [];
+			for (let x = 0; x < this.size; ++x) {
+				row.push(this.getGridItem(x, y).Serializable());
+			}
+			serializable.push(row);
+		}
+
+		document.cookie = this.gridItemsCookieName + JSON.stringify(serializable) + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
 	}
 
 	getHorizontalLabel(y: number, isStart: boolean = false): number[] {
@@ -179,6 +211,8 @@ export class Grid {
 	onTileChanged(tile: GridItemTile) {
 		this.getGridItem<GridItemLabel>(tile.x, -1).isCorrect = this.checkVerticalLabel(tile.x);
 		this.getGridItem<GridItemLabel>(-1, tile.y).isCorrect = this.checkHorizontalLabel(tile.y);
+
+		this.saveGridItemsToCookie();
 
 		this.checkWon();
 	}
@@ -276,6 +310,8 @@ export class Grid {
 
 export abstract class GridItem {
 	elem: HTMLElement;
+
+	abstract Serializable(): object;
 }
 export class GridItemTile extends GridItem {
 	private grid: Grid;
@@ -287,7 +323,7 @@ export class GridItemTile extends GridItem {
 	public readonly x: number;
 	public readonly y: number;
 
-	constructor(grid: Grid, x: number, y: number) {
+	constructor(grid: Grid, x: number, y: number, serialized: Record<string, boolean> = null) {
 		super();
 		this.elem = document.createElement("tile");
 		this.grid = grid;
@@ -304,6 +340,11 @@ export class GridItemTile extends GridItem {
 		this.elem.addEventListener("touchend", (event) => this.onTouchEnd(event));
 		this.elem.addEventListener("touchmove", (event) => this.onTouchMove(event));
 		this.elem.addEventListener("click", () => this.grid.onTileClicked(this));
+
+		if (serialized != null) {
+			this.isSelected = serialized.isSelected;
+			this.isCrossed = serialized.isCrossed;
+		}
 	}
 
 	private onDragStart(event: DragEvent) {
@@ -361,14 +402,25 @@ export class GridItemTile extends GridItem {
 			this.elem.classList.remove("crossed");
 		}
 	}
+
+	Serializable(): Record<string, boolean> {
+		return {
+			isSelected: this.isSelected,
+			isCrossed: this.isCrossed
+		};
+	}
 }
 export class GridItemLabel extends GridItem {
 	public counts: string;
 	private _correct: boolean = false;
 
-	constructor() {
+	constructor(serialized: Record<string, boolean> = null) {
 		super();
 		this.elem = document.createElement("label");
+
+		if (serialized != null) {
+			this.isCorrect = serialized.isCorrect;
+		}
 	}
 
 	public get isCorrect(): boolean {
@@ -382,6 +434,12 @@ export class GridItemLabel extends GridItem {
 		} else {
 			this.elem.classList.remove("correct");
 		}
+	}
+
+	Serializable(): Record<string, boolean> {
+		return {
+			isCorrect: this.isCorrect
+		};
 	}
 }
 
