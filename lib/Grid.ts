@@ -349,13 +349,13 @@ export class GridItemTile extends GridItem {
 		this.elem.dataset.y = y + "";
 
 		this.elem.draggable = true;
-		this.elem.addEventListener("dragstart", (event) => this.onDragStart(event));
-		this.elem.addEventListener("dragend", (event) => this.onDragEnd(event));
-		this.elem.addEventListener("dragenter", (event) => this.onDragEnter(event));
-		this.elem.addEventListener("touchstart", (event) => this.onTouchStart(event));
-		this.elem.addEventListener("touchend", (event) => this.onTouchEnd(event));
-		this.elem.addEventListener("touchmove", (event) => this.onTouchMove(event));
-		this.elem.addEventListener("click", () => this.grid.onTileClicked(this));
+		this.elem.addEventListener("dragstart", (event) => this.onDragStart(event), {passive: true});
+		this.elem.addEventListener("dragend", (event) => this.onDragEnd(event), {passive: true});
+		this.elem.addEventListener("dragenter", (event) => this.onDragEnter(event), {passive: true});
+		this.elem.addEventListener("touchstart", (event) => this.onTouchStart(event), {passive: true});
+		this.elem.addEventListener("touchend", (event) => this.onTouchEnd(event), {passive: true});
+		this.elem.addEventListener("touchmove", (event) => this.onTouchMove(event), {passive: true});
+		this.elem.addEventListener("click", () => this.grid.onTileClicked(this), {passive: true});
 
 		if (serialized != null) {
 			this.isSelected = serialized.isSelected;
