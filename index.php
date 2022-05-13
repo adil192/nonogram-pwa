@@ -7,7 +7,7 @@ $lastUpdate = "22-05-06-0000"; // when changing this, you should also update sw.
 <head>
 	<?php createHead(
 		"Nonogram",
-		null,
+		"Play unlimited randomly generated nonograms, graphical crosswords where you colour in a grid according to the numbers on the rows and columns.",
 		null,
 		null,
         "2022-05-06",
