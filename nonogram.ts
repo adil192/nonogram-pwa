@@ -39,6 +39,7 @@ window.addEventListener("load", function() {
 	})
 	newGameBtn.addEventListener("click", function () {
 		Grid.ClearSeed();
+		grid.Clear();
 		grid.Destroy();
 		grid.hideWonModal();
 		grid = new Grid(main, GRID_SIZE);
