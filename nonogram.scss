@@ -232,6 +232,9 @@ tile {
 	align-content: center;
 	align-items: center;
 }
+.modal-dialog {
+	margin: auto;
+}
 
 @media (prefers-color-scheme: dark) {
 	html, body, .modal-content {
