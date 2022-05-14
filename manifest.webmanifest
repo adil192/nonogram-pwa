@@ -33,5 +33,17 @@
       "sizes": "513x513",
       "purpose": "any maskable"
     }
+  ],
+  "screenshots": [
+    {
+      "src": "/nonogram/screenshots/nonogram-ss.webp",
+      "sizes": "1080x2240",
+      "type": "image/webp"
+    },
+    {
+      "src": "/nonogram/screenshots/nonogram-ss-dark.webp",
+      "sizes": "1080x2240",
+      "type": "image/webp"
+    }
   ]
 }
