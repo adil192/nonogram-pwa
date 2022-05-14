@@ -1,5 +1,5 @@
 // Cache name has a timestamp because the browser re-caches the assets when the service worker file is modified
-const staticCacheName = "nonogram-cache-" + "22-05-11-0900";
+const staticCacheName = "nonogram-cache-" + "22-05-14-0100";
 const assets = [
 	'/favicon.ico',
 	'/nonogram/',
@@ -16,18 +16,10 @@ const assets_extra = [
 	'/nonogram/images/transparent.webp',
 	'/nonogram/images/trash.svg',
 
-	'/nonogram/fonts/MPLUSRounded1c-Regular.00-ff.ttf',
-	'/nonogram/fonts/MPLUSRounded1c-Regular.00-ff.woff',
-	'/nonogram/fonts/MPLUSRounded1c-Regular.00-ff.woff2',
-	'/nonogram/fonts/MPLUSRounded1c-Regular.100-5ff.ttf',
-	'/nonogram/fonts/MPLUSRounded1c-Regular.100-5ff.woff',
-	'/nonogram/fonts/MPLUSRounded1c-Regular.100-5ff.woff2',
-	'/nonogram/fonts/MPLUSRounded1c-Medium.00-ff.ttf',
-	'/nonogram/fonts/MPLUSRounded1c-Medium.00-ff.woff',
-	'/nonogram/fonts/MPLUSRounded1c-Medium.00-ff.woff2',
-	'/nonogram/fonts/MPLUSRounded1c-Medium.100-5ff.ttf',
-	'/nonogram/fonts/MPLUSRounded1c-Medium.100-5ff.woff',
-	'/nonogram/fonts/MPLUSRounded1c-Medium.100-5ff.woff2',
+	'/nonogram/fonts/font-files/MPLUSRounded1c-Regular.20-3f.woff2',
+	'/nonogram/fonts/font-files/MPLUSRounded1c-Regular.40-7f.woff2',
+	'/nonogram/fonts/font-files/MPLUSRounded1c-Medium.20-3f.woff2',
+	'/nonogram/fonts/font-files/MPLUSRounded1c-Medium.40-7f.woff2',
 ];
 
 self.addEventListener('install', (evt) => {
