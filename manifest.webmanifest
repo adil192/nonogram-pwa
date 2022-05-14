@@ -1,7 +1,7 @@
 {
   "name": "Nonogram - Adil Hanney",
   "short_name": "Nonogram",
-  "description": "",
+  "description": "Play unlimited randomly generated nonograms, graphical crosswords where you colour in a grid according to the numbers on the rows and columns.",
   "theme_color": "#8732f5",
   "background_color": "#ffffff",
   "display": "standalone",
