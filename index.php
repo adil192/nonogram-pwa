@@ -19,7 +19,8 @@ $lastUpdate = "22-05-14-0000"; // when changing this, you should also update sw.
     <link rel="stylesheet" href="nonogram.css?lastUpdate=<?=$lastUpdate?>">
 
     <link rel="manifest" href="manifest.webmanifest">
-    <link rel="apple-touch-icon" href="/maskable_icon_x192.png">
+    <link rel="icon" href="icons/android-192x192.png" type="image/png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png"/>
     <meta name="apple-mobile-web-app-status-bar" content="#8732f5">
     <meta name="theme-color" content="#8732f5">
 
