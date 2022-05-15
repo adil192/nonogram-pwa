@@ -2,6 +2,7 @@ import {Grid} from "./lib/Grid";
 
 let main: HTMLElement;
 
+let refreshBtn: HTMLButtonElement;
 let difficultyToggle: HTMLInputElement;
 let crossToggle: HTMLButtonElement;
 let binBtn: HTMLButtonElement;
@@ -21,6 +22,7 @@ window.addEventListener("load", function() {
 	}
 
 	main = document.querySelector("main");
+	refreshBtn = document.querySelector("#refreshBtn");
 	difficultyToggle = document.querySelector("#difficultyToggle");
 	crossToggle = document.querySelector("#crossToggle");
 	binBtn = document.querySelector("#binBtn");
@@ -37,13 +39,9 @@ window.addEventListener("load", function() {
 	binBtn.addEventListener("click", function () {
 		grid.Clear();
 	})
-	newGameBtn.addEventListener("click", function () {
-		Grid.ClearSeed();
-		grid.Clear();
-		grid.Destroy();
-		grid.hideWonModal();
-		grid = new Grid(main, GRID_SIZE);
-	})
+	refreshBtn.addEventListener("click", newGame)
+	newGameBtn.addEventListener("click", newGame)
+	
 	difficultyToggle.valueAsNumber = Grid.difficulty * 11;
 	difficultyToggle.addEventListener("change", function () {
 		let inputValue = difficultyToggle.valueAsNumber;
@@ -64,5 +62,12 @@ function init() {
 	if (grid != null) grid.Destroy();
 
 	grid = new Grid(main, GRID_SIZE);
+}
 
+function newGame() {
+	Grid.ClearSeed();
+	grid.Clear();
+	grid.Destroy();
+	grid.hideWonModal();
+	grid = new Grid(main, GRID_SIZE);
 }

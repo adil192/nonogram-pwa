@@ -29,6 +29,12 @@ body {
 
 header {
 	padding: 1rem;
+	display: flex;
+	flex-flow: row nowrap;
+
+	h1 {
+		flex: 1;
+	}
 }
 
 main {

@@ -31,6 +31,7 @@ $lastUpdate = "22-05-15-1600"; // when changing this, you should also update sw.
 
 <header>
     <h1>Nonogram</h1>
+    <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="Refresh" id="refreshBtn"></button>
 </header>
 
 <main>
