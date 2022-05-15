@@ -104,11 +104,13 @@ export class Grid {
 					this.getGridItem<GridItemTile>(x, by).isSelected = true;
 				}
 				this.getGridItem<GridItemLabel>(x, -1).isCorrect = true;
-			} else if (!label) {
+			} else if (!label) { // empty row/column
 				for (let by = 0; by < this.size; ++by) {
 					this.getGridItem<GridItemTile>(x, by).isCrossed = true;
 				}
 				this.getGridItem<GridItemLabel>(x, -1).isCorrect = true;
+			} else { // check this row/column
+				this.onTileChanged(this.getGridItem<GridItemTile>(x, 0));
 			}
 		}
 		for (let y = 0; y < this.size; ++y) {
@@ -125,11 +127,13 @@ export class Grid {
 					this.getGridItem<GridItemTile>(bx, y).isSelected = true;
 				}
 				this.getGridItem<GridItemLabel>(-1, y).isCorrect = true;
-			} else if (!label) {
+			} else if (!label) { // empty row/column
 				for (let bx = 0; bx < this.size; ++bx) {
 					this.getGridItem<GridItemTile>(bx, y).isCrossed = true;
 				}
 				this.getGridItem<GridItemLabel>(-1, y).isCorrect = true;
+			} else { // check this row/column
+				this.onTileChanged(this.getGridItem<GridItemTile>(0, y));
 			}
 		}
 		
