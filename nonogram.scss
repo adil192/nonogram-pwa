@@ -155,6 +155,14 @@ footer {
 		background-size: contain;
 	}
 }
+.btn-google-play {
+	aspect-ratio: auto;
+	border-radius: 0.5rem;
+	img {
+		height: 100%;
+		width: auto;
+	}
+}
 
 tile {
 	aspect-ratio: 1;
