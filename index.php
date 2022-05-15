@@ -1,6 +1,6 @@
 <?php
 include_once "../global_tools.php";
-$lastUpdate = "22-05-15-1600"; // when changing this, you should also update sw.js
+$lastUpdate = "22-05-15-2000"; // when changing this, you should also update sw.js
 ?>
 <!doctype html>
 <html lang="en">
@@ -10,7 +10,7 @@ $lastUpdate = "22-05-15-1600"; // when changing this, you should also update sw.
 		"Play unlimited randomly generated nonograms, graphical crosswords where you colour in a grid according to the numbers on the rows and columns.",
 		null,
 		null,
-        "2022-05-06",
+        "2022-05-15",
         "InteractiveResource",
         true
 	); ?>
@@ -33,7 +33,7 @@ $lastUpdate = "22-05-15-1600"; // when changing this, you should also update sw.
     <h1>Nonogram</h1>
     <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="Refresh" id="refreshBtn"></button>
 </header>
-<div class="icon-links">
+<div class="icon-links" style="display: none;">
     <a class="btn btn-outline-primary btn-icon btn-google-play" href="https://play.google.com/store/apps/details?id=org.hanney.adil.nonogram">
         <img src="/assets/images/logos/google-play-badge.webp" alt="Google Play Store" width="564" height="168">
     </a>

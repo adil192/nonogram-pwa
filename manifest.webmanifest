@@ -7,7 +7,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "scope": "https://adil.hanney.org/nonogram/",
-  "start_url": "https://adil.hanney.org/nonogram/",
+  "start_url": "https://adil.hanney.org/nonogram/#pwa-enabled",
   "icons": [
     {
       "src": "/nonogram/icons/android-chrome-192x192.png",

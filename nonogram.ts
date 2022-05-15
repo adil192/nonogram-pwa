@@ -1,6 +1,7 @@
 import {Grid} from "./lib/Grid";
 
 let main: HTMLElement;
+let iconLinks: HTMLDivElement;
 
 let refreshBtn: HTMLButtonElement;
 let difficultyToggle: HTMLInputElement;
@@ -22,6 +23,8 @@ window.addEventListener("load", function() {
 	}
 
 	main = document.querySelector("main");
+	iconLinks = document.querySelector(".icon-links");
+
 	refreshBtn = document.querySelector("#refreshBtn");
 	difficultyToggle = document.querySelector("#difficultyToggle");
 	crossToggle = document.querySelector("#crossToggle");
@@ -56,6 +59,8 @@ window.addEventListener("load", function() {
 		grid.Destroy();
 		grid = new Grid(main, GRID_SIZE);
 	})
+
+	iconLinks.style.display = (isAndroid() && !isStandalone()) ? "block" : "none";
 });
 
 function init() {
@@ -70,4 +75,21 @@ function newGame() {
 	grid.Destroy();
 	grid.hideWonModal();
 	grid = new Grid(main, GRID_SIZE);
+}
+
+function isStandalone(): boolean {
+	if (document.referrer.includes('android-app://')) return true;
+	// @ts-ignore
+	if (window.navigator.standalone) return true; // ios fallback
+
+	if (location.hash.indexOf("pwa-enabled") !== -1) return true;
+
+	if (window.matchMedia) return ["fullscreen", "standalone", "minimal-ui"].some(
+		(displayMode) => window.matchMedia('(display-mode: ' + displayMode + ')').matches
+	);
+
+	return false;
+}
+function isAndroid(): boolean {
+	return navigator.userAgent.toLowerCase().indexOf("android") !== -1;
 }
