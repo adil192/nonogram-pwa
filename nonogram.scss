@@ -38,6 +38,10 @@ header {
 	}
 }
 
+.icon-links {
+	text-align: center;
+}
+
 main {
 	display: grid;
 	grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr;
@@ -155,11 +159,21 @@ footer {
 		background-size: contain;
 	}
 }
+.btn-github {
+	&::before {
+		background: url("/assets/images/logos/GitHub-Mark.svg") no-repeat center center;
+		background-size: contain;
+	}
+}
 .btn-google-play {
 	aspect-ratio: auto;
 	border-radius: 0.5rem;
+	display: inline-flex;
+	flex-flow: row nowrap;
+	align-items: center;
 	img {
-		height: 100%;
+		height: 2rem;
+		max-height: 100%;
 		width: auto;
 	}
 }

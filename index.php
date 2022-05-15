@@ -31,11 +31,14 @@ $lastUpdate = "22-05-15-1600"; // when changing this, you should also update sw.
 
 <header>
     <h1>Nonogram</h1>
+    <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="Refresh" id="refreshBtn"></button>
+</header>
+<div class="icon-links">
     <a class="btn btn-outline-primary btn-icon btn-google-play" href="https://play.google.com/store/apps/details?id=org.hanney.adil.nonogram">
         <img src="/assets/images/logos/google-play-badge.webp" alt="Google Play Store" width="564" height="168">
     </a>
-    <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="Refresh" id="refreshBtn"></button>
-</header>
+    <a class="btn btn-outline-primary btn-icon btn-github" href="https://github.com/adil192/nonogram-pwa" aria-label="GitHub project"></a>
+</div>
 
 <main>
 </main>
