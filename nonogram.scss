@@ -28,9 +28,10 @@ body {
 }
 
 header {
-	padding: 1rem;
+	padding: 0.5rem 1rem;
 	display: flex;
 	flex-flow: row nowrap;
+	align-items: center;
 
 	h1 {
 		flex: 1;
