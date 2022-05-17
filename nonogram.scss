@@ -43,6 +43,11 @@ header {
 }
 
 main {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+board {
 	display: grid;
 	grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-gap: 0;

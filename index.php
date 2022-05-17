@@ -42,6 +42,7 @@ $lastUpdate = "22-05-15-2000"; // when changing this, you should also update sw.
 </div>
 
 <main>
+    <board></board>
 </main>
 
 <footer>

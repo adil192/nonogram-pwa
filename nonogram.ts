@@ -1,6 +1,6 @@
 import {Grid} from "./lib/Grid";
 
-let main: HTMLElement;
+let board: HTMLElement;
 let iconLinks: HTMLDivElement;
 let githubAlt: HTMLAnchorElement;
 
@@ -23,7 +23,7 @@ window.addEventListener("load", function() {
 			.catch(err => console.log('service worker not registered', err));
 	}
 
-	main = document.querySelector("main");
+	board = document.querySelector("board");
 	iconLinks = document.querySelector(".icon-links");
 	githubAlt = document.querySelector("#github-alt");
 
@@ -60,7 +60,7 @@ window.addEventListener("load", function() {
 
 		grid.Clear();
 		grid.Destroy();
-		grid = new Grid(main, GRID_SIZE);
+		grid = new Grid(board, GRID_SIZE);
 	})
 
 	let android = isAndroid();
@@ -72,7 +72,7 @@ window.addEventListener("load", function() {
 function init() {
 	if (grid != null) grid.Destroy();
 
-	grid = new Grid(main, GRID_SIZE);
+	grid = new Grid(board, GRID_SIZE);
 }
 
 function newGame() {
@@ -80,7 +80,7 @@ function newGame() {
 	grid.Clear();
 	grid.Destroy();
 	grid.hideWonModal();
-	grid = new Grid(main, GRID_SIZE);
+	grid = new Grid(board, GRID_SIZE);
 }
 
 function isStandalone(): boolean {
