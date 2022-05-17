@@ -30,6 +30,7 @@ window.addEventListener("load", function() {
 	crossToggle = document.querySelector("#crossToggle");
 	binBtn = document.querySelector("#binBtn");
 	newGameBtn = document.querySelector("#newGameBtn");
+	Grid.wonModalBtn = newGameBtn;
 
 	init();
 

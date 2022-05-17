@@ -57,7 +57,7 @@ $lastUpdate = "22-05-15-2000"; // when changing this, you should also update sw.
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title" id="wonModalLabel">Congrats</h2>
-                <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="Refresh" id="newGameBtn"></button>
+                <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="Refresh" id="newGameBtn" disabled="disabled"></button>
             </div>
             <div class="modal-body">
                 Game complete

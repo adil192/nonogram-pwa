@@ -7,6 +7,8 @@ export class Grid {
 
 	private modalBackdrop: HTMLDivElement;
 	private wonModal: HTMLDivElement;
+	private modalTimeout: number = null;
+	public static wonModalBtn: HTMLButtonElement;
 
 	public touchEnabled: boolean = false;
 	private draggingTile: GridItemTile;
@@ -261,10 +263,18 @@ export class Grid {
 		this.wonModal.style.display = "flex"
 		void(this.wonModal.offsetHeight) // enable css transition for .modal.show
 		this.wonModal.classList.add("show")
+
+		clearTimeout(this.modalTimeout);
+		this.modalTimeout = setTimeout(() => {
+			Grid.wonModalBtn.disabled = false;
+		}, 200);
 	}
 	hideWonModal() {
 		this.wonModal.classList.remove("show")
-		setTimeout(() => {
+		Grid.wonModalBtn.disabled = true;
+
+		clearTimeout(this.modalTimeout);
+		this.modalTimeout = setTimeout(() => {
 			this.modalBackdrop.style.display = "none"
 			this.wonModal.style.display = "none"
 		}, 300)
