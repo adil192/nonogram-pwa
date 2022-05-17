@@ -3,10 +3,10 @@ $theme-color: #8732f5;
 // tiles
 $tile-selected-bg: $theme-color;
 $normal-border-color: #f0f0f0;
-$normal-border-color-dark: #0f0f0f;
+$normal-border-color-dark: #2f2f2f;
 $normal-border-width: 1px;
 $middle-border-color: #aaaaaa;
-$middle-border-color-dark: #2f2f2f;
+$middle-border-color-dark: mix($theme-color, white);
 $middle-border-width: 2px;
 $thick-border-color: $theme-color;
 $thick-border-width: 0.75vw;
