@@ -31,6 +31,7 @@ $lastUpdate = "22-05-15-2000"; // when changing this, you should also update sw.
 
 <header>
     <h1>Nonogram</h1>
+    <a id="github-alt" class="btn btn-outline-primary btn-icon btn-github" href="https://github.com/adil192/nonogram-pwa" aria-label="GitHub project" style="display: none;"></a>
     <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="Refresh" id="refreshBtn"></button>
 </header>
 <div class="icon-links" style="display: none;">

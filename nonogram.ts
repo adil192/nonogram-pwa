@@ -2,6 +2,7 @@ import {Grid} from "./lib/Grid";
 
 let main: HTMLElement;
 let iconLinks: HTMLDivElement;
+let githubAlt: HTMLAnchorElement;
 
 let refreshBtn: HTMLButtonElement;
 let difficultyToggle: HTMLInputElement;
@@ -24,6 +25,7 @@ window.addEventListener("load", function() {
 
 	main = document.querySelector("main");
 	iconLinks = document.querySelector(".icon-links");
+	githubAlt = document.querySelector("#github-alt");
 
 	refreshBtn = document.querySelector("#refreshBtn");
 	difficultyToggle = document.querySelector("#difficultyToggle");
@@ -61,7 +63,10 @@ window.addEventListener("load", function() {
 		grid = new Grid(main, GRID_SIZE);
 	})
 
-	iconLinks.style.display = (isAndroid() && !isStandalone()) ? "block" : "none";
+	let android = isAndroid();
+	let standalone = isStandalone();
+	iconLinks.style.display = (android && !standalone) ? "block" : "none";
+	githubAlt.style.display = (!android && !standalone) ? "block" : "none";
 });
 
 function init() {
