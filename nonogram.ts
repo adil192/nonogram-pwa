@@ -1,5 +1,5 @@
 import {Grid} from "./lib/Grid";
-import {allowPinchToZoom} from "./lib/PinchToZoom";
+import {allowPinchToZoom, PinchToZoomHandler} from "./lib/PinchToZoom";
 
 let board: HTMLElement;
 let iconLinks: HTMLDivElement;
@@ -10,6 +10,8 @@ let difficultyToggle: HTMLInputElement;
 let crossToggle: HTMLButtonElement;
 let binBtn: HTMLButtonElement;
 let newGameBtn: HTMLButtonElement;
+
+let pinchToZoomHandler: PinchToZoomHandler = null;
 
 let grid: Grid = null;
 
@@ -75,7 +77,14 @@ function init() {
 
 	grid = new Grid(board, GRID_SIZE);
 
-	allowPinchToZoom(board, true);
+	pinchToZoomHandler = allowPinchToZoom(board, true);
+	pinchToZoomHandler.onChange = onZoomChange;
+}
+
+function onZoomChange(scale: number) {
+	// todo: show a "reset zoom" button if scale is not 1 AND !active
+	// (i.e. wait until pinch gesture ends and zoomed in to show button)
+	// todo: hide the same button if scale is 1
 }
 
 function newGame() {

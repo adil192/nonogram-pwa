@@ -36,6 +36,7 @@ export class PinchToZoomHandler {
 	// is currently pinching to zoom?
 	public get active() { return this.#active; }
 	private set active(active: boolean) { this.#active = active; }
+	public onChange?: (scale: number, offset: Vector2) => void;
 
 	startingPinchSize: number;
 	startingPinchPosition: Vector2;
@@ -80,6 +81,8 @@ export class PinchToZoomHandler {
 		this.lastOffset = offset;
 
 		this.elem.style.transform = `scale(${scale}) translate(${offset.x}px, ${offset.y}px)`;
+
+		this.onChange?.(scale, offset);
 	}
 	private FixTransform() {
 		if (this.lastScale < 1.05) {
