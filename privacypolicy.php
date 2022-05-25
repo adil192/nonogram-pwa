@@ -8,7 +8,7 @@ include_once "../global_tools.php";
 	<?php createHead(
 		"Privacy Policy - Nonogram",
 		"Play unlimited randomly generated nonograms, graphical crosswords where you colour in a grid according to the numbers on the rows and columns.",
-		null,
+		"https://adil.hanney.org/previews/nonogram-bg.webp",
 		null,
 		"2022-05-06",
 		"InteractiveResource",
