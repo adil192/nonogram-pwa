@@ -12,7 +12,7 @@ $lastUpdate = "22-05-15-2000"; // when changing this, you should also update sw.
 		null,
         "2022-05-15",
         "InteractiveResource",
-        true
+        false // disable page zooming in favour of PinchToZoom on board only
 	); ?>
 
     <link rel="stylesheet" href="/assets/ext/bootstrap.5.1.3.min.css" />

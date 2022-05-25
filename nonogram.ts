@@ -1,4 +1,5 @@
 import {Grid} from "./lib/Grid";
+import {allowPinchToZoom} from "./lib/PinchToZoom";
 
 let board: HTMLElement;
 let iconLinks: HTMLDivElement;
@@ -73,6 +74,8 @@ function init() {
 	if (grid != null) grid.Destroy();
 
 	grid = new Grid(board, GRID_SIZE);
+
+	allowPinchToZoom(board, true);
 }
 
 function newGame() {
