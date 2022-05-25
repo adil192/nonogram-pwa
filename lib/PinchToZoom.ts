@@ -25,14 +25,17 @@ class Vector2 {
 }
 
 export class PinchToZoomHandler {
+	// is pinch to zoom enabled?
+	public enabled: boolean;
+
 	#elem: HTMLElement;
 	public get elem() { return this.#elem; }
 	private set elem(elem: HTMLElement) { this.#elem = elem; }
 
-	// is pinch to zoom enabled
-	public enabled: boolean;
-	// is currently pinching to zoom
 	#active: boolean;
+	// is currently pinching to zoom?
+	public get active() { return this.#active; }
+	private set active(active: boolean) { this.#active = active; }
 
 	startingPinchSize: number;
 	startingPinchPosition: Vector2;
@@ -53,7 +56,7 @@ export class PinchToZoomHandler {
 	private Start(touches: TouchList) {
 		this.startingPinchSize = PinchToZoomHandler.getPinchSize(touches);
 		this.startingPinchPosition = PinchToZoomHandler.getPinchPosition(touches);
-		this.#active = true;
+		this.active = true;
 		this.elem.style.transitionProperty = "transform";
 		this.elem.style.transitionDuration = "0s";
 	}
@@ -69,7 +72,7 @@ export class PinchToZoomHandler {
 		this.startingScale = this.lastScale;
 		this.startingOffset = this.lastOffset;
 
-		this.#active = false;
+		this.active = false;
 	}
 
 	private SetTransform(scale: number, offset: Vector2) {
@@ -118,7 +121,7 @@ export class PinchToZoomHandler {
 		this.End();
 	}
 	private onTouchMove(event: TouchEvent) {
-		if (!this.#active) return;
+		if (!this.active) return;
 		this.Update(event.touches);
 	}
 
