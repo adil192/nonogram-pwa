@@ -1,5 +1,5 @@
 import {Grid} from "./lib/Grid";
-import {allowPinchToZoom, PinchToZoomHandler} from "./lib/PinchToZoom";
+import {allowPinchToZoom, PinchToZoomHandler} from "../repo/PinchToZoom";
 
 let board: HTMLElement;
 let iconLinks: HTMLDivElement;

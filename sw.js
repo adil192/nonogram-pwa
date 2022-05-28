@@ -6,6 +6,7 @@ const assets = [
 	'/nonogram/nonogram.js',
 	'/nonogram/lib/Grid',
 	'/nonogram/lib/Rng',
+	'/repo/PinchToZoom',
 	'/assets/ext/bootstrap.5.1.3.min.css',
 ];
 const assets_extra = [
