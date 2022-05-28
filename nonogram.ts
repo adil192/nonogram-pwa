@@ -81,7 +81,7 @@ function init() {
 	pinchToZoomHandler.onChange = onZoomChange;
 }
 
-function onZoomChange(scale: number) {
+function onZoomChange(scale: number, offset: {x: number, y: number}) {
 	// todo: show a "reset zoom" button if scale is not 1 AND !active
 	// (i.e. wait until pinch gesture ends and zoomed in to show button)
 	// todo: hide the same button if scale is 1
