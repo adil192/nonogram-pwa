@@ -128,6 +128,11 @@ export class GridItemLabel extends GridItem {
 		}
 	}
 
+	resetAnim() {
+		// trigger reflow to allow us to restart animation
+		void this.elem.offsetWidth;
+	}
+
 	Serializable(): Record<string, boolean> {
 		return {
 			isCorrect: this.isCorrect
