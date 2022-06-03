@@ -191,14 +191,18 @@ export class Grid {
 
 		for (let x = 0; x < this.size; ++x) this._getLabel_countTile(x, y, isStart, counts);
 
-		return counts.filter(n => n != 0);
+		counts = counts.filter(n => n != 0);
+		if (!counts.length) counts = [0];
+		return counts;
 	}
 	getVerticalLabel(x: number, isStart: boolean = false): number[] {
 		let counts: number[] = [0];
 
 		for (let y = 0; y < this.size; ++y) this._getLabel_countTile(x, y, isStart, counts);
 
-		return counts.filter(n => n != 0);
+		counts = counts.filter(n => n != 0);
+		if (!counts.length) counts = [0];
+		return counts;
 	}
 	checkHorizontalLabel(y: number): boolean {
 		return this.getHorizontalLabel(y).join(",") == this.getGridItem<GridItemLabel>(-1, y).counts;
