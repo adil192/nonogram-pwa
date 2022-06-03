@@ -67,6 +67,7 @@ board {
 		// center text
 		display: flex;
 		align-items: center;
+		transition: color 0.2s ease, opacity 1s ease;
 	}
 	label.vertical {
 		flex-direction: column-reverse; // align text at bottom
@@ -79,7 +80,7 @@ board {
 	}
 	label.correct {
 		color: $theme-color;
-		font-weight: 500;
+		opacity: 0;
 	}
 }
 
