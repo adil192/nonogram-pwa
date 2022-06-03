@@ -1,243 +1,36 @@
 // used commands like this to subset the full 3.4MB ttf file:
 // pyftsubset MPLUSRounded1c-Regular.ttf --unicodes=100-5ff --ignore-missing-unicodes --with-zopfli --recommended-glyphs --flavor=woff2
 
-// Subset of MPLUSRounded1c-Regular.ttf with unicode range 00-1f
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.00-1f.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.00-1f.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.00-1f.ttf') format('truetype');
-	unicode-range: U+00-1f;
-}
-// Subset of MPLUSRounded1c-Medium.ttf with unicode range 00-1f
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.00-1f.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.00-1f.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.00-1f.ttf') format('truetype');
-	unicode-range: U+00-1f;
-}
-// Subset of MPLUSRounded1c-Regular.ttf with unicode range 20-3f
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.20-3f.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.20-3f.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.20-3f.ttf') format('truetype');
-	unicode-range: U+20-3f;
-}
-// Subset of MPLUSRounded1c-Medium.ttf with unicode range 20-3f
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.20-3f.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.20-3f.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.20-3f.ttf') format('truetype');
-	unicode-range: U+20-3f;
-}
-// Subset of MPLUSRounded1c-Regular.ttf with unicode range 40-7f
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.40-7f.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.40-7f.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.40-7f.ttf') format('truetype');
-	unicode-range: U+40-7f;
-}
-// Subset of MPLUSRounded1c-Medium.ttf with unicode range 40-7f
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.40-7f.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.40-7f.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.40-7f.ttf') format('truetype');
-	unicode-range: U+40-7f;
-}
-// Subset of MPLUSRounded1c-Regular.ttf with unicode range 80-9f
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.80-9f.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.80-9f.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.80-9f.ttf') format('truetype');
-	unicode-range: U+80-9f;
-}
-// Subset of MPLUSRounded1c-Medium.ttf with unicode range 80-9f
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.80-9f.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.80-9f.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.80-9f.ttf') format('truetype');
-	unicode-range: U+80-9f;
-}
-// Subset of MPLUSRounded1c-Regular.ttf with unicode range a0-ff
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.a0-ff.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.a0-ff.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.a0-ff.ttf') format('truetype');
-	unicode-range: U+a0-ff;
-}
-// Subset of MPLUSRounded1c-Medium.ttf with unicode range a0-ff
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.a0-ff.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.a0-ff.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.a0-ff.ttf') format('truetype');
-	unicode-range: U+a0-ff;
-}
-// Subset of MPLUSRounded1c-Regular.ttf with unicode range 100-1ff
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.100-1ff.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.100-1ff.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.100-1ff.ttf') format('truetype');
-	unicode-range: U+100-1ff;
-}
-// Subset of MPLUSRounded1c-Medium.ttf with unicode range 100-1ff
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.100-1ff.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.100-1ff.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.100-1ff.ttf') format('truetype');
-	unicode-range: U+100-1ff;
-}
-// Subset of MPLUSRounded1c-Regular.ttf with unicode range 200-2ff
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.200-2ff.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.200-2ff.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.200-2ff.ttf') format('truetype');
-	unicode-range: U+200-2ff;
-}
-// Subset of MPLUSRounded1c-Medium.ttf with unicode range 200-2ff
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.200-2ff.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.200-2ff.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.200-2ff.ttf') format('truetype');
-	unicode-range: U+200-2ff;
-}
-// Subset of MPLUSRounded1c-Regular.ttf with unicode range 300-3ff
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.300-3ff.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.300-3ff.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.300-3ff.ttf') format('truetype');
-	unicode-range: U+300-3ff;
-}
-// Subset of MPLUSRounded1c-Medium.ttf with unicode range 300-3ff
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.300-3ff.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.300-3ff.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.300-3ff.ttf') format('truetype');
-	unicode-range: U+300-3ff;
-}
-// Subset of MPLUSRounded1c-Regular.ttf with unicode range 400-4ff
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.400-4ff.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.400-4ff.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.400-4ff.ttf') format('truetype');
-	unicode-range: U+400-4ff;
-}
-// Subset of MPLUSRounded1c-Medium.ttf with unicode range 400-4ff
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.400-4ff.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.400-4ff.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.400-4ff.ttf') format('truetype');
-	unicode-range: U+400-4ff;
-}
-// Subset of MPLUSRounded1c-Regular.ttf with unicode range 500-5ff
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.500-5ff.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.500-5ff.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Regular.500-5ff.ttf') format('truetype');
-	unicode-range: U+500-5ff;
-}
-// Subset of MPLUSRounded1c-Medium.ttf with unicode range 500-5ff
-@font-face {
-	font-family: 'MPLUSRounded1c';
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-	src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.500-5ff.woff2') format('woff2'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.500-5ff.woff') format('woff'),
-	url('/nonogram/fonts/font-files/MPLUSRounded1c-Medium.500-5ff.ttf') format('truetype');
-	unicode-range: U+500-5ff;
+$unicode-ranges: (
+	"00-1f",
+	"20-3f",
+	"40-7f",
+	"80-9f",
+	"a0-ff",
+	"100-1ff",
+	"200-2ff",
+	"300-3ff",
+	"400-4ff",
+	"500-5ff",
+);
+
+$weights: (
+	"Regular": 400,
+	"Medium": 500,
+);
+
+@each $unicode-range in $unicode-ranges {
+	@each $weight-name, $weight-num in $weights {
+		@font-face {
+			font-family: 'MPLUSRounded1c';
+			font-style: normal;
+			font-weight: $weight-num;
+			font-display: swap;
+			src: local('MPLUSRounded1c'), local('M PLUS Rounded 1c'),
+			url('/nonogram/fonts/font-files/MPLUSRounded1c-#{$weight-name}.#{$unicode-range}.woff2') format('woff2'),
+			url('/nonogram/fonts/font-files/MPLUSRounded1c-#{$weight-name}.#{$unicode-range}.woff') format('woff'),
+			url('/nonogram/fonts/font-files/MPLUSRounded1c-#{$weight-name}.#{$unicode-range}.ttf') format('truetype');
+			unicode-range: #{"U+" + $unicode-range};
+		}
+	}
 }
