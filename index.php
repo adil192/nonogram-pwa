@@ -31,15 +31,15 @@ $lastUpdate = "22-06-03-0700"; // when changing this, you should also update sw.
 
 <header>
     <h1>Nonogram</h1>
-    <a id="github-alt" class="btn btn-outline-primary btn-icon btn-github" href="https://github.com/adil192/nonogram-pwa" aria-label="GitHub project" style="display: none;"></a>
-    <button class="btn btn-outline-primary btn-icon" id="btnContrast" aria-label="Enable e-reader mode"><?php include "images/contrast_FILL1_wght400_GRAD0_opsz48.svg"; ?></button>
-    <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="Refresh" id="refreshBtn"></button>
+    <a id="github-alt" class="btn btn-outline-primary btn-icon btn-github" href="https://github.com/adil192/nonogram-pwa" aria-label="GitHub project" title="GitHub project" style="display: none;"></a>
+    <button class="btn btn-outline-primary btn-icon" id="btnContrast" aria-label="Toggle e-reader mode" title="Toggle e-reader mode"><?php include "images/contrast_FILL1_wght400_GRAD0_opsz48.svg"; ?></button>
+    <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="New game" title="New game" id="refreshBtn"></button>
 </header>
 <div class="icon-links" style="display: none;">
     <a class="btn btn-outline-primary btn-icon btn-google-play" href="https://play.google.com/store/apps/details?id=org.hanney.adil.nonogram">
-        <img src="/assets/images/logos/google-play-badge.webp" alt="Google Play Store" width="564" height="168">
+        <img src="/assets/images/logos/google-play-badge.webp" alt="Google Play Store" title="Google Play Store" width="564" height="168">
     </a>
-    <a class="btn btn-outline-primary btn-icon btn-github" href="https://github.com/adil192/nonogram-pwa" aria-label="GitHub project"></a>
+    <a class="btn btn-outline-primary btn-icon btn-github" href="https://github.com/adil192/nonogram-pwa" aria-label="GitHub project" title="GitHub project"></a>
 </div>
 
 <main>
@@ -51,8 +51,8 @@ $lastUpdate = "22-06-03-0700"; // when changing this, you should also update sw.
         <label for="difficultyToggle">Difficulty</label>
         <input id="difficultyToggle" type="number" value="4" min="1" max="10">
     </div>
-    <button class="btn btn-outline-primary btn-icon" aria-label="Toggle cross" id="crossToggle"></button>
-    <button class="btn btn-outline-primary btn-icon" aria-label="Clear" id="binBtn"></button>
+    <button class="btn btn-outline-primary btn-icon" aria-label="Toggle cross marker" title="Toggle cross marker" id="crossToggle"></button>
+    <button class="btn btn-outline-primary btn-icon" aria-label="Clear board" title="Clear board" id="binBtn"></button>
 </footer>
 
 <div class="modal fade" id="wonModal" tabindex="-1" aria-labelledby="wonModalLabel" aria-hidden="true" aria-modal="true">
@@ -60,7 +60,7 @@ $lastUpdate = "22-06-03-0700"; // when changing this, you should also update sw.
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title" id="wonModalLabel">Congrats</h2>
-                <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="Refresh" id="newGameBtn" disabled="disabled"></button>
+                <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="New game" title="New game" id="newGameBtn" disabled="disabled"></button>
             </div>
             <div class="modal-body">
                 Game complete
