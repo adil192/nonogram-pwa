@@ -79,6 +79,8 @@ window.addEventListener("load", function() {
 function init() {
 	if (grid != null) grid.Destroy();
 
+	loadEReaderMode();
+
 	grid = new Grid(board, GRID_SIZE);
 
 	pinchToZoomHandler = allowPinchToZoom(board, true);
@@ -102,6 +104,7 @@ function newGame() {
 let eReaderModeEnabled: boolean = false;
 function toggleEReaderMode() {
 	eReaderModeEnabled = !eReaderModeEnabled;
+	saveEReaderMode();
 	if (eReaderModeEnabled) {
 		document.body.classList.add("e-reader");
 		eReaderBtn.classList.add("eReaderEnabled");
@@ -109,6 +112,20 @@ function toggleEReaderMode() {
 		document.body.classList.remove("e-reader");
 		eReaderBtn.classList.remove("eReaderEnabled");
 	}
+}
+function saveEReaderMode() {
+	document.cookie = "nonogramEReader=" + eReaderModeEnabled + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
+}
+function loadEReaderMode() {
+	let name = "nonogramEReader=";
+	let cookies = decodeURIComponent(document.cookie).split('; ');
+	cookies.forEach(val => {
+		if (val.indexOf(name) === 0) {
+			eReaderModeEnabled = JSON.parse(val.substring(name.length));
+		}
+	});
+	eReaderModeEnabled = !eReaderModeEnabled;
+	toggleEReaderMode();
 }
 
 function isStandalone(): boolean {
