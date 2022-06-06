@@ -327,6 +327,13 @@ body.e-reader {
 			}
 		}
 	}
+
+	.modal-backdrop {
+		opacity: 0 !important;
+	}
+	.modal-content {
+		border: 1px solid black;
+	}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -414,6 +421,10 @@ body.e-reader {
 					border-color: white;
 				}
 			}
+		}
+
+		.modal-content {
+			border-color: white;
 		}
 	}
 }
