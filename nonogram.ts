@@ -10,6 +10,7 @@ let difficultyToggle: HTMLInputElement;
 let crossToggle: HTMLButtonElement;
 let binBtn: HTMLButtonElement;
 let newGameBtn: HTMLButtonElement;
+let eReaderBtn: HTMLButtonElement;
 
 let pinchToZoomHandler: PinchToZoomHandler = null;
 
@@ -35,6 +36,7 @@ window.addEventListener("load", function() {
 	crossToggle = document.querySelector("#crossToggle");
 	binBtn = document.querySelector("#binBtn");
 	newGameBtn = document.querySelector("#newGameBtn");
+	eReaderBtn = document.querySelector("#eReaderBtn");
 	Grid.wonModalBtn = newGameBtn;
 
 	init();
@@ -66,6 +68,8 @@ window.addEventListener("load", function() {
 		grid = new Grid(board, GRID_SIZE);
 	})
 
+	eReaderBtn.addEventListener("click", toggleEReaderMode);
+
 	let android = isAndroid();
 	let standalone = isStandalone();
 	iconLinks.style.display = (android && !standalone) ? "block" : "none";
@@ -93,6 +97,18 @@ function newGame() {
 	grid.Destroy();
 	grid.hideWonModal();
 	grid = new Grid(board, GRID_SIZE);
+}
+
+let eReaderModeEnabled: boolean = false;
+function toggleEReaderMode() {
+	eReaderModeEnabled = !eReaderModeEnabled;
+	if (eReaderModeEnabled) {
+		document.body.classList.add("e-reader");
+		eReaderBtn.classList.add("eReaderEnabled");
+	} else {
+		document.body.classList.remove("e-reader");
+		eReaderBtn.classList.remove("eReaderEnabled");
+	}
 }
 
 function isStandalone(): boolean {

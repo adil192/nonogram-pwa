@@ -188,12 +188,12 @@ footer {
 		width: auto;
 	}
 }
-#btnContrast svg {
+#eReaderBtn svg {
 	width: 1.8rem;
 	height: 1.8rem;
 	object-fit: contain;
 }
-#btnContrast.contrast-enabled svg {
+#eReaderBtn.eReaderEnabled svg {
 	fill: $theme-color;
 }
 
@@ -341,10 +341,10 @@ body.e-reader {
 	.btn-icon::before {
 		filter: invert(1);
 	}
-	#btnContrast svg {
+	#eReaderBtn svg {
 		fill: white;
 	}
-	#btnContrast.contrast-enabled svg {
+	#eReaderBtn.eReaderEnabled svg {
 		fill: $theme-color;
 	}
 	#crossToggle {
