@@ -284,6 +284,51 @@ tile {
 	margin: auto;
 }
 
+
+body.e-reader {
+	&, .modal-content {
+		background-color: white;
+	}
+
+	footer {
+		#crossToggle {
+			&::before {
+				background-color: #111;
+			}
+			&.is-cross {
+				&::before {
+					background-color: transparent;
+					background-image: url("images/cross.svg");
+				}
+			}
+		}
+	}
+	tile {
+		&.selected {
+			background: #111;
+		}
+
+		&::before {
+			border-color: #333;
+		}
+		&.x-middle::before {
+			border-left-color: black;
+		}
+		&.y-middle::before {
+			border-top-color: black;
+		}
+
+		&.x-start,
+		&.x-end,
+		&.y-start,
+		&.y-end {
+			&::after {
+				border-color: black;
+			}
+		}
+	}
+}
+
 @media (prefers-color-scheme: dark) {
 	html, body, .modal-content {
 		background: #191919;
@@ -325,6 +370,50 @@ tile {
 
 		&.y-middle::before {
 			border-top-color: $middle-border-color-dark;
+		}
+	}
+
+	body.e-reader {
+		&, .modal-content {
+			background: #111;
+		}
+
+		footer {
+			#crossToggle {
+				&::before {
+					background-color: #eee;
+				}
+				&.is-cross {
+					&::before {
+						background-color: transparent;
+						background-image: url("images/cross.svg");
+					}
+				}
+			}
+		}
+		tile {
+			&.selected {
+				background: #eee;
+			}
+
+			&::before {
+				border-color: #bbb;
+			}
+			&.x-middle::before {
+				border-left-color: white;
+			}
+			&.y-middle::before {
+				border-top-color: white;
+			}
+
+			&.x-start,
+			&.x-end,
+			&.y-start,
+			&.y-end {
+				&::after {
+					border-color: white;
+				}
+			}
 		}
 	}
 }
