@@ -32,6 +32,7 @@ $lastUpdate = "22-06-03-0700"; // when changing this, you should also update sw.
 <header>
     <h1>Nonogram</h1>
     <a id="github-alt" class="btn btn-outline-primary btn-icon btn-github" href="https://github.com/adil192/nonogram-pwa" aria-label="GitHub project" style="display: none;"></a>
+    <button class="btn btn-outline-primary btn-icon" id="btnContrast" aria-label="Enable e-reader mode"><?php include "images/contrast_FILL1_wght400_GRAD0_opsz48.svg"; ?></button>
     <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="Refresh" id="refreshBtn"></button>
 </header>
 <div class="icon-links" style="display: none;">
