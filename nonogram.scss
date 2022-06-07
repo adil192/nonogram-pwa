@@ -192,9 +192,12 @@ footer {
 	width: 1.8rem;
 	height: 1.8rem;
 	object-fit: contain;
+	fill: $theme-color;
+	transition: transform 0.2s;
 }
 #eReaderBtn.eReaderEnabled svg {
-	fill: $theme-color;
+	fill: black;
+	transform: rotate(180deg);
 }
 
 tile {
@@ -349,10 +352,10 @@ body.e-reader {
 		filter: invert(1);
 	}
 	#eReaderBtn svg {
-		fill: white;
+		fill: $theme-color;
 	}
 	#eReaderBtn.eReaderEnabled svg {
-		fill: $theme-color;
+		fill: white;
 	}
 	#crossToggle {
 		&::before {
