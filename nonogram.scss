@@ -307,6 +307,8 @@ body.e-reader {
 		}
 	}
 	tile {
+		transition: none;
+
 		&.selected {
 			background: #111;
 		}
