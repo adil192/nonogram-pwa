@@ -320,8 +320,15 @@ export class Grid {
 		// only allow dragging horizontally/vertically
 		if (this.draggingTile.x != newTile.x && this.draggingTile.y != newTile.y) return;
 
-		this.draggingAction(newTile);
-		this.onTileChanged(newTile);
+		// interpolate between this.draggingTile and newTile to make sure we don't miss any tiles
+		let tile: GridItemTile;
+		for (let x = Math.min(newTile.x, this.draggingTile.x); x <= Math.max(newTile.x, this.draggingTile.x); ++x) {
+			for (let y = Math.min(newTile.y, this.draggingTile.y); y <= Math.max(newTile.y, this.draggingTile.y); ++y) {
+				tile = this.getGridItem(x, y);
+				this.draggingAction(tile);
+				this.onTileChanged(tile);
+			}
+		}
 	}
 	public OnTileDragEnterCoords(x: number, y: number) {
 		let tile: GridItemTile;
