@@ -248,10 +248,10 @@ export class Grid {
 					break;
 				}
 		} else if (current.length > correct.length) {
-			isIncorrect = true;
+			isIncorrect = current.reduce((sum, n) => sum + n + 1) > correct.reduce((sum, n) => sum + n + 1);
 		} else {
 			for (let i = 0; i < current.length; ++i)
-				if (current[i] > correct.slice(i).reduce((sum, n) => sum + n)) {
+				if (current[i] > correct.slice(i).reduce((sum, n) => sum + n + 1)) {
 					isIncorrect = true;
 					break;
 				}
