@@ -124,6 +124,7 @@ export class GridItemLabel extends GridItem {
 
 		if (correct) {
 			this.elem.classList.add("correct");
+			this.isIncorrect = false;
 		} else {
 			this.elem.classList.remove("correct");
 		}
@@ -137,6 +138,7 @@ export class GridItemLabel extends GridItem {
 
 		if (incorrect) {
 			this.elem.classList.add("incorrect");
+			this.isCorrect = false;
 		} else {
 			this.elem.classList.remove("incorrect");
 		}
