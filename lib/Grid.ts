@@ -251,7 +251,7 @@ export class Grid {
 			isIncorrect = current.reduce((sum, n) => sum + n + 1) > correct.reduce((sum, n) => sum + n + 1);
 		} else {
 			for (let i = 0; i < current.length; ++i)
-				if (current[i] > correct.slice(i).reduce((sum, n) => sum + n + 1)) {
+				if (current[i] > correct.slice(i).reduce((sum, n) => sum + n)) {
 					isIncorrect = true;
 					break;
 				}
