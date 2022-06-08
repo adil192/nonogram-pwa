@@ -97,12 +97,23 @@ export class Grid {
 			let gridItem: GridItemLabel = this.getGridItem(x, -1);
 
 			let counts = this.getVerticalLabel(x, true);
-			gridItem.counts = counts.join(",");
+			gridItem.counts = counts;
 
 			let label: string = counts.join("\n");
 			gridItem.elem.innerText = label;
+		}
+		for (let y = 0; y < this.size; ++y) {
+			let gridItem: GridItemLabel = this.getGridItem(-1, y);
 
-			if (label == this.size + "") { // full row/column
+			let counts = this.getHorizontalLabel(y, true);
+			gridItem.counts = counts;
+
+			let label: string = counts.join(" ");
+			gridItem.elem.innerText = label;
+		}
+		for (let x = 0; x < this.size; ++x) {
+			let counts: number[] = this.getGridItem<GridItemLabel>(x, -1).counts;
+			if (counts == [this.size]) { // full row/column
 				for (let by = 0; by < this.size; ++by) {
 					this.getGridItem<GridItemTile>(x, by).isSelected = true;
 				}
@@ -110,7 +121,7 @@ export class Grid {
 				let gridItem = this.getGridItem<GridItemLabel>(x, -1);
 				gridItem.resetAnim();
 				gridItem.isCorrect = true;
-			} else if (!label) { // empty row/column
+			} else if (counts == [0]) { // empty row/column
 				for (let by = 0; by < this.size; ++by) {
 					this.getGridItem<GridItemTile>(x, by).isCrossed = true;
 				}
@@ -123,15 +134,8 @@ export class Grid {
 			}
 		}
 		for (let y = 0; y < this.size; ++y) {
-			let gridItem: GridItemLabel = this.getGridItem(-1, y);
-
-			let counts = this.getHorizontalLabel(y, true);
-			gridItem.counts = counts.join(",");
-
-			let label: string = counts.join(" ");
-			gridItem.elem.innerText = label;
-
-			if (label == this.size + "") { // full row/column
+			let counts: number[] = this.getGridItem<GridItemLabel>(-1, y).counts;
+			if (counts == [this.size]) { // full row/column
 				for (let bx = 0; bx < this.size; ++bx) {
 					this.getGridItem<GridItemTile>(bx, y).isSelected = true;
 				}
@@ -139,7 +143,7 @@ export class Grid {
 				let gridItem = this.getGridItem<GridItemLabel>(-1, y);
 				gridItem.resetAnim();
 				gridItem.isCorrect = true;
-			} else if (!label) { // empty row/column
+			} else if (counts == [0]) { // empty row/column
 				for (let bx = 0; bx < this.size; ++bx) {
 					this.getGridItem<GridItemTile>(bx, y).isCrossed = true;
 				}
@@ -216,11 +220,44 @@ export class Grid {
 		if (!counts.length) counts = [0];
 		return counts;
 	}
-	checkHorizontalLabel(y: number): boolean {
-		return this.getHorizontalLabel(y).join(",") == this.getGridItem<GridItemLabel>(-1, y).counts;
+	checkHorizontalLabel(y: number): [isCorrect: boolean, isIncorrect: boolean] {
+		let current = this.getHorizontalLabel(y);
+		let correct = this.getGridItem<GridItemLabel>(-1, y).counts;
+
+		console.log("checkHorizontalLabel", current, this.getGridItem<GridItemLabel>(-1, y), correct);
+
+		return this.checkLabel(current, correct);
 	}
-	checkVerticalLabel(x: number): boolean {
-		return this.getVerticalLabel(x).join(",") == this.getGridItem<GridItemLabel>(x, -1).counts;
+	checkVerticalLabel(x: number): [isCorrect: boolean, isIncorrect: boolean] {
+		let current = this.getVerticalLabel(x);
+		let correct = this.getGridItem<GridItemLabel>(x, -1).counts;
+
+		console.log("checkVerticalLabel", current, this.getGridItem<GridItemLabel>(x, -1), correct);
+
+		return this.checkLabel(current, correct);
+	}
+	private checkLabel(current: number[], correct: number[]): [isCorrect: boolean, isIncorrect: boolean] {
+		let isCorrect = current.toString() == correct.toString();
+		let isIncorrect = false;
+		if (isCorrect) return [isCorrect, isIncorrect];
+
+		if (current.length == correct.length) {
+			for (let i = 0; i < current.length; ++i)
+				if (current[i] > correct[i]) {
+					isIncorrect = true;
+					break;
+				}
+		} else if (current.length > correct.length) {
+			isIncorrect = true;
+		} else {
+			for (let i = 0; i < current.length; ++i)
+				if (current[i] > correct.slice(i).reduce((sum, n) => sum + n)) {
+					isIncorrect = true;
+					break;
+				}
+		}
+		console.log(isCorrect, isIncorrect);
+		return [isCorrect, isIncorrect];
 	}
 	private _getLabel_countTile(x: number, y: number, isStart: boolean, counts: number[]) {
 		let tile: GridItemTile = this.getGridItem(x, y);
@@ -249,8 +286,11 @@ export class Grid {
 		this.onTileChanged(tile);
 	}
 	onTileChanged(tile: GridItemTile) {
-		this.getGridItem<GridItemLabel>(tile.x, -1).isCorrect = this.checkVerticalLabel(tile.x);
-		this.getGridItem<GridItemLabel>(-1, tile.y).isCorrect = this.checkHorizontalLabel(tile.y);
+		let verticalLabel: GridItemLabel = this.getGridItem(tile.x, -1);
+		let horizontalLabel: GridItemLabel = this.getGridItem<GridItemLabel>(-1, tile.y);
+
+		[verticalLabel.isCorrect, verticalLabel.isIncorrect] = this.checkVerticalLabel(tile.x);
+		[horizontalLabel.isCorrect, horizontalLabel.isIncorrect] = this.checkHorizontalLabel(tile.y);
 
 		this.saveGridItemsToCookie();
 

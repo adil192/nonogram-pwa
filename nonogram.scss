@@ -78,6 +78,9 @@ board {
 		padding-right: 2 * $thick-border-width;
 		min-width: 4em;
 	}
+	label.incorrect {
+		text-decoration: line-through;
+	}
 	label.correct {
 		color: $theme-color;
 		opacity: 0;

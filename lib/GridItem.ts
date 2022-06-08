@@ -103,8 +103,9 @@ export class GridItemTile extends GridItem {
 	}
 }
 export class GridItemLabel extends GridItem {
-	public counts: string;
+	public counts: number[];
 	private _correct: boolean = false;
+	private _incorrect: boolean = false;
 
 	constructor(serialized: Record<string, boolean> = null) {
 		super();
@@ -125,6 +126,19 @@ export class GridItemLabel extends GridItem {
 			this.elem.classList.add("correct");
 		} else {
 			this.elem.classList.remove("correct");
+		}
+	}
+
+	public get isIncorrect(): boolean {
+		return this._incorrect;
+	}
+	public set isIncorrect(incorrect: boolean) {
+		this._incorrect = incorrect;
+
+		if (incorrect) {
+			this.elem.classList.add("incorrect");
+		} else {
+			this.elem.classList.remove("incorrect");
 		}
 	}
 
