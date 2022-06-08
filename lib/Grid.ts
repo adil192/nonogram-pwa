@@ -113,7 +113,7 @@ export class Grid {
 		}
 		for (let x = 0; x < this.size; ++x) {
 			let counts: number[] = this.getGridItem<GridItemLabel>(x, -1).counts;
-			if (counts == [this.size]) { // full row/column
+			if (counts.toString() == [this.size].toString()) { // full row/column
 				for (let by = 0; by < this.size; ++by) {
 					this.getGridItem<GridItemTile>(x, by).isSelected = true;
 				}
@@ -121,7 +121,7 @@ export class Grid {
 				let gridItem = this.getGridItem<GridItemLabel>(x, -1);
 				gridItem.resetAnim();
 				gridItem.isCorrect = true;
-			} else if (counts == [0]) { // empty row/column
+			} else if (counts.toString() == [0].toString()) { // empty row/column
 				for (let by = 0; by < this.size; ++by) {
 					this.getGridItem<GridItemTile>(x, by).isCrossed = true;
 				}
@@ -135,7 +135,7 @@ export class Grid {
 		}
 		for (let y = 0; y < this.size; ++y) {
 			let counts: number[] = this.getGridItem<GridItemLabel>(-1, y).counts;
-			if (counts == [this.size]) { // full row/column
+			if (counts.toString() == [this.size].toString()) { // full row/column
 				for (let bx = 0; bx < this.size; ++bx) {
 					this.getGridItem<GridItemTile>(bx, y).isSelected = true;
 				}
@@ -143,7 +143,7 @@ export class Grid {
 				let gridItem = this.getGridItem<GridItemLabel>(-1, y);
 				gridItem.resetAnim();
 				gridItem.isCorrect = true;
-			} else if (counts == [0]) { // empty row/column
+			} else if (counts.toString() == [0].toString()) { // empty row/column
 				for (let bx = 0; bx < this.size; ++bx) {
 					this.getGridItem<GridItemTile>(bx, y).isCrossed = true;
 				}
