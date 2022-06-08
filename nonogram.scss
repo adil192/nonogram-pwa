@@ -79,7 +79,12 @@ board {
 		min-width: 4em;
 	}
 	label.incorrect {
-		text-decoration: line-through;
+		color: red;
+	}
+	label.incorrect::after {
+		content: "✗";
+		padding-inline: 0.3em;
+		opacity: 0.7;
 	}
 	label.correct {
 		color: $theme-color;
