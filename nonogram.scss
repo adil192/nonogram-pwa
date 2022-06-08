@@ -78,12 +78,16 @@ board {
 		padding-right: 2 * $thick-border-width;
 		min-width: 4em;
 	}
+	label::after {
+		content: "✗";
+		padding-inline: 0.3em;
+		opacity: 0;
+		transition: opacity 0.2s;
+	}
 	label.incorrect {
 		color: red;
 	}
 	label.incorrect::after {
-		content: "✗";
-		padding-inline: 0.3em;
 		opacity: 0.7;
 	}
 	label.correct {
@@ -339,6 +343,9 @@ body.e-reader {
 				border-color: black;
 			}
 		}
+	}
+	board label::after {
+		transition: none;
 	}
 
 	.modal-backdrop {
