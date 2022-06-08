@@ -173,7 +173,6 @@ export class Grid {
 		}
 	}
 	static SaveSeed() {
-		console.log("save seed:", Rng.seed);
 		document.cookie = this.seedCookieName + Rng.seed + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
 	}
 	static ClearSeed() {
@@ -224,15 +223,11 @@ export class Grid {
 		let current = this.getHorizontalLabel(y);
 		let correct = this.getGridItem<GridItemLabel>(-1, y).counts;
 
-		console.log("checkHorizontalLabel", current, this.getGridItem<GridItemLabel>(-1, y), correct);
-
 		return this.checkLabel(current, correct);
 	}
 	checkVerticalLabel(x: number): [isCorrect: boolean, isIncorrect: boolean] {
 		let current = this.getVerticalLabel(x);
 		let correct = this.getGridItem<GridItemLabel>(x, -1).counts;
-
-		console.log("checkVerticalLabel", current, this.getGridItem<GridItemLabel>(x, -1), correct);
 
 		return this.checkLabel(current, correct);
 	}
@@ -256,7 +251,6 @@ export class Grid {
 					break;
 				}
 		}
-		console.log(isCorrect, isIncorrect);
 		return [isCorrect, isIncorrect];
 	}
 	private _getLabel_countTile(x: number, y: number, isStart: boolean, counts: number[]) {
