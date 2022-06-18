@@ -67,6 +67,8 @@ board {
 		// center text
 		display: flex;
 		align-items: center;
+
+		white-space: nowrap;
 		transition: color 0.2s ease, opacity 1s ease;
 	}
 	label.vertical {
