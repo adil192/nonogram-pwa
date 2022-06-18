@@ -100,7 +100,7 @@ function onResize() {
 	board.style.transform = "none";
 	board.style.fontSize = "1em";
 	// make board smaller if it doesn't fit on display
-	let widthRatio = board.scrollWidth / document.body.scrollWidth;
+	let widthRatio = board.scrollWidth / document.body.offsetWidth;
 	if (widthRatio > 1) {
 		board.style.fontSize = (1/widthRatio) + "em";
 	}
