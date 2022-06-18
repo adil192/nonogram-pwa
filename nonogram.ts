@@ -85,6 +85,14 @@ function init() {
 
 	pinchToZoomHandler = allowPinchToZoom(board, true);
 	pinchToZoomHandler.onChange = onZoomChange;
+
+	// make board smaller if doesn't fit on display
+	board.style.transform = "none";
+	board.style.fontSize = "1em";
+	let widthRatio = board.scrollWidth / document.body.scrollWidth;
+	if (widthRatio > 1) {
+		board.style.fontSize = (1/widthRatio) + "em";
+	}
 }
 
 function onZoomChange(scale: number, offset: {x: number, y: number}) {
