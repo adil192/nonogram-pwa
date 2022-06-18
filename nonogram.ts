@@ -52,6 +52,7 @@ window.addEventListener("load", function() {
 	})
 	refreshBtn.addEventListener("click", newGame)
 	newGameBtn.addEventListener("click", newGame)
+	window.addEventListener("resize", onResize)
 	
 	difficultyToggle.valueAsNumber = Grid.difficulty * 11;
 	difficultyToggle.addEventListener("change", function () {
@@ -86,19 +87,23 @@ function init() {
 	pinchToZoomHandler = allowPinchToZoom(board, true);
 	pinchToZoomHandler.onChange = onZoomChange;
 
-	// make board smaller if doesn't fit on display
-	board.style.transform = "none";
-	board.style.fontSize = "1em";
-	let widthRatio = board.scrollWidth / document.body.scrollWidth;
-	if (widthRatio > 1) {
-		board.style.fontSize = (1/widthRatio) + "em";
-	}
+	onResize();
 }
 
 function onZoomChange(scale: number, offset: {x: number, y: number}) {
 	// todo: show a "reset zoom" button if scale is not 1 AND !active
 	// (i.e. wait until pinch gesture ends and zoomed in to show button)
 	// todo: hide the same button if scale is 1
+}
+
+function onResize() {
+	board.style.transform = "none";
+	board.style.fontSize = "1em";
+	// make board smaller if it doesn't fit on display
+	let widthRatio = board.scrollWidth / document.body.scrollWidth;
+	if (widthRatio > 1) {
+		board.style.fontSize = (1/widthRatio) + "em";
+	}
 }
 
 function newGame() {
