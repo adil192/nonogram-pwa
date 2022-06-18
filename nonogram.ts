@@ -102,7 +102,7 @@ function onResize() {
 	// make board smaller if it doesn't fit on display
 	let widthRatio = board.scrollWidth / document.body.offsetWidth;
 	if (widthRatio > 1) {
-		board.style.fontSize = (1/widthRatio) + "em";
+		board.style.fontSize = (1/widthRatio * 0.99) + "em";
 	}
 }
 
