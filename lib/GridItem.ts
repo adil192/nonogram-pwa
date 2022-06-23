@@ -3,8 +3,8 @@ import {Grid} from "./Grid";
 export abstract class GridItem {
 	elem: HTMLElement;
 
-	abstract LoadFromSerialized(serialized: Record<string, number>);
-	abstract Serializable(): Record<string, number>;
+	abstract LoadFromSerialized(serialized: Record<string, boolean>);
+	abstract Serializable(): Record<string, boolean>;
 }
 export class GridItemTile extends GridItem {
 	private grid: Grid;
@@ -16,7 +16,7 @@ export class GridItemTile extends GridItem {
 	public readonly x: number;
 	public readonly y: number;
 
-	constructor(grid: Grid, x: number, y: number, serialized: Record<string, number> = null) {
+	constructor(grid: Grid, x: number, y: number, serialized: Record<string, boolean> = null) {
 		super();
 		this.elem = document.createElement("tile");
 		this.grid = grid;
@@ -37,7 +37,7 @@ export class GridItemTile extends GridItem {
 		if (serialized != null) this.LoadFromSerialized(serialized);
 	}
 
-	LoadFromSerialized(serialized: Record<string, number>) {
+	LoadFromSerialized(serialized: Record<string, boolean>) {
 		this.isSelected = serialized.isSelected ?? this.isSelected;
 		this.isCrossed = serialized.isCrossed ?? this.isCrossed;
 	}
@@ -77,8 +77,8 @@ export class GridItemTile extends GridItem {
 	public get isSelected(): boolean {
 		return this._selected;
 	}
-	public set isSelected(selected: boolean | number) {
-		this._selected = !!selected;
+	public set isSelected(selected: boolean) {
+		this._selected = selected;
 
 		if (selected) {
 			this.elem.classList.add("selected");
@@ -90,8 +90,8 @@ export class GridItemTile extends GridItem {
 	public get isCrossed(): boolean {
 		return this._crossed;
 	}
-	public set isCrossed(crossed: boolean | number) {
-		this._crossed = !!crossed;
+	public set isCrossed(crossed: boolean) {
+		this._crossed = crossed;
 
 		if (crossed) {
 			this.elem.classList.add("crossed");
@@ -101,10 +101,10 @@ export class GridItemTile extends GridItem {
 		}
 	}
 
-	Serializable(): Record<string, number> {
+	Serializable(): Record<string, boolean> {
 		return {
-			isSelected: this.isSelected ? 1 : 0,
-			isCrossed: this.isCrossed ? 1 : 0,
+			isSelected: this.isSelected,
+			isCrossed: this.isCrossed
 		};
 	}
 }
@@ -113,14 +113,14 @@ export class GridItemLabel extends GridItem {
 	private _correct: boolean = false;
 	private _incorrect: boolean = false;
 
-	constructor(serialized: Record<string, number> = null) {
+	constructor(serialized: Record<string, boolean> = null) {
 		super();
 		this.elem = document.createElement("label");
 
 		if (serialized != null) this.LoadFromSerialized(serialized);
 	}
 
-	LoadFromSerialized(serialized: Record<string, number>) {
+	LoadFromSerialized(serialized: Record<string, boolean>) {
 		this.isCorrect = serialized.isCorrect ?? this.isCorrect;
 		this.isIncorrect = serialized.isIncorrect ?? this.isIncorrect;
 	}
@@ -128,8 +128,8 @@ export class GridItemLabel extends GridItem {
 	public get isCorrect(): boolean {
 		return this._correct;
 	}
-	public set isCorrect(correct: boolean | number) {
-		this._correct = !!correct;
+	public set isCorrect(correct: boolean) {
+		this._correct = correct;
 
 		if (correct) {
 			this.elem.classList.add("correct");
@@ -142,8 +142,8 @@ export class GridItemLabel extends GridItem {
 	public get isIncorrect(): boolean {
 		return this._incorrect;
 	}
-	public set isIncorrect(incorrect: boolean | number) {
-		this._incorrect = !!incorrect;
+	public set isIncorrect(incorrect: boolean) {
+		this._incorrect = incorrect;
 
 		if (incorrect) {
 			this.elem.classList.add("incorrect");
@@ -158,10 +158,10 @@ export class GridItemLabel extends GridItem {
 		void this.elem.offsetWidth;
 	}
 
-	Serializable(): Record<string, number> {
+	Serializable(): Record<string, boolean> {
 		return {
-			isCorrect: this.isCorrect ? 1 : 0,
-			isIncorrect: this.isIncorrect ? 1 : 0,
+			isCorrect: this.isCorrect,
+			isIncorrect: this.isIncorrect,
 		};
 	}
 }

@@ -5,7 +5,7 @@ export class Grid {
 	readonly elem: HTMLElement;
 	readonly size: number;
 	private readonly gridItems: GridItem[][];
-	private gridItemsBackup: Record<string, number>[][];
+	private gridItemsBackup: Record<string, boolean>[][];
 
 	private modalBackdrop: HTMLDivElement;
 	private wonModal: HTMLDivElement;
@@ -60,7 +60,7 @@ export class Grid {
 		for (let y = -1; y < this.size; ++y) {
 			let row: GridItem[] = [];
 			for (let x = -1; x < this.size; ++x) {
-				let serialized: Record<string, number>;
+				let serialized: Record<string, boolean>;
 				try {
 					serialized = serializedGridItems[y + 1][x + 1];
 				} catch (e) {
@@ -181,8 +181,8 @@ export class Grid {
 		this.SaveSeed();
 	}
 
-	private loadSerializedGridItemsFromCookie(): Record<string, number>[][] {
-		let gridItems: Record<string, number>[][] = null;
+	private loadSerializedGridItemsFromCookie(): Record<string, boolean>[][] {
+		let gridItems: Record<string, boolean>[][] = null;
 		let cookies = decodeURIComponent(document.cookie).split('; ');
 		cookies.forEach(val => {
 			if (val.indexOf(this.gridItemsCookieName) === 0) gridItems = JSON.parse(val.substring(this.gridItemsCookieName.length));
@@ -204,7 +204,7 @@ export class Grid {
 			}
 		}
 	}
-	private _serializeGridItems(): Record<string, number>[][] {
+	private _serializeGridItems(): Record<string, boolean>[][] {
 		let serializable = [];
 		for (let y = -1; y < this.size; ++y) {
 			let row = [];
