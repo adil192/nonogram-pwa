@@ -181,18 +181,39 @@ export class Grid {
 		this.SaveSeed();
 	}
 
+	private compressGridItemsJson(json: string) {
+		return json
+			.replace(/isCorrect/g, "#Y")
+			.replace(/isIncorrect/g, "#N")
+			.replace(/isSelected/g, "#S")
+			.replace(/isCrossed/g, "#C")
+			.replace(/true/g, "#T")
+			.replace(/false/g, "#F");
+	}
+	private decompressGridItemsJson(compressed: string) {
+		return compressed
+			.replace(/#Y/g, "isCorrect")
+			.replace(/#N/g, "isIncorrect")
+			.replace(/#S/g, "isSelected")
+			.replace(/#C/g, "isCrossed")
+			.replace(/#T/g, "true")
+			.replace(/#F/g, "false");
+	}
 	private loadSerializedGridItemsFromCookie(): Record<string, boolean>[][] {
 		let gridItems: Record<string, boolean>[][] = null;
 		let cookies = decodeURIComponent(document.cookie).split('; ');
 		cookies.forEach(val => {
-			if (val.indexOf(this.gridItemsCookieName) === 0) gridItems = JSON.parse(val.substring(this.gridItemsCookieName.length));
+			if (val.indexOf(this.gridItemsCookieName) === 0) {
+				gridItems = JSON.parse(this.decompressGridItemsJson(val.substring(this.gridItemsCookieName.length)));
+			}
 		});
 		return gridItems;
 	}
 	private saveGridItemsToCookie() {
 		let serialized = this._serializeGridItems();
+		let compressed = this.compressGridItemsJson(JSON.stringify(serialized));
 
-		document.cookie = this.gridItemsCookieName + JSON.stringify(serialized) + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
+		document.cookie = this.gridItemsCookieName + compressed + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
 	}
 	private saveGridItemsBackup() {
 		this.gridItemsBackup = this._serializeGridItems();
