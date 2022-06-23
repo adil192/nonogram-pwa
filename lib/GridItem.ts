@@ -122,6 +122,7 @@ export class GridItemLabel extends GridItem {
 
 	LoadFromSerialized(serialized: Record<string, boolean>) {
 		this.isCorrect = serialized.isCorrect;
+		this.isIncorrect = serialized.isIncorrect;
 	}
 
 	public get isCorrect(): boolean {
@@ -159,7 +160,8 @@ export class GridItemLabel extends GridItem {
 
 	Serializable(): Record<string, boolean> {
 		return {
-			isCorrect: this.isCorrect
+			isCorrect: this.isCorrect,
+			isIncorrect: this.isIncorrect,
 		};
 	}
 }
