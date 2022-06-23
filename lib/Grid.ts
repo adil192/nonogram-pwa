@@ -62,7 +62,7 @@ export class Grid {
 			for (let x = -1; x < this.size; ++x) {
 				let serialized: Record<string, boolean>;
 				try {
-					serialized = serializedGridItems[y][x];
+					serialized = serializedGridItems[y + 1][x + 1];
 				} catch (e) {
 					serialized = null;
 				}
@@ -181,8 +181,8 @@ export class Grid {
 		this.SaveSeed();
 	}
 
-	private loadSerializedGridItemsFromCookie(): Record<string, boolean> {
-		let gridItems: Record<string, boolean> = null;
+	private loadSerializedGridItemsFromCookie(): Record<string, boolean>[][] {
+		let gridItems: Record<string, boolean>[][] = null;
 		let cookies = decodeURIComponent(document.cookie).split('; ');
 		cookies.forEach(val => {
 			if (val.indexOf(this.gridItemsCookieName) === 0) gridItems = JSON.parse(val.substring(this.gridItemsCookieName.length));
@@ -198,17 +198,17 @@ export class Grid {
 		this.gridItemsBackup = this._serializeGridItems();
 	}
 	private loadGridItemsBackup() {
-		for (let y = 0; y < this.size; ++y) {
-			for (let x = 0; x < this.size; ++x) {
-				this.getGridItem(x, y).LoadFromSerialized(this.gridItemsBackup[y][x]);
+		for (let y = -1; y < this.size; ++y) {
+			for (let x = -1; x < this.size; ++x) {
+				this.getGridItem(x, y).LoadFromSerialized(this.gridItemsBackup[y + 1][x + 1]);
 			}
 		}
 	}
 	private _serializeGridItems(): Record<string, boolean>[][] {
 		let serializable = [];
-		for (let y = 0; y < this.size; ++y) {
+		for (let y = -1; y < this.size; ++y) {
 			let row = [];
-			for (let x = 0; x < this.size; ++x) {
+			for (let x = -1; x < this.size; ++x) {
 				row.push(this.getGridItem(x, y).Serializable());
 			}
 			serializable.push(row);
