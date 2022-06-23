@@ -3,7 +3,8 @@ import {Grid} from "./Grid";
 export abstract class GridItem {
 	elem: HTMLElement;
 
-	abstract Serializable(): object;
+	abstract LoadFromSerialized(serialized: Record<string, boolean>);
+	abstract Serializable(): Record<string, boolean>;
 }
 export class GridItemTile extends GridItem {
 	private grid: Grid;
@@ -33,10 +34,12 @@ export class GridItemTile extends GridItem {
 		this.elem.addEventListener("touchmove", (event) => this.onTouchMove(event), {passive: true});
 		this.elem.addEventListener("click", () => this.grid.onTileClicked(this), {passive: true});
 
-		if (serialized != null) {
-			this.isSelected = serialized.isSelected;
-			this.isCrossed = serialized.isCrossed;
-		}
+		if (serialized != null) this.LoadFromSerialized(serialized);
+	}
+
+	LoadFromSerialized(serialized: Record<string, boolean>) {
+		this.isSelected = serialized.isSelected;
+		this.isCrossed = serialized.isCrossed;
 	}
 
 	private onDragStart(event: DragEvent) {
@@ -55,6 +58,8 @@ export class GridItemTile extends GridItem {
 	}
 
 	private onTouchStart(event: TouchEvent) {
+		if (event.touches.length > 1) return this.grid.OnTileDragCancel(); // cancel because this is a zoom gesture
+
 		this.grid.touchEnabled = true;
 		this.grid.OnTileDragStart(this);
 	}
@@ -62,7 +67,8 @@ export class GridItemTile extends GridItem {
 		this.grid.OnTileDragEnd();
 	}
 	private onTouchMove(event: TouchEvent) {
-		if (event.touches.length < 1) return;
+		if (event.touches.length != 1) return;
+
 		let touch: Touch = event.touches.item(0);
 		let newTileElem: HTMLElement = document.elementFromPoint(touch.pageX, touch.pageY) as HTMLElement;
 		this.grid.OnTileDragEnterCoords(parseInt(newTileElem.dataset.x), parseInt(newTileElem.dataset.y));
@@ -111,9 +117,11 @@ export class GridItemLabel extends GridItem {
 		super();
 		this.elem = document.createElement("label");
 
-		if (serialized != null) {
-			this.isCorrect = serialized.isCorrect;
-		}
+		if (serialized != null) this.LoadFromSerialized(serialized);
+	}
+
+	LoadFromSerialized(serialized: Record<string, boolean>) {
+		this.isCorrect = serialized.isCorrect;
 	}
 
 	public get isCorrect(): boolean {

@@ -1,10 +1,11 @@
 import {Rng} from "./Rng";
-import {GridItem, GridItemTile, GridItemLabel} from "./GridItem";
+import {GridItem, GridItemLabel, GridItemTile} from "./GridItem";
 
 export class Grid {
 	readonly elem: HTMLElement;
 	readonly size: number;
 	private readonly gridItems: GridItem[][];
+	private gridItemsBackup: Record<string, boolean>[][];
 
 	private modalBackdrop: HTMLDivElement;
 	private wonModal: HTMLDivElement;
@@ -189,6 +190,21 @@ export class Grid {
 		return gridItems;
 	}
 	private saveGridItemsToCookie() {
+		let serialized = this._serializeGridItems();
+
+		document.cookie = this.gridItemsCookieName + JSON.stringify(serialized) + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
+	}
+	private saveGridItemsBackup() {
+		this.gridItemsBackup = this._serializeGridItems();
+	}
+	private loadGridItemsBackup() {
+		for (let y = 0; y < this.size; ++y) {
+			for (let x = 0; x < this.size; ++x) {
+				this.getGridItem(x, y).LoadFromSerialized(this.gridItemsBackup[y][x]);
+			}
+		}
+	}
+	private _serializeGridItems(): Record<string, boolean>[][] {
 		let serializable = [];
 		for (let y = 0; y < this.size; ++y) {
 			let row = [];
@@ -197,8 +213,7 @@ export class Grid {
 			}
 			serializable.push(row);
 		}
-
-		document.cookie = this.gridItemsCookieName + JSON.stringify(serializable) + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
+		return serializable;
 	}
 
 	getHorizontalLabel(y: number, isStart: boolean = false): number[] {
@@ -333,6 +348,7 @@ export class Grid {
 
 	public OnTileDragStart(startTile: GridItemTile) {
 		this.draggingTile = startTile;
+		this.saveGridItemsBackup();
 
 		if (this.isCross) {
 			if (startTile.isCrossed) this.draggingAction = (tile) => tile.isCrossed = false;
@@ -371,6 +387,13 @@ export class Grid {
 		} catch (e) { return; }
 
 		this.OnTileDragEnter(tile);
+	}
+	public OnTileDragCancel() {
+		console.log("OnTileDragCancel");
+		this.OnTileDragEnd();
+
+		// undo any changes because this is actually a zoom gesture
+		this.loadGridItemsBackup();
 	}
 
 	public Clear() {
