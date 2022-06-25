@@ -27,6 +27,7 @@ body {
 	flex-flow: column nowrap;
 	font-family: MPLUSRounded1c, var(--bs-body-font-family), sans-serif;
 	touch-action: pan-x pan-y; // disable default pinch-to-zoom since desktop chrome ignores user-scalable meta tag
+	-webkit-user-select: none; // disable iOS text selection
 }
 
 header {
