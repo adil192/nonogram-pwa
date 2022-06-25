@@ -373,9 +373,11 @@ export class Grid {
 
 		if (this.isCross) {
 			if (startTile.isCrossed) this.draggingAction = (tile) => tile.isCrossed = false;
+			else if (!startTile.isSelected) this.draggingAction = (tile) => { if (!tile.isSelected) tile.isCrossed = true; }
 			else this.draggingAction = (tile) => tile.isCrossed = true;
 		} else {
 			if (startTile.isSelected) this.draggingAction = (tile) => tile.isSelected = false;
+			else if (!startTile.isCrossed) this.draggingAction = (tile) => { if (!tile.isCrossed) tile.isSelected = true; }
 			else this.draggingAction = (tile) => tile.isSelected = true;
 		}
 		this.draggingAction(startTile);
