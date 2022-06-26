@@ -7,5 +7,6 @@ Play unlimited randomly generated nonograms, graphical crosswords where you colo
 <a href="https://play.google.com/store/apps/details?id=org.hanney.adil.nonogram">
   <img src="https://user-images.githubusercontent.com/21128619/175814836-b4e26b02-bdc8-4878-be08-b52976f402f4.png" width=175 alt="Get it on Google Play">
 </a>
+<br/>
 
 <img src="https://user-images.githubusercontent.com/21128619/174640874-a0aded69-e45a-4a3a-9dca-e6f76848ba16.gif" width=250 alt="Play-through recording">
