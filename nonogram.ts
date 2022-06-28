@@ -56,13 +56,11 @@ window.addEventListener("load", function() {
 	
 	difficultyToggle.valueAsNumber = Grid.difficulty * 11;
 	difficultyToggle.addEventListener("change", function () {
-		let inputValue = difficultyToggle.valueAsNumber;
-		inputValue = Math.min(10, Math.max(1, inputValue));
-		if (inputValue != difficultyToggle.valueAsNumber) {
-			difficultyToggle.valueAsNumber = inputValue;
-		}
+		let inputValue = Math.min(10, Math.max(1, difficultyToggle.valueAsNumber));
+		if (isNaN(inputValue)) difficultyToggle.valueAsNumber = inputValue = 1;
+		else if (inputValue != difficultyToggle.valueAsNumber) difficultyToggle.valueAsNumber = inputValue;
 
-		Grid.difficulty = difficultyToggle.valueAsNumber / 11;
+		Grid.difficulty = inputValue / 11;
 
 		grid.Clear();
 		grid.Destroy();
