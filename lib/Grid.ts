@@ -23,11 +23,13 @@ export class Grid {
 	readonly gridItemsCookieName: string = "nonogramGridItems=";
 
 	public static _difficulty: number = (() => {
-		let difficulty: number = 4 / 11;
+		let difficulty: number = NaN;
 		let cookies = decodeURIComponent(document.cookie).split('; ');
 		cookies.forEach(val => {
 			if (val.indexOf(this.difficultyCookieName) === 0) difficulty = parseFloat(val.substring(this.difficultyCookieName.length));
 		});
+		if (isNaN(difficulty)) difficulty = 4 / 11; // default difficulty
+		else difficulty = Math.max(0, Math.min(1, difficulty));
 		return difficulty;
 	})();
 	// difficulty between 0.0 (easiest) and 1.0 (hardest)
