@@ -274,20 +274,22 @@ export class Grid {
 		let isIncorrect = false;
 		if (isCorrect) return [isCorrect, isIncorrect];
 
-		if (current.length == correct.length) {
+		if (current.length == correct.length) { // same length, compare each element
 			for (let i = 0; i < current.length; ++i)
 				if (current[i] > correct[i]) {
 					isIncorrect = true;
 					break;
 				}
-		} else if (current.length > correct.length) {
-			isIncorrect = current.reduce((sum, n) => sum + n + 1) > correct.reduce((sum, n) => sum + n + 1);
-		} else {
+		} else if (current.length > correct.length) { // current is longer, check if sum of current is greater than correct
+			isIncorrect =
+				current.reduce((sum, n) => sum + n + 1)
+				> correct.reduce((sum, n) => sum + n + 1);
+		} else { // current is shorter than correct
 			for (let i = 0; i < current.length; ++i) {
-				if (current[i] > correct.slice(i).reduce((sum, n) => sum + n)) {
+				if (current[i] > correct.slice(i).reduce((sum, n) => sum + n)) { // is current > correct[i..end]
 					isIncorrect = true;
 					break;
-				} else if (current[i] > Math.max(...correct.slice(i))) {
+				} else if (current[i] > Math.max(...correct.slice(i))) { // is current bigger than max of correct
 					isIncorrect = true;
 					break;
 				}
