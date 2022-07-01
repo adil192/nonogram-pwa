@@ -283,11 +283,15 @@ export class Grid {
 		} else if (current.length > correct.length) {
 			isIncorrect = current.reduce((sum, n) => sum + n + 1) > correct.reduce((sum, n) => sum + n + 1);
 		} else {
-			for (let i = 0; i < current.length; ++i)
+			for (let i = 0; i < current.length; ++i) {
 				if (current[i] > correct.slice(i).reduce((sum, n) => sum + n)) {
 					isIncorrect = true;
 					break;
+				} else if (current[i] > Math.max(...correct.slice(i))) {
+					isIncorrect = true;
+					break;
 				}
+			}
 		}
 		return [isCorrect, isIncorrect];
 	}
