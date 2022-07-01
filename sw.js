@@ -1,5 +1,5 @@
 // Cache name has a timestamp because the browser re-caches the assets when the service worker file is modified
-const staticCacheName = "nonogram-cache-" + "22-06-28-0000";
+const staticCacheName = "nonogram-cache-" + "22-07-01-0000";
 const assets = [
 	'/nonogram/',
 	'/nonogram/nonogram.css',
