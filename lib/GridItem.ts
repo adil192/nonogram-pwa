@@ -132,6 +132,7 @@ export class GridItemLabel extends GridItem {
 		return this._correct;
 	}
 	public set isCorrect(correct: boolean) {
+		if (this._correct == correct) return;
 		this._correct = correct;
 
 		if (correct) {
@@ -148,6 +149,7 @@ export class GridItemLabel extends GridItem {
 		return this._incorrect;
 	}
 	public set isIncorrect(incorrect: boolean) {
+		if (this._incorrect == incorrect) return;
 		this._incorrect = incorrect;
 
 		if (incorrect) {
