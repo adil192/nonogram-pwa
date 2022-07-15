@@ -81,12 +81,8 @@ export class Grid {
 					gridItem.state = Rng.seededRandom() > Grid.difficulty;
 
 					// add border around edges
-					if (x == 0) gridItem.elem.classList.add("x-start");
-					else if (x == this.size - 1) gridItem.elem.classList.add("x-end");
-					else if (x == this.size / 2.0) gridItem.elem.classList.add("x-middle");
-					if (y == 0) gridItem.elem.classList.add("y-start");
-					else if (y == this.size - 1) gridItem.elem.classList.add("y-end");
-					else if (y == this.size / 2.0) gridItem.elem.classList.add("y-middle");
+					if (x == (this.size - 1) / 2.0) gridItem.elem.classList.add("x-middle");
+					if (y == (this.size - 1) / 2.0) gridItem.elem.classList.add("y-middle");
 				}
 
 				this.elem.append(gridItem.elem);

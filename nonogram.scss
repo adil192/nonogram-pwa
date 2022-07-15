@@ -205,12 +205,17 @@ tile {
 	aspect-ratio: 1;
 	border-radius: 33%;
 	margin: 3%;
-	background: rgba(0, 0, 0, 0.05);
+	background-color: rgba(0, 0, 0, 0.05);
 	transition: background-color 0.05s;
 	touch-action: pinch-zoom; // disable double-tap to zoom and panning
 
+	&.x-middle,
+	&.y-middle {
+		background-color: rgba(0,0,0,0.1);
+	}
+
 	&.selected {
-		background: $theme-color;
+		background-color: $theme-color;
 	}
 	&.crossed {
 		background: url("images/cross.svg") no-repeat center center;
@@ -249,7 +254,7 @@ body.e-reader {
 		transition: none;
 
 		&.selected {
-			background: #111;
+			background-color: #111;
 		}
 	}
 	board label::after {
@@ -291,8 +296,16 @@ body.e-reader {
 		}
 	}
 	tile {
-		background: rgba(255, 255, 255, 0.05);
+		background-color: rgba(255, 255, 255, 0.05);
+		&.x-middle,
+		&.y-middle {
+			background-color: rgba(255, 255, 255, 0.1);
+		}
+		&.selected {
+			background-color: $theme-color;
+		}
 		&.crossed {
+			background-color: transparent;
 			background-image: url("/nonogram/images/cross-white.svg");
 		}
 	}
@@ -317,7 +330,7 @@ body.e-reader {
 		}
 		tile {
 			&.selected {
-				background: #eee;
+				background-color: #eee;
 			}
 		}
 
