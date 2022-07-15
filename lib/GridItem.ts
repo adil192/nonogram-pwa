@@ -7,6 +7,8 @@ export abstract class GridItem {
 	abstract Serializable(): Record<string, boolean>;
 }
 export class GridItemTile extends GridItem {
+	static audioNormal: HTMLAudioElement = document.querySelector("#audioNormal");
+
 	private grid: Grid;
 
 	public state: boolean = false;
@@ -78,11 +80,15 @@ export class GridItemTile extends GridItem {
 		return this._selected;
 	}
 	public set isSelected(selected: boolean) {
+		if (this._selected == selected) return;
 		this._selected = selected;
 
 		if (selected) {
 			this.elem.classList.add("selected");
 			this.isCrossed = false;
+
+			GridItemTile.audioNormal.load();
+			GridItemTile.audioNormal.play();
 		} else {
 			this.elem.classList.remove("selected");
 		}
