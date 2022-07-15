@@ -20,6 +20,10 @@ const assets_extra = [
 	'/nonogram/fonts/font-files/MPLUSRounded1c-Regular.40-7f.woff2',
 	'/nonogram/fonts/font-files/MPLUSRounded1c-Medium.20-3f.woff2',
 	'/nonogram/fonts/font-files/MPLUSRounded1c-Medium.40-7f.woff2',
+
+	'/nonogram/sounds/pop-39222.mp3',
+	'/nonogram/sounds/notification-sound-7062.mp3',
+	'/nonogram/sounds/stop-13692.mp3',
 ];
 
 self.addEventListener('install', (evt) => {

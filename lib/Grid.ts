@@ -11,6 +11,7 @@ export class Grid {
 	private wonModal: HTMLDivElement;
 	private modalTimeout: number = null;
 	public static wonModalBtn: HTMLButtonElement;
+	private audioNormal: HTMLAudioElement;
 
 	public touchEnabled: boolean = false;
 	private draggingTile: GridItemTile;
@@ -50,6 +51,8 @@ export class Grid {
 
 		this.modalBackdrop = document.querySelector("#backdrop");
 		this.wonModal = document.querySelector("#wonModal");
+		this.audioNormal = document.querySelector("#audioNormal");
+		document.querySelectorAll("audio").forEach(audio => audio.load());
 
 		// set number of css grid columns
 		this.elem.style.gridTemplateColumns = "auto "+ "1fr ".repeat(this.size);
@@ -320,6 +323,9 @@ export class Grid {
 		this.onTileChanged(tile);
 	}
 	onTileChanged(tile: GridItemTile) {
+		this.audioNormal.load();
+		this.audioNormal.play();
+
 		let verticalLabel: GridItemLabel = this.getGridItem(tile.x, -1);
 		let horizontalLabel: GridItemLabel = this.getGridItem<GridItemLabel>(-1, tile.y);
 

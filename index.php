@@ -100,6 +100,10 @@ $lastUpdate = "22-07-15-0000"; // when changing this, you should also update sw.
 <div class="modal-backdrop fade show" id="backdrop" style="display: none;"></div>
 
 
+<audio id="audioNormal" src="sounds/pop-39222.mp3" preload="auto"></audio>
+<audio id="audioCorrect" src="sounds/notification-sound-7062.mp3" preload="auto"></audio>
+<audio id="audioIncorrect" src="sounds/stop-13692.mp3" preload="auto"></audio>
+
 <script src="nonogram.js?lastUpdate=<?=$lastUpdate?>" type="module"></script>
 </body>
 </html>

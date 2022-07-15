@@ -109,6 +109,9 @@ export class GridItemTile extends GridItem {
 	}
 }
 export class GridItemLabel extends GridItem {
+	static audioCorrect: HTMLAudioElement = document.querySelector("#audioCorrect");
+	static audioIncorrect: HTMLAudioElement = document.querySelector("#audioIncorrect");
+
 	public counts: number[];
 	private _correct: boolean = false;
 	private _incorrect: boolean = false;
@@ -134,6 +137,8 @@ export class GridItemLabel extends GridItem {
 		if (correct) {
 			this.elem.classList.add("correct");
 			this.isIncorrect = false;
+			GridItemLabel.audioCorrect.load();
+			GridItemLabel.audioCorrect.play();
 		} else {
 			this.elem.classList.remove("correct");
 		}
@@ -148,6 +153,8 @@ export class GridItemLabel extends GridItem {
 		if (incorrect) {
 			this.elem.classList.add("incorrect");
 			this.isCorrect = false;
+			GridItemLabel.audioIncorrect.load();
+			GridItemLabel.audioIncorrect.play();
 		} else {
 			this.elem.classList.remove("incorrect");
 		}
