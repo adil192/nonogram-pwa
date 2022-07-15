@@ -1,18 +1,5 @@
 $theme-color: #8732f5;
 
-// tiles
-$tile-selected-bg: $theme-color;
-$normal-border-color: #f0f0f0;
-$normal-border-color-dark: #2f2f2f;
-$normal-border-width: 1px;
-$middle-border-color: #aaaaaa;
-$middle-border-color-dark: mix($theme-color, white);
-$middle-border-width: 2px;
-$thick-border-color: $theme-color;
-$thick-border-width: 0.75vw;
-$thick-border-radius-internal: 1vw;
-$thick-border-radius: 1.5vw;
-
 
 @import "fonts/MPLUSRounded1c";
 
@@ -56,7 +43,7 @@ board {
 	grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-gap: 0;
 	text-align: center;
-	padding: $thick-border-width * 2;
+	padding: 1em;
 	width: 100%;
 	max-width: 75vh;
 	margin: auto;
@@ -72,11 +59,11 @@ board {
 	}
 	label.vertical {
 		flex-direction: column-reverse; // align text at bottom
-		padding-bottom: 2 * $thick-border-width;
+		padding-bottom: 1em;
 	}
 	label.horizontal {
 		flex-direction: row-reverse; // align text to end
-		padding-right: 2 * $thick-border-width;
+		padding-right: 1em;
 		min-width: 4em;
 	}
 	label::after {
@@ -114,6 +101,7 @@ footer {
 		&::before {
 			background: $theme-color no-repeat center center;
 			background-size: 100%;
+			border-radius: 33%;
 		}
 
 		&.is-cross {
@@ -215,80 +203,18 @@ footer {
 
 tile {
 	aspect-ratio: 1;
-	position: relative;
+	border-radius: 33%;
+	margin: 3%;
+	background: rgba(0, 0, 0, 0.05);
 	transition: background-color 0.05s;
 	touch-action: pinch-zoom; // disable double-tap to zoom and panning
 
-	&::before, &::after {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-	}
-
 	&.selected {
-		background: $tile-selected-bg;
+		background: $theme-color;
 	}
 	&.crossed {
 		background: url("images/cross.svg") no-repeat center center;
 		background-size: 50%;
-	}
-
-	&::before {
-		border: $normal-border-width solid $normal-border-color;
-		border-right-width: 0;
-		border-bottom-width: 0;
-	}
-	&.x-middle::before {
-		border-left-width: $middle-border-width;
-		border-left-color: $middle-border-color;
-	}
-	&.y-middle::before {
-		border-top-width: $middle-border-width;
-		border-top-color: $middle-border-color;
-	}
-
-	&.x-start,
-	&.x-end,
-	&.y-start,
-	&.y-end {
-		&::after {
-			margin: -$thick-border-width * 2 / 3;
-			border-width: $thick-border-width;
-			border-color: $theme-color;
-		}
-	}
-	&.x-start::after {
-		border-left-style: solid;
-	}
-	&.x-end::after {
-		border-right-style: solid;
-	}
-	&.y-start::after {
-		border-top-style: solid;
-	}
-	&.y-end::after {
-		border-bottom-style: solid;
-	}
-	@mixin thick-border-radius($position) {
-		border-#{$position}-radius: $thick-border-radius-internal;
-		&::after {
-			border-#{$position}-radius: $thick-border-radius;
-		}
-	}
-	&.x-start.y-start {
-		@include thick-border-radius(top-left);
-	}
-	&.x-start.y-end {
-		@include thick-border-radius(bottom-left);
-	}
-	&.x-end.y-start {
-		@include thick-border-radius(top-right);
-	}
-	&.x-end.y-end {
-		@include thick-border-radius(bottom-right);
 	}
 }
 
@@ -324,25 +250,6 @@ body.e-reader {
 
 		&.selected {
 			background: #111;
-		}
-
-		&::before {
-			border-color: #333;
-		}
-		&.x-middle::before {
-			border-left-color: black;
-		}
-		&.y-middle::before {
-			border-top-color: black;
-		}
-
-		&.x-start,
-		&.x-end,
-		&.y-start,
-		&.y-end {
-			&::after {
-				border-color: black;
-			}
 		}
 	}
 	board label::after {
@@ -384,20 +291,9 @@ body.e-reader {
 		}
 	}
 	tile {
+		background: rgba(255, 255, 255, 0.05);
 		&.crossed {
 			background-image: url("/nonogram/images/cross-white.svg");
-		}
-
-		&::before {
-			border-color: $normal-border-color-dark;
-		}
-
-		&.x-middle::before {
-			border-left-color: $middle-border-color-dark;
-		}
-
-		&.y-middle::before {
-			border-top-color: $middle-border-color-dark;
 		}
 	}
 
@@ -422,25 +318,6 @@ body.e-reader {
 		tile {
 			&.selected {
 				background: #eee;
-			}
-
-			&::before {
-				border-color: #bbb;
-			}
-			&.x-middle::before {
-				border-left-color: white;
-			}
-			&.y-middle::before {
-				border-top-color: white;
-			}
-
-			&.x-start,
-			&.x-end,
-			&.y-start,
-			&.y-end {
-				&::after {
-					border-color: white;
-				}
 			}
 		}
 
