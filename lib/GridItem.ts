@@ -83,12 +83,12 @@ export class GridItemTile extends GridItem {
 		if (this._selected == selected) return;
 		this._selected = selected;
 
+		GridItemTile.audioNormal.load();
+		GridItemTile.audioNormal.play();
+
 		if (selected) {
 			this.elem.classList.add("selected");
 			this.isCrossed = false;
-
-			GridItemTile.audioNormal.load();
-			GridItemTile.audioNormal.play();
 		} else {
 			this.elem.classList.remove("selected");
 		}
