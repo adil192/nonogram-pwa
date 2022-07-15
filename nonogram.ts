@@ -16,7 +16,7 @@ let pinchToZoomHandler: PinchToZoomHandler = null;
 
 let grid: Grid = null;
 
-const GRID_SIZE = 10;
+const GRID_SIZE = 9;
 
 
 window.addEventListener("load", function() {
