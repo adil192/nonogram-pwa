@@ -15,6 +15,8 @@ const assets_extra = [
 	'/nonogram/images/refresh.svg',
 	'/nonogram/images/transparent.webp',
 	'/nonogram/images/trash.svg',
+	'/nonogram/images/lock.svg',
+	'/nonogram/images/unlock.svg',
 
 	'/nonogram/fonts/font-files/MPLUSRounded1c-Regular.20-3f.woff2',
 	'/nonogram/fonts/font-files/MPLUSRounded1c-Regular.40-7f.woff2',
