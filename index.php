@@ -60,9 +60,11 @@ $lastUpdate = "22-07-15-0300"; // when changing this, you should also update sw.
 
 <header>
     <h1>Nonogram</h1>
-    <a id="github-alt" class="btn btn-outline-primary btn-icon btn-github" href="https://github.com/adil192/nonogram-pwa" aria-label="GitHub project" title="GitHub project" style="display: none;"></a>
-    <button class="btn btn-outline-primary btn-icon" id="eReaderBtn" aria-label="Toggle e-reader mode" title="Toggle e-reader mode"><?php include "images/contrast_FILL1_wght400_GRAD0_opsz48.svg"; ?></button>
-    <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="New game" title="New game" id="refreshBtn"></button>
+    <div id="headerActions">
+        <a id="github-alt" class="btn btn-outline-primary btn-icon btn-github" href="https://github.com/adil192/nonogram-pwa" aria-label="GitHub project" title="GitHub project" style="display: none;"></a>
+        <button class="btn btn-outline-primary btn-icon" id="eReaderBtn" aria-label="Toggle e-reader mode" title="Toggle e-reader mode"><?php include "images/contrast_FILL1_wght400_GRAD0_opsz48.svg"; ?></button>
+        <button class="btn btn-outline-primary btn-icon btn-refresh" aria-label="New game" title="New game" id="refreshBtn"></button>
+    </div>
 </header>
 <div class="icon-links" style="display: none;">
     <a class="btn btn-outline-primary btn-icon btn-google-play" href="https://play.google.com/store/apps/details?id=org.hanney.adil.nonogram">

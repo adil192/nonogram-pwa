@@ -26,6 +26,12 @@ header {
 	h1 {
 		flex: 1;
 	}
+
+	#headerActions {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: center;
+	}
 }
 
 .icon-links {
