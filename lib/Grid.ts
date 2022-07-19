@@ -24,9 +24,7 @@ export class Grid {
 	}
 	public set isLocked(locked: boolean) {
 		this._isLocked = locked;
-		if (locked) {
-			console.log("todo: lock Grid");
-		}
+		this.toggleLock(locked);
 	}
 
 	static readonly seedCookieName: string = "nonogramSeed=";
@@ -168,6 +166,15 @@ export class Grid {
 		}
 		
 		this.checkWon();
+	}
+
+	private toggleLock(isLocked: boolean) {
+		for (let y = 0; y < this.size; ++y) {
+			for (let x = 0; x < this.size; ++x) {
+				let tile = this.getGridItem<GridItemTile>(x, y);
+				if (!isLocked || !tile.isEmpty) tile.isLocked = isLocked;
+			}
+		}
 	}
 
 	static LoadSeedFromCookie() {

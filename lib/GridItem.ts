@@ -14,6 +14,7 @@ export class GridItemTile extends GridItem {
 	public state: boolean = false;
 	private _selected: boolean = false;
 	private _crossed: boolean = false;
+	private _isLocked: boolean;
 
 	public readonly x: number;
 	public readonly y: number;
@@ -80,6 +81,8 @@ export class GridItemTile extends GridItem {
 		return this._selected;
 	}
 	public set isSelected(selected: boolean) {
+		if (this.isLocked) return;
+
 		if (this._selected == selected) return;
 		this._selected = selected;
 
@@ -97,6 +100,8 @@ export class GridItemTile extends GridItem {
 		return this._crossed;
 	}
 	public set isCrossed(crossed: boolean) {
+		if (this.isLocked) return;
+
 		this._crossed = crossed;
 
 		if (crossed) {
@@ -105,6 +110,22 @@ export class GridItemTile extends GridItem {
 		} else {
 			this.elem.classList.remove("crossed");
 		}
+	}
+
+	public get isLocked(): boolean {
+		return this._isLocked;
+	}
+	public set isLocked(locked: boolean) {
+		this._isLocked = locked;
+		if (locked) {
+			this.elem.classList.add("locked");
+		} else {
+			this.elem.classList.remove("locked");
+		}
+	}
+
+	public get isEmpty(): boolean {
+		return !this.isCrossed && !this.isSelected;
 	}
 
 	Serializable(): Record<string, boolean> {

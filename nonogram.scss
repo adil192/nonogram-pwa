@@ -238,6 +238,11 @@ tile {
 		background: url("images/cross.svg") no-repeat center center;
 		background-size: 50%;
 	}
+
+	&.locked {
+		transform: scale(0.5);
+		opacity: 0.7;
+	}
 }
 
 .modal {
