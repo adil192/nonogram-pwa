@@ -177,6 +177,15 @@ footer {
 		background-size: contain;
 	}
 }
+.btn-lock {
+	&::before {
+		background: url("images/unlock.svg") no-repeat center center;
+		background-size: contain;
+	}
+	&[locked]::before {
+		background-image: url("images/lock.svg");
+	}
+}
 .btn-github {
 	&::before {
 		background: url("/assets/images/logos/GitHub-Mark.svg") no-repeat center center;
