@@ -18,6 +18,17 @@ export class Grid {
 
 	public isCross: boolean = false;
 
+	private _isLocked: boolean = false;
+	public get isLocked(): boolean {
+		return this._isLocked;
+	}
+	public set isLocked(locked: boolean) {
+		this._isLocked = locked;
+		if (locked) {
+			console.log("todo: lock Grid");
+		}
+	}
+
 	static readonly seedCookieName: string = "nonogramSeed=";
 	static readonly difficultyCookieName: string = "nonogramDifficulty=";
 	readonly gridItemsCookieName: string = "nonogramGridItems=";

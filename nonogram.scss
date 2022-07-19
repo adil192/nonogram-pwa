@@ -184,7 +184,7 @@ footer {
 		background: url("images/unlock.svg") no-repeat center center;
 		background-size: contain;
 	}
-	&[locked]::before {
+	&.is-locked::before {
 		background-image: url("images/lock.svg");
 	}
 }

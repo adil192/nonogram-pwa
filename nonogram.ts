@@ -6,6 +6,7 @@ let iconLinks: HTMLDivElement;
 let githubAlt: HTMLAnchorElement;
 
 let refreshBtn: HTMLButtonElement;
+let lockBtn: HTMLButtonElement;
 let difficultyToggle: HTMLInputElement;
 let crossToggle: HTMLButtonElement;
 let binBtn: HTMLButtonElement;
@@ -32,6 +33,7 @@ window.addEventListener("load", function() {
 	githubAlt = document.querySelector("#github-alt");
 
 	refreshBtn = document.querySelector("#refreshBtn");
+	lockBtn = document.querySelector("#lockBtn");
 	difficultyToggle = document.querySelector("#difficultyToggle");
 	crossToggle = document.querySelector("#crossToggle");
 	binBtn = document.querySelector("#binBtn");
@@ -50,6 +52,7 @@ window.addEventListener("load", function() {
 	binBtn.addEventListener("click", function () {
 		grid.Clear();
 	})
+	lockBtn.addEventListener("click", toggleLock)
 	refreshBtn.addEventListener("click", newGame)
 	newGameBtn.addEventListener("click", newGame)
 	window.addEventListener("resize", onResize)
@@ -110,6 +113,12 @@ function newGame() {
 	grid.Destroy();
 	grid.hideWonModal();
 	grid = new Grid(board, GRID_SIZE);
+}
+
+function toggleLock() {
+	grid.isLocked = !grid.isLocked;
+	if (grid.isLocked) lockBtn.classList.add("is-locked");
+	else lockBtn.classList.remove("is-locked");
 }
 
 let eReaderModeEnabled: boolean = false;
