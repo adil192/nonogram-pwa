@@ -43,6 +43,7 @@ export class GridItemTile extends GridItem {
 	LoadFromSerialized(serialized: Record<string, boolean>) {
 		this.isSelected = serialized.isSelected ?? this.isSelected;
 		this.isCrossed = serialized.isCrossed ?? this.isCrossed;
+		this.isLocked = serialized.isLocked ?? this.isLocked;
 	}
 
 	private onDragStart(event: DragEvent) {
@@ -131,7 +132,8 @@ export class GridItemTile extends GridItem {
 	Serializable(): Record<string, boolean> {
 		return {
 			isSelected: this.isSelected,
-			isCrossed: this.isCrossed
+			isCrossed: this.isCrossed,
+			isLocked: this.isLocked,
 		};
 	}
 }

@@ -88,6 +88,7 @@ function init() {
 	pinchToZoomHandler = allowPinchToZoom(board, true);
 	pinchToZoomHandler.onChange = onZoomChange;
 
+	updateLockIcon();
 	onResize();
 }
 
@@ -113,10 +114,14 @@ function newGame() {
 	grid.Destroy();
 	grid.hideWonModal();
 	grid = new Grid(board, GRID_SIZE);
+	updateLockIcon();
 }
 
 function toggleLock() {
 	grid.isLocked = !grid.isLocked;
+	updateLockIcon();
+}
+function updateLockIcon() {
 	if (grid.isLocked) lockBtn.classList.add("is-locked");
 	else lockBtn.classList.remove("is-locked");
 }

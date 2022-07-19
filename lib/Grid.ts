@@ -82,6 +82,9 @@ export class Grid {
 				const isTile: boolean = x >= 0 && y >= 0;
 				const gridItem = isTile ? new GridItemTile(this, x, y, serialized) : new GridItemLabel(serialized);
 
+				let isLocked: boolean = isTile ? (gridItem as GridItemTile).isLocked : false;
+				if (isLocked) this._isLocked = true;
+
 				if (gridItem instanceof GridItemLabel) {
 					if (y < 0) gridItem.elem.classList.add("vertical"); // make top row vertical
 					else gridItem.elem.classList.add("horizontal");
