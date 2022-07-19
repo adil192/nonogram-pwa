@@ -223,7 +223,7 @@ tile {
 	border-radius: 33%;
 	margin: 3%;
 	background-color: rgba(0, 0, 0, 0.05);
-	transition: background-color 0.05s;
+	transition: background-color 0.05s, transform 0.2s, opacity 0.2s;
 	touch-action: pinch-zoom; // disable double-tap to zoom and panning
 
 	&.x-middle,
