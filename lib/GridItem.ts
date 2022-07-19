@@ -1,5 +1,10 @@
 import {Grid} from "./Grid";
 
+function playAudioFromStart(audio: HTMLAudioElement) {
+	try { audio.load(); } catch (e) { }
+	audio.play().catch(_ => { });
+}
+
 export abstract class GridItem {
 	elem: HTMLElement;
 
@@ -87,8 +92,7 @@ export class GridItemTile extends GridItem {
 		if (this._selected == selected) return;
 		this._selected = selected;
 
-		GridItemTile.audioNormal.load();
-		GridItemTile.audioNormal.play();
+		playAudioFromStart(GridItemTile.audioNormal);
 
 		if (selected) {
 			this.elem.classList.add("selected");
@@ -167,8 +171,7 @@ export class GridItemLabel extends GridItem {
 		if (correct) {
 			this.elem.classList.add("correct");
 			this.isIncorrect = false;
-			GridItemLabel.audioCorrect.load();
-			GridItemLabel.audioCorrect.play();
+			playAudioFromStart(GridItemLabel.audioCorrect);
 		} else {
 			this.elem.classList.remove("correct");
 		}
@@ -184,8 +187,7 @@ export class GridItemLabel extends GridItem {
 		if (incorrect) {
 			this.elem.classList.add("incorrect");
 			this.isCorrect = false;
-			GridItemLabel.audioIncorrect.load();
-			GridItemLabel.audioIncorrect.play();
+			playAudioFromStart(GridItemLabel.audioIncorrect);
 		} else {
 			this.elem.classList.remove("incorrect");
 		}

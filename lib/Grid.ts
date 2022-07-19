@@ -59,7 +59,12 @@ export class Grid {
 
 		this.modalBackdrop = document.querySelector("#backdrop");
 		this.wonModal = document.querySelector("#wonModal");
-		document.querySelectorAll("audio").forEach(audio => audio.load());
+
+		try {
+			document.querySelectorAll("audio").forEach(audio => audio.load());
+		} catch (e) {
+			console.log("Error loading audio: " + e);
+		}
 
 		// set number of css grid columns
 		this.elem.style.gridTemplateColumns = "auto "+ "1fr ".repeat(this.size);
