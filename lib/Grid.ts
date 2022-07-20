@@ -451,9 +451,11 @@ export class Grid {
 	}
 
 	public Clear() {
+		this._isLocked = false;
 		for (let x = 0; x < this.size; ++x) {
 			for (let y = 0; y < this.size; ++y) {
 				let gridItem: GridItemTile = this.getGridItem(x, y);
+				gridItem.isLocked = false;
 				gridItem.isSelected = false;
 				gridItem.isCrossed = false;
 			}
