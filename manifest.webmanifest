@@ -40,32 +40,42 @@
   "screenshots": [
     {
       "src": "/nonogram/screenshots/nonogram-light-1.png",
-      "sizes": "1080x2240",
+      "sizes": "1080x2400",
       "type": "image/png"
     },
     {
       "src": "/nonogram/screenshots/nonogram-light-2.png",
-      "sizes": "1080x2240",
+      "sizes": "1080x2400",
       "type": "image/png"
     },
     {
       "src": "/nonogram/screenshots/nonogram-light-3.png",
-      "sizes": "1080x2240",
+      "sizes": "1080x2400",
+      "type": "image/png"
+    },
+    {
+      "src": "/nonogram/screenshots/nonogram-light-4.png",
+      "sizes": "1080x2400",
       "type": "image/png"
     },
     {
       "src": "/nonogram/screenshots/nonogram-dark-1.png",
-      "sizes": "1080x2240",
+      "sizes": "1080x2400",
       "type": "image/png"
     },
     {
       "src": "/nonogram/screenshots/nonogram-dark-2.png",
-      "sizes": "1080x2240",
+      "sizes": "1080x2400",
       "type": "image/png"
     },
     {
       "src": "/nonogram/screenshots/nonogram-dark-3.png",
-      "sizes": "1080x2240",
+      "sizes": "1080x2400",
+      "type": "image/png"
+    },
+    {
+      "src": "/nonogram/screenshots/nonogram-dark-4.png",
+      "sizes": "1080x2400",
       "type": "image/png"
     }
   ]
