@@ -6,6 +6,7 @@ let iconLinks: HTMLDivElement;
 let githubAlt: HTMLAnchorElement;
 
 let refreshBtn: HTMLButtonElement;
+let soundBtn: HTMLButtonElement;
 let lockBtn: HTMLButtonElement;
 let difficultyToggle: HTMLInputElement;
 let crossToggle: HTMLButtonElement;
@@ -33,6 +34,7 @@ window.addEventListener("load", function() {
 	githubAlt = document.querySelector("#github-alt");
 
 	refreshBtn = document.querySelector("#refreshBtn");
+	soundBtn = document.querySelector("#soundBtn");
 	lockBtn = document.querySelector("#lockBtn");
 	difficultyToggle = document.querySelector("#difficultyToggle");
 	crossToggle = document.querySelector("#crossToggle");
@@ -52,6 +54,7 @@ window.addEventListener("load", function() {
 	binBtn.addEventListener("click", function () {
 		grid.Clear();
 	})
+	soundBtn.addEventListener("click", toggleSound);
 	lockBtn.addEventListener("click", toggleLock)
 	refreshBtn.addEventListener("click", newGame)
 	newGameBtn.addEventListener("click", newGame)
@@ -117,6 +120,16 @@ function newGame() {
 	updateLockIcon();
 }
 
+function toggleSound() {
+	if (window.isSoundEnabled) {
+		window.isSoundEnabled = false;
+		soundBtn.classList.add("is-muted");
+	} else {
+		window.isSoundEnabled = true;
+		soundBtn.classList.remove("is-muted");
+	}
+}
+
 function toggleLock() {
 	grid.isLocked = !grid.isLocked;
 	updateLockIcon();
@@ -142,15 +155,20 @@ function saveEReaderMode() {
 	document.cookie = "nonogramEReader=" + eReaderModeEnabled + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
 }
 function loadEReaderMode() {
-	let name = "nonogramEReader=";
+	let nonogramEReader = "nonogramEReader=";
+	let nonogramSoundEnabled = "nonogramSoundEnabled=";
 	let cookies = decodeURIComponent(document.cookie).split('; ');
 	cookies.forEach(val => {
-		if (val.indexOf(name) === 0) {
-			eReaderModeEnabled = JSON.parse(val.substring(name.length));
+		if (val.indexOf(nonogramEReader) === 0) {
+			eReaderModeEnabled = JSON.parse(val.substring(nonogramEReader.length));
+		} else if (val.indexOf(nonogramSoundEnabled) === 0) {
+			window.isSoundEnabled = !!JSON.parse(val.substring(nonogramSoundEnabled.length));
 		}
 	});
 	eReaderModeEnabled = !eReaderModeEnabled;
 	toggleEReaderMode();
+	window.isSoundEnabled = !window.isSoundEnabled;
+	toggleSound();
 }
 
 function isStandalone(): boolean {

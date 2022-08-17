@@ -20,7 +20,7 @@ body {
 header {
 	padding: 0.5rem 1rem;
 	display: flex;
-	flex-flow: row nowrap;
+	flex-flow: row wrap;
 	align-items: start;
 
 	h1 {
@@ -33,6 +33,10 @@ header {
 		display: flex;
 		flex-flow: row wrap;
 		justify-content: center;
+	}
+	
+	@media screen and (max-width: 500px) {
+		display: block;
 	}
 }
 
@@ -177,6 +181,15 @@ footer {
 	&::before {
 		background: url("images/refresh.svg") no-repeat center center;
 		background-size: contain;
+	}
+}
+.btn-sound {
+	&::before {
+		background: url("images/sound-on.svg") no-repeat center center;
+		background-size: contain;
+	}
+	&.is-muted::before {
+		background-image: url("images/sound-off.svg");
 	}
 }
 .btn-lock {

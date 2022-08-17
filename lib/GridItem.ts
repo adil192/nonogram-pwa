@@ -1,6 +1,7 @@
 import {Grid} from "./Grid";
 
 function playAudioFromStart(audio: HTMLAudioElement) {
+	if (!window.isSoundEnabled) return;
 	try { audio.load(); } catch (e) { }
 	audio.play().catch(_ => { });
 }
