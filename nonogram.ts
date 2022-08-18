@@ -120,6 +120,7 @@ function newGame() {
 	updateLockIcon();
 }
 
+window.isSoundEnabled = true;
 function toggleSound() {
 	if (window.isSoundEnabled) {
 		window.isSoundEnabled = false;
