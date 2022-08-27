@@ -9,4 +9,4 @@ Play unlimited randomly generated nonograms, graphical crosswords where you colo
 </a>
 <br/>
 
-<img src="https://user-images.githubusercontent.com/21128619/174640874-a0aded69-e45a-4a3a-9dca-e6f76848ba16.gif" width=250 alt="Play-through recording">
+<img src="https://user-images.githubusercontent.com/21128619/187011066-c679d84e-aceb-47ef-b4b9-fe50e7feb78a.gif" width=250 alt="Play-through recording">
