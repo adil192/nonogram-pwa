@@ -47,9 +47,7 @@ window.addEventListener("load", function() {
 
 	crossToggle.addEventListener("click", function () {
 		grid.isCross = !grid.isCross;
-
-		if (grid.isCross) crossToggle.classList.add("is-cross");
-		else crossToggle.classList.remove("is-cross");
+		updateCrossIcon();
 	})
 	binBtn.addEventListener("click", function () {
 		grid.Clear();
@@ -118,6 +116,7 @@ function newGame() {
 	grid.hideWonModal();
 	grid = new Grid(board, GRID_SIZE);
 	updateLockIcon();
+	updateCrossIcon();
 }
 
 window.isSoundEnabled = true;
@@ -138,6 +137,11 @@ function toggleLock() {
 function updateLockIcon() {
 	if (grid.isLocked) lockBtn.classList.add("is-locked");
 	else lockBtn.classList.remove("is-locked");
+}
+
+function updateCrossIcon() {
+	if (grid.isCross) crossToggle.classList.add("is-cross");
+	else crossToggle.classList.remove("is-cross");
 }
 
 let eReaderModeEnabled: boolean = false;
