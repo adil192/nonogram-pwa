@@ -33,7 +33,7 @@ export class Grid {
 
 	public static _difficulty: number = (() => {
 		let difficulty: number = NaN;
-		let cookies = decodeURIComponent(document.cookie).split('; ');
+		const cookies = decodeURIComponent(document.cookie).split('; ');
 		cookies.forEach(val => {
 			if (val.indexOf(this.difficultyCookieName) === 0) difficulty = parseFloat(val.substring(this.difficultyCookieName.length));
 		});
@@ -70,12 +70,12 @@ export class Grid {
 		this.elem.style.gridTemplateColumns = "auto "+ "1fr ".repeat(this.size);
 
 		// get saved state
-		let serializedGridItems = this.loadSerializedGridItemsFromCookie();
+		const serializedGridItems = this.loadSerializedGridItemsFromCookie();
 
 		// create grid items
 		this.gridItems = [];
 		for (let y = -1; y < this.size; ++y) {
-			let row: GridItem[] = [];
+			const row: GridItem[] = [];
 			for (let x = -1; x < this.size; ++x) {
 				let serialized: Record<string, boolean>;
 				try {
@@ -87,7 +87,7 @@ export class Grid {
 				const isTile: boolean = x >= 0 && y >= 0;
 				const gridItem = isTile ? new GridItemTile(this, x, y, serialized) : new GridItemLabel(serialized);
 
-				let isLocked: boolean = isTile ? (gridItem as GridItemTile).isLocked : false;
+				const isLocked: boolean = isTile ? (gridItem as GridItemTile).isLocked : false;
 				if (isLocked) this._isLocked = true;
 
 				if (gridItem instanceof GridItemLabel) {
@@ -111,21 +111,21 @@ export class Grid {
 		}
 
 		for (let x = 0; x < this.size; ++x) {
-			let gridItem: GridItemLabel = this.getGridItem(x, -1);
+			const gridItem: GridItemLabel = this.getGridItem(x, -1);
 
-			let counts = this.getVerticalLabel(x, true);
+			const counts = this.getVerticalLabel(x, true);
 			gridItem.counts = counts;
 
-			let label: string = counts.join("\n");
+			const label: string = counts.join("\n");
 			gridItem.elem.innerText = label;
 		}
 		for (let y = 0; y < this.size; ++y) {
-			let gridItem: GridItemLabel = this.getGridItem(-1, y);
+			const gridItem: GridItemLabel = this.getGridItem(-1, y);
 
-			let counts = this.getHorizontalLabel(y, true);
+			const counts = this.getHorizontalLabel(y, true);
 			gridItem.counts = counts;
 
-			let label: string = counts.join(" ");
+			const label: string = counts.join(" ");
 			gridItem.elem.innerText = label;
 		}
 		for (let x = 0; x < this.size; ++x) {
