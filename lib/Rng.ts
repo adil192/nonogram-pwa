@@ -7,7 +7,7 @@ export class Rng {
 
 	static seededRandom(max = 1, min = 0) {
 		this.seed = (this.seed * 9301 + 49297) % 233280;
-		let rnd = this.seed / 233280;
+		const rnd = this.seed / 233280;
 
 		return min + rnd * (max - min);
 	}

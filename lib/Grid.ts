@@ -33,7 +33,7 @@ export class Grid {
 
 	public static _difficulty: number = (() => {
 		let difficulty: number = NaN;
-		let cookies = decodeURIComponent(document.cookie).split('; ');
+		const cookies = decodeURIComponent(document.cookie).split('; ');
 		cookies.forEach(val => {
 			if (val.indexOf(this.difficultyCookieName) === 0) difficulty = parseFloat(val.substring(this.difficultyCookieName.length));
 		});
@@ -70,12 +70,12 @@ export class Grid {
 		this.elem.style.gridTemplateColumns = "auto "+ "1fr ".repeat(this.size);
 
 		// get saved state
-		let serializedGridItems = this.loadSerializedGridItemsFromCookie();
+		const serializedGridItems = this.loadSerializedGridItemsFromCookie();
 
 		// create grid items
 		this.gridItems = [];
 		for (let y = -1; y < this.size; ++y) {
-			let row: GridItem[] = [];
+			const row: GridItem[] = [];
 			for (let x = -1; x < this.size; ++x) {
 				let serialized: Record<string, boolean>;
 				try {
@@ -87,7 +87,7 @@ export class Grid {
 				const isTile: boolean = x >= 0 && y >= 0;
 				const gridItem = isTile ? new GridItemTile(this, x, y, serialized) : new GridItemLabel(serialized);
 
-				let isLocked: boolean = isTile ? (gridItem as GridItemTile).isLocked : false;
+				const isLocked: boolean = isTile ? (gridItem as GridItemTile).isLocked : false;
 				if (isLocked) this._isLocked = true;
 
 				if (gridItem instanceof GridItemLabel) {
@@ -111,31 +111,31 @@ export class Grid {
 		}
 
 		for (let x = 0; x < this.size; ++x) {
-			let gridItem: GridItemLabel = this.getGridItem(x, -1);
+			const gridItem: GridItemLabel = this.getGridItem(x, -1);
 
-			let counts = this.getVerticalLabel(x, true);
+			const counts = this.getVerticalLabel(x, true);
 			gridItem.counts = counts;
 
-			let label: string = counts.join("\n");
+			const label: string = counts.join("\n");
 			gridItem.elem.innerText = label;
 		}
 		for (let y = 0; y < this.size; ++y) {
-			let gridItem: GridItemLabel = this.getGridItem(-1, y);
+			const gridItem: GridItemLabel = this.getGridItem(-1, y);
 
-			let counts = this.getHorizontalLabel(y, true);
+			const counts = this.getHorizontalLabel(y, true);
 			gridItem.counts = counts;
 
-			let label: string = counts.join(" ");
+			const label: string = counts.join(" ");
 			gridItem.elem.innerText = label;
 		}
 		for (let x = 0; x < this.size; ++x) {
-			let counts: number[] = this.getGridItem<GridItemLabel>(x, -1).counts;
+			const counts: number[] = this.getGridItem<GridItemLabel>(x, -1).counts;
 			if (counts.toString() == [this.size].toString()) { // full row/column
 				for (let by = 0; by < this.size; ++by) {
 					this.getGridItem<GridItemTile>(x, by).isSelected = true;
 				}
 
-				let gridItem = this.getGridItem<GridItemLabel>(x, -1);
+				const gridItem = this.getGridItem<GridItemLabel>(x, -1);
 				gridItem.resetAnim();
 				gridItem.isCorrect = true;
 			} else if (counts.toString() == [0].toString()) { // empty row/column
@@ -143,7 +143,7 @@ export class Grid {
 					this.getGridItem<GridItemTile>(x, by).isCrossed = true;
 				}
 
-				let gridItem = this.getGridItem<GridItemLabel>(x, -1);
+				const gridItem = this.getGridItem<GridItemLabel>(x, -1);
 				gridItem.resetAnim();
 				gridItem.isCorrect = true;
 			} else { // check this row/column
@@ -151,13 +151,13 @@ export class Grid {
 			}
 		}
 		for (let y = 0; y < this.size; ++y) {
-			let counts: number[] = this.getGridItem<GridItemLabel>(-1, y).counts;
+			const counts: number[] = this.getGridItem<GridItemLabel>(-1, y).counts;
 			if (counts.toString() == [this.size].toString()) { // full row/column
 				for (let bx = 0; bx < this.size; ++bx) {
 					this.getGridItem<GridItemTile>(bx, y).isSelected = true;
 				}
 
-				let gridItem = this.getGridItem<GridItemLabel>(-1, y);
+				const gridItem = this.getGridItem<GridItemLabel>(-1, y);
 				gridItem.resetAnim();
 				gridItem.isCorrect = true;
 			} else if (counts.toString() == [0].toString()) { // empty row/column
@@ -165,7 +165,7 @@ export class Grid {
 					this.getGridItem<GridItemTile>(bx, y).isCrossed = true;
 				}
 
-				let gridItem = this.getGridItem<GridItemLabel>(-1, y);
+				const gridItem = this.getGridItem<GridItemLabel>(-1, y);
 				gridItem.resetAnim();
 				gridItem.isCorrect = true;
 			} else { // check this row/column
@@ -179,7 +179,7 @@ export class Grid {
 	private toggleLock(isLocked: boolean) {
 		for (let y = 0; y < this.size; ++y) {
 			for (let x = 0; x < this.size; ++x) {
-				let tile = this.getGridItem<GridItemTile>(x, y);
+				const tile = this.getGridItem<GridItemTile>(x, y);
 				if (!isLocked || !tile.isEmpty) tile.isLocked = isLocked;
 			}
 		}
@@ -187,7 +187,7 @@ export class Grid {
 
 	static LoadSeedFromCookie() {
 		let seed: number = 0;
-		let cookies = decodeURIComponent(document.cookie).split('; ');
+		const cookies = decodeURIComponent(document.cookie).split('; ');
 		cookies.forEach(val => {
 			if (val.indexOf(this.seedCookieName) === 0) seed = parseFloat(val.substring(this.seedCookieName.length));
 		});
@@ -226,7 +226,7 @@ export class Grid {
 	}
 	private loadSerializedGridItemsFromCookie(): Record<string, boolean>[][] {
 		let gridItems: Record<string, boolean>[][] = null;
-		let cookies = decodeURIComponent(document.cookie).split('; ');
+		const cookies = decodeURIComponent(document.cookie).split('; ');
 		cookies.forEach(val => {
 			if (val.indexOf(this.gridItemsCookieName) === 0) {
 				gridItems = JSON.parse(this.decompressGridItemsJson(val.substring(this.gridItemsCookieName.length)));
@@ -235,8 +235,8 @@ export class Grid {
 		return gridItems;
 	}
 	private saveGridItemsToCookie() {
-		let serialized = this._serializeGridItems();
-		let compressed = this.compressGridItemsJson(JSON.stringify(serialized));
+		const serialized = this._serializeGridItems();
+		const compressed = this.compressGridItemsJson(JSON.stringify(serialized));
 
 		document.cookie = this.gridItemsCookieName + compressed + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
 	}
@@ -251,9 +251,9 @@ export class Grid {
 		}
 	}
 	private _serializeGridItems(): Record<string, boolean>[][] {
-		let serializable = [];
+		const serializable = [];
 		for (let y = -1; y < this.size; ++y) {
-			let row = [];
+			const row = [];
 			for (let x = -1; x < this.size; ++x) {
 				row.push(this.getGridItem(x, y).Serializable());
 			}
@@ -281,19 +281,19 @@ export class Grid {
 		return counts;
 	}
 	checkHorizontalLabel(y: number): [isCorrect: boolean, isIncorrect: boolean] {
-		let current = this.getHorizontalLabel(y);
-		let correct = this.getGridItem<GridItemLabel>(-1, y).counts;
+		const current = this.getHorizontalLabel(y);
+		const correct = this.getGridItem<GridItemLabel>(-1, y).counts;
 
 		return this.checkLabel(current, correct);
 	}
 	checkVerticalLabel(x: number): [isCorrect: boolean, isIncorrect: boolean] {
-		let current = this.getVerticalLabel(x);
-		let correct = this.getGridItem<GridItemLabel>(x, -1).counts;
+		const current = this.getVerticalLabel(x);
+		const correct = this.getGridItem<GridItemLabel>(x, -1).counts;
 
 		return this.checkLabel(current, correct);
 	}
 	private checkLabel(current: number[], correct: number[]): [isCorrect: boolean, isIncorrect: boolean] {
-		let isCorrect = current.toString() == correct.toString();
+		const isCorrect = current.toString() == correct.toString();
 		let isIncorrect = false;
 		if (isCorrect) return [isCorrect, isIncorrect];
 
@@ -321,8 +321,8 @@ export class Grid {
 		return [isCorrect, isIncorrect];
 	}
 	private _getLabel_countTile(x: number, y: number, isStart: boolean, counts: number[]) {
-		let tile: GridItemTile = this.getGridItem(x, y);
-		let counted = isStart ? tile.state : tile.isSelected;
+		const tile: GridItemTile = this.getGridItem(x, y);
+		const counted = isStart ? tile.state : tile.isSelected;
 
 		if (counted) {
 			counts[counts.length - 1] += 1
@@ -347,8 +347,8 @@ export class Grid {
 		this.onTileChanged(tile);
 	}
 	onTileChanged(tile: GridItemTile) {
-		let verticalLabel: GridItemLabel = this.getGridItem(tile.x, -1);
-		let horizontalLabel: GridItemLabel = this.getGridItem<GridItemLabel>(-1, tile.y);
+		const verticalLabel: GridItemLabel = this.getGridItem(tile.x, -1);
+		const horizontalLabel: GridItemLabel = this.getGridItem<GridItemLabel>(-1, tile.y);
 
 		[verticalLabel.isCorrect, verticalLabel.isIncorrect] = this.checkVerticalLabel(tile.x);
 		[horizontalLabel.isCorrect, horizontalLabel.isIncorrect] = this.checkHorizontalLabel(tile.y);
@@ -454,7 +454,7 @@ export class Grid {
 		this._isLocked = false;
 		for (let x = 0; x < this.size; ++x) {
 			for (let y = 0; y < this.size; ++y) {
-				let gridItem: GridItemTile = this.getGridItem(x, y);
+				const gridItem: GridItemTile = this.getGridItem(x, y);
 				gridItem.isLocked = false;
 				gridItem.isSelected = false;
 				gridItem.isCrossed = false;
@@ -468,7 +468,7 @@ export class Grid {
 	public Destroy() {
 		for (let x = -1; x < this.size; ++x) {
 			for (let y = -1; y < this.size; ++y) {
-				let gridItem = this.getGridItem(x, y);
+				const gridItem = this.getGridItem(x, y);
 				gridItem.elem.remove();
 			}
 		}

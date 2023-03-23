@@ -56,7 +56,7 @@ export class GridItemTile extends GridItem {
 		this.grid.OnTileDragStart(this);
 
 		// set dragging image as a blank canvas
-		let image = new Image();
+		const image = new Image();
 		image.src = 'images/transparent.webp';
 		event.dataTransfer.setDragImage(image, 0, 0);
 	}
@@ -79,8 +79,8 @@ export class GridItemTile extends GridItem {
 	private onTouchMove(event: TouchEvent) {
 		if (event.touches.length != 1) return;
 
-		let touch: Touch = event.touches.item(0);
-		let newTileElem: HTMLElement = document.elementFromPoint(touch.pageX, touch.pageY) as HTMLElement;
+		const touch: Touch = event.touches.item(0);
+		const newTileElem: HTMLElement = document.elementFromPoint(touch.pageX, touch.pageY) as HTMLElement;
 		this.grid.OnTileDragEnterCoords(parseInt(newTileElem.dataset.x), parseInt(newTileElem.dataset.y));
 	}
 

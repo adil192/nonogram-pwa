@@ -73,8 +73,8 @@ window.addEventListener("load", function() {
 
 	eReaderBtn.addEventListener("click", toggleEReaderMode);
 
-	let android = isAndroid();
-	let standalone = isStandalone();
+	const android = isAndroid();
+	const standalone = isStandalone();
 	iconLinks.style.display = (android && !standalone) ? "block" : "none";
 	githubAlt.style.display = (!android && !standalone) ? "block" : "none";
 });
@@ -103,7 +103,7 @@ function onResize() {
 	board.style.transform = "none";
 	board.style.fontSize = "1em";
 	// make board smaller if it doesn't fit on display
-	let widthRatio = board.scrollWidth / document.body.offsetWidth;
+	const widthRatio = board.scrollWidth / document.body.offsetWidth;
 	if (widthRatio > 1) {
 		board.style.fontSize = (1/widthRatio * 0.99) + "em";
 	}
@@ -160,9 +160,9 @@ function saveEReaderMode() {
 	document.cookie = "nonogramEReader=" + eReaderModeEnabled + "; SameSite=Strict; Secure; max-age=31536000";  // max age = 1 year
 }
 function loadEReaderMode() {
-	let nonogramEReader = "nonogramEReader=";
-	let nonogramSoundEnabled = "nonogramSoundEnabled=";
-	let cookies = decodeURIComponent(document.cookie).split('; ');
+	const nonogramEReader = "nonogramEReader=";
+	const nonogramSoundEnabled = "nonogramSoundEnabled=";
+	const cookies = decodeURIComponent(document.cookie).split('; ');
 	cookies.forEach(val => {
 		if (val.indexOf(nonogramEReader) === 0) {
 			eReaderModeEnabled = JSON.parse(val.substring(nonogramEReader.length));
